@@ -3,23 +3,34 @@ using UnityEngine;
 using UnityEngine.Networking;
 using System.Threading;
 using System;
+using Unity.Jobs;
+using Random = UnityEngine.Random;
 
 public class GameManagerServer : NetworkBehaviour
 {
-    public static GameManagerServer instance;
+    private static GameManagerServer instance;
+    public const double ChangeColourTimer = 15;   // 15 seconds
 
-    private volatile Colour currentRoundColor = RandomColour();
-    private Thread colorChanger;
-    private const double ChangeColourTimer = 15;   // 15 seconds
-    private double changeColourTimerDisplay; // in seconds
+    [SyncVar]
+    private Colour currentRoundColor = Colour.Green;
+    
+    [SyncVar]
+    private double changeColourTimerDisplay = ChangeColourTimer; // in seconds
 
-    private bool serverStarted = false;
+    void FixedUpdate() {
+        if (isServer) { 
 
-    ~GameManagerServer()
-    {
-        if (colorChanger != null)
-        {
-            colorChanger.Abort();
+            Debug.Log("Server!!!");
+            if (changeColourTimerDisplay < 1)
+            {
+                changeColourTimerDisplay = ChangeColourTimer;
+                currentRoundColor = RandomColour();
+            }
+            changeColourTimerDisplay -= Time.deltaTime;
+            // Update time
+            // counter -= 1.0f;
+            //changeColourTimerDisplay = counter;
+            //RpcDecrementTimer();
         }
     }
 
@@ -29,35 +40,6 @@ public class GameManagerServer : NetworkBehaviour
             throw new Exception("More than 1 Game Manager in scene");
         }
         instance = this;
-
-        if (colorChanger is null)
-        {
-            colorChanger = new Thread(() => {
-
-                double counter = ChangeColourTimer;
-                while (true)
-                {
-                    if (changeColourTimerDisplay < 1)
-                    {
-                        counter = ChangeColourTimer;
-                        currentRoundColor = RandomColour();
-                    }
-
-                    // Update time
-                    counter -= 1.0f;
-                    changeColourTimerDisplay = counter;
-                    Thread.Sleep(1000);
-                }
-
-            });
-            colorChanger.Start();
-        }
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
     }
 
     public static Colour GetRoundColour()
@@ -69,11 +51,10 @@ public class GameManagerServer : NetworkBehaviour
         return instance?.changeColourTimerDisplay ?? 0.0;
     }
 
-    private static System.Random random = new System.Random();
-    private static Colour RandomColour()
+    public Colour RandomColour()
     {
         Array values = Enum.GetValues(typeof(Colour));
-        int index = random.Next(0, values.Length);
+        int index = Random.Range(0, values.Length);
         return (Colour)values.GetValue(index);
     }
 
@@ -87,4 +68,5 @@ public class GameManagerServer : NetworkBehaviour
         Blue,
         Violet
     }
+
 }

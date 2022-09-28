@@ -24,11 +24,6 @@ public class GameManager : MonoBehaviour
         // Ui Text fields
         currentColourText = GameObject.Find("CurrentColourText").GetComponent<Text>();
         nextColourTimer = GameObject.Find("NextColourTimer").GetComponent<Text>();
-
-        // TODO: REMOVE FROM HERE!!!!!
-        if (GameManagerServer.instance is null) {
-            new GameManagerServer().Awake();
-        }
     }
 
     // Need this to update UI
