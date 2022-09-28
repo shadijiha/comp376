@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LevelObstacle : MonoBehaviour
 {
-    private BoxCollider colliderComponent;
+    private Collider colliderComponent;
     private Material material;
     private float originalAlpha = 1.0f;
 
@@ -13,7 +13,9 @@ public class LevelObstacle : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        colliderComponent = GetComponent<BoxCollider>();
+        // Check if the component has a box collider or a Mesh collider
+        colliderComponent = GetComponent<Collider>();
+        
         material = GetComponent<Renderer>().material;
         originalAlpha = material.color.a;
     }
