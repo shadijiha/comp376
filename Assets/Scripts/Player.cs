@@ -55,7 +55,7 @@ public class Player : NetworkBehaviour
     }
 
     [ClientRpc]
-    public void RpcTakeDamage(int amount) {
+    public void RpcTakeDamage(int amount, string damageSrc) {
 
         if (isDead())
             return;
@@ -63,7 +63,13 @@ public class Player : NetworkBehaviour
         currentHealth -= amount;
 
         if (currentHealth <= 0)
+        {
             Die();
+
+            Player dmgSrcPlayerObject = GameManager.GetPlayer(damageSrc);
+            GameManagerServer.RegisterStat(dmgSrcPlayerObject, this);
+            GameManagerServer.LogStats();
+        }
     }
 
     public void SetDefaults() {

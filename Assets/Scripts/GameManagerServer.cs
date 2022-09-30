@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using System.Threading;
 using System;
-using Unity.Jobs;
+using Assets.Scripts;
 using Random = UnityEngine.Random;
 
 public class GameManagerServer : NetworkBehaviour
@@ -17,20 +17,17 @@ public class GameManagerServer : NetworkBehaviour
     [SyncVar]
     private double changeColourTimerDisplay = ChangeColourTimer; // in seconds
 
+    [SyncVar]
+    private PlayerStatsList playersStats = new PlayerStatsList();
+
     void FixedUpdate() {
         if (isServer) { 
-
-            Debug.Log("Server!!!");
             if (changeColourTimerDisplay < 1)
             {
                 changeColourTimerDisplay = ChangeColourTimer;
                 currentRoundColor = RandomColour();
             }
             changeColourTimerDisplay -= Time.deltaTime;
-            // Update time
-            // counter -= 1.0f;
-            //changeColourTimerDisplay = counter;
-            //RpcDecrementTimer();
         }
     }
 
@@ -42,6 +39,7 @@ public class GameManagerServer : NetworkBehaviour
         instance = this;
     }
 
+    #region static functions that modify game state on server
     public static Colour GetRoundColour()
     {
         return instance.currentRoundColor;
@@ -51,7 +49,18 @@ public class GameManagerServer : NetworkBehaviour
         return instance?.changeColourTimerDisplay ?? 0.0;
     }
 
-    public Colour RandomColour()
+    public static void RegisterStat(Player killer, Player victim) {
+        instance.playersStats.IncrementKills(killer);
+        instance.playersStats.IncrementDeath(victim);
+    }
+
+    public static void LogStats() {
+        Debug.Log(instance.playersStats.ToString());
+    }
+
+    #endregion
+
+    private Colour RandomColour()
     {
         Array values = Enum.GetValues(typeof(Colour));
         int index = Random.Range(0, values.Length);

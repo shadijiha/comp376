@@ -101,7 +101,7 @@ public class PlayerShoot : NetworkBehaviour
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, m_CurrentWeapon.range, mask)) {
             // We hit Something
             if (hit.collider.tag == PLAYER_TAG) {
-                CmdPlayerShot(hit.collider.name, m_CurrentWeapon.damage);
+                CmdPlayerShot(hit.collider.name, this.name, m_CurrentWeapon.damage);
             }
 
             // Play Hit effect on the sever
@@ -110,13 +110,13 @@ public class PlayerShoot : NetworkBehaviour
     }
 
     [Command]
-    void CmdPlayerShot(string hit_id, int damage) {
+    void CmdPlayerShot(string hit_id, string src, int damage) {
         // Do the damage stuff
         Debug.Log(hit_id + " has been shot");
 
         // In the future shoud pass the source to grant assists
         Player p = GameManager.GetPlayer(hit_id);
-        p.RpcTakeDamage(damage);
+        p.RpcTakeDamage(damage, src);
 
         Debug.Log(hit_id + " has " + p.getHealth());
     }
