@@ -27,6 +27,7 @@ public class Player : NetworkBehaviour
         }
 
         SetDefaults();
+        //GameManagerServer.InitPlayerStats(this);
     }
 
     private void Die() {
