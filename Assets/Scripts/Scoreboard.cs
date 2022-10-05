@@ -26,12 +26,14 @@ public class Scoreboard : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Tab))
         {
+            // Reset the scoreboard whenever players are entering/leaving the game
             if (playerStatsCanvas.Count != players.Count)
             {
+                UnloadPlayerCanvases();
                 LoadPlayerScoreboard();
                 PositionPlayerCanvases();
             }
-
+            // Update the deaths/kills of the players
             RefreshScoreboard();
         } 
 
@@ -41,10 +43,9 @@ public class Scoreboard : MonoBehaviour
     // Create the player canvases
     private void LoadPlayerScoreboard()
     {
-        UnloadPlayerCanvases();
         playerStatsCanvas = new Dictionary<Player, Canvas>();
         PlayerTemplateCanvas.enabled = true;
-
+        // Create a canvas from the template for each current player
         foreach (var player in players)
         {
             var newPlayerCanvas = Instantiate(PlayerTemplateCanvas, PlayersCanvas.transform);

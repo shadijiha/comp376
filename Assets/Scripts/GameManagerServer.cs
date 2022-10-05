@@ -49,11 +49,6 @@ public class GameManagerServer : NetworkBehaviour
         return instance?.changeColourTimerDisplay ?? 0.0;
     }
 
-    public static void InitPlayerStats(Player player)
-    {
-        instance.playersStats.Init(player);
-    }
-
     public static void RegisterStat(Player killer, Player victim) {
         instance.playersStats.IncrementKills(killer);
         instance.playersStats.IncrementDeath(victim);

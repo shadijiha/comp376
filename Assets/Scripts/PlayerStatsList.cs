@@ -9,16 +9,6 @@ namespace Assets.Scripts
 {
     public class PlayerStatsList : SyncListStruct<PlayerStats>
     {
-        public void Init(Player p)
-        {
-            Add(new PlayerStats()
-            {
-                player = p,
-                kills = 0,
-                death = 0
-            });
-        }
-
         public void IncrementKills(Player p)
         {
             for (int i = 0; i < Count; i++)
