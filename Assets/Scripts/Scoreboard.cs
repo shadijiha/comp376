@@ -16,6 +16,7 @@ public class Scoreboard : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        ScoreboardCanvas.gameObject.SetActive(true);
         ScoreboardCanvas.enabled = false;
         players = GameManager.GetPlayers();
         playerStatsList = GameManagerServer.GetPlayerStatsList();
