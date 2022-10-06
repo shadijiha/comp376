@@ -58,6 +58,11 @@ public class GameManagerServer : NetworkBehaviour
         Debug.Log(instance.playersStats.ToString());
     }
 
+    public static PlayerStatsList GetPlayerStatsList()
+    {
+        return instance.playersStats;
+    }
+
     #endregion
 
     private Colour RandomColour()

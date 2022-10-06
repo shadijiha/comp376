@@ -28,7 +28,6 @@ public class GameManager : MonoBehaviour
 
     // Need this to update UI
     void Update() {
-
         // Update UI
         {
             var timer = GameManagerServer.GetTimerDisplay();

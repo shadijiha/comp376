@@ -7,7 +7,7 @@ using UnityEngine.Networking;
 
 namespace Assets.Scripts
 {
-    internal class PlayerStatsList : SyncListStruct<PlayerStats>
+    public class PlayerStatsList : SyncListStruct<PlayerStats>
     {
         public void IncrementKills(Player p)
         {
@@ -98,7 +98,7 @@ namespace Assets.Scripts
             return builder.ToString();           
         }
     }
-    internal struct PlayerStats
+    public struct PlayerStats
     {
         public Player player;
         public int kills;
