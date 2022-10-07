@@ -2,8 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class Scoreboard : MonoBehaviour
+using UnityEngine.Networking;
+public class Scoreboard : NetworkBehaviour
 {
     public Canvas ScoreboardCanvas;
     public Canvas PlayersCanvas;
