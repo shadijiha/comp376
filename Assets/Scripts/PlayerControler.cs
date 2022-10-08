@@ -22,8 +22,8 @@ public class PlayerControler : MonoBehaviour
     void Update()
     {
         // Lock the cursor
-        if (Cursor.lockState != CursorLockMode.Locked)
-            Cursor.lockState = CursorLockMode.Locked;
+        //if (Cursor.lockState != CursorLockMode.Locked)
+        //    Cursor.lockState = CursorLockMode.Locked;
 
 
         // Calculate the movement velocity as a 3D vector
