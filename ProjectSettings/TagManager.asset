@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - UI
+  - Fire
   layers:
   - Default
   - TransparentFX
@@ -17,7 +18,7 @@ TagManager:
   - LocalPlayerLayer
   - RemotePlayerLayer
   - Weapon
-  - 
+  - wallGlow
   - 
   - 
   - 
