@@ -9,7 +9,7 @@ using Random = UnityEngine.Random;
 public class GameManagerServer : NetworkBehaviour
 {
     private static GameManagerServer instance;
-    public const double ChangeColourTimer = 15;   // 15 seconds
+    public const double ChangeColourTimer = 7;   // 15 seconds
 
     [SyncVar]
     private Colour currentRoundColor = Colour.Green;
