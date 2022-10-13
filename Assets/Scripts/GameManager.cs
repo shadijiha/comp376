@@ -54,6 +54,8 @@ public class GameManager : MonoBehaviour
 
         players.Add(playerID, player);
         player.transform.name = playerID;
+        // Initialize PlayerStats for new player
+        GameManagerServer.InitPlayerStats(player);
     }
 
     public static void UnRegisterPlayer(string id) {

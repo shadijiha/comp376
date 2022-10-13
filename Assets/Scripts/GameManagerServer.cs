@@ -17,7 +17,6 @@ public class GameManagerServer : NetworkBehaviour
     [SyncVar]
     private double changeColourTimerDisplay = ChangeColourTimer; // in seconds
 
-    [SyncVar]
     private PlayerStatsList playersStats = new PlayerStatsList();
 
     void FixedUpdate() {
@@ -61,6 +60,11 @@ public class GameManagerServer : NetworkBehaviour
     public static PlayerStatsList GetPlayerStatsList()
     {
         return instance.playersStats;
+    }
+
+    public static void InitPlayerStats(Player p)
+    {
+        instance.playersStats.InitPlayerStats(p);
     }
 
     #endregion
