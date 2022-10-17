@@ -9,22 +9,36 @@ public class WeaponManager : NetworkBehaviour
     public const string WEAPON_LAYER = "Weapon";
 
     [SerializeField] private PlayerWeapon primary;
+    [SerializeField] private PlayerWeapon secondary;
+    [SerializeField] private PlayerWeapon super;
     [SerializeField] private Transform weaponHolder;
 
     private PlayerWeapon current;
     private WeaponGraphics currentGraphics;
 
-    // Start is called before the first frame update
-    void Start()
+    // Awake is called before Start, allowing this to equip the weapon before Start() in PlayerShoot requires it.
+    void Awake()
     {
-        // Equipe the weapon
-        Equipe(primary);
+        // Equip the primary weapon
+        Equip(primary);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        // Weapon Switching
+        if (Input.GetKey(KeyCode.Alpha1) && primary != current)
+        {
+            Equip(primary);
+        }
+        if (Input.GetKey(KeyCode.Alpha2) && secondary != current)
+        {
+            Equip(secondary);
+        }
+        if (Input.GetKey(KeyCode.Alpha3) && super != current)
+        {
+            Equip(super);
+        }
     }
 
     public PlayerWeapon GetCurrentWeapon() {
@@ -35,7 +49,7 @@ public class WeaponManager : NetworkBehaviour
         return currentGraphics;
     }
 
-    private void Equipe(PlayerWeapon weapon) {
+    private void Equip(PlayerWeapon weapon) {
         this.current = weapon;
 
         GameObject weaponInstance = (GameObject)Instantiate(weapon.model, weaponHolder.position, weaponHolder.rotation);
