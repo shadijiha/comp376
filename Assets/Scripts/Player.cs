@@ -72,6 +72,7 @@ public class Player : NetworkBehaviour
         }
     }
 
+
     public void SetDefaults() {
         isDead(false);
         currentHealth = maxHealth;
@@ -87,6 +88,16 @@ public class Player : NetworkBehaviour
 
     public int getHealth() {
         return currentHealth;
+    }
+
+    public int getMaxHealth()
+    {
+        return maxHealth;
+    }
+
+    public void setHealth(int amount)
+    {
+        currentHealth = amount;
     }
 
     public bool isDead() {
