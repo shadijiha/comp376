@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - UI
+  - Fire
+  - helthpack
+  - landmine
   layers:
   - Default
   - TransparentFX

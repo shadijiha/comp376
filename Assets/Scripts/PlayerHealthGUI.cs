@@ -30,7 +30,7 @@ public class PlayerHealthGUI : MonoBehaviour
         }
 
         if (text != null && localPlayer != null)
-            text.text = localPlayer.getHealth() + "";
+            text.text = localPlayer.GetHealth() + "";
     }
 
     public void UpdateGUI() {
