@@ -54,7 +54,12 @@ public class GameManager : MonoBehaviour
     }
 
     public static Player GetPlayer(string id) {
-        return players[id];
+        try {
+            return players[id];
+        }
+        catch (Exception) {
+            return null;
+        }       
     }
 
     public static ICollection<Player> GetPlayers() {

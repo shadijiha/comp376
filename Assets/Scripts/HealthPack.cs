@@ -1,38 +1,40 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Networking;
-
+using System.Collections;
 
 public class HealthPack : NetworkBehaviour
 {
-    private int currentHealth;
-    private int maxHealth;
-    private int gain = 20;
+    [SerializeField] private uint healing = 20;
 
-    // Start is called before the first frame update
-    void Start()
+    private IEnumerator Respawn()
     {
-        
+        yield return new WaitForSeconds(GameManager.instance.MATCH_SETTINGS.HealthPackRespawnTime);
+
+        Enabled();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
+    /// <summary>
+    /// Hide from match until respawn
+    /// </summary>
+    private void Disable() { 
+        GetComponent<Collider>().enabled = false;
+        GetComponent<Renderer>().enabled = false;
     }
 
+    private void Enabled() {
+        GetComponent<Collider>().enabled = true;
+        GetComponent<Renderer>().enabled = true;
+    }
 
     public void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag.Contains("Player"))
+        if (collision.gameObject.tag.Contains(PlayerShoot.PLAYER_TAG))
         {
-            var healthFunctions = collision.gameObject.GetComponent<HealthFunctions>();
-            healthFunctions.HealPlayer(gain, collision);
-            Destroy(gameObject);
+            var playerScript = collision.gameObject.GetComponent<Player>();
+            playerScript.HealBy(healing);
 
+            Disable();
+            StartCoroutine(Respawn());
         }
-
     }
 }

@@ -1998,7 +1998,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MATCH_SETTINGS:
-    RESPAWN_TIME: 3
+    PlayerRespawnTime: 3
+    HealthPackRespawnTime: 5
 --- !u!4 &781546714
 Transform:
   m_ObjectHideFlags: 0
@@ -2797,6 +2798,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2214120500427458653, guid: 3b02dfa9aed0d1e45b521db81d327c31,
+        type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7988225609167207927, guid: 3b02dfa9aed0d1e45b521db81d327c31,
         type: 3}
       propertyPath: m_RootOrder
