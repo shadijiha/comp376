@@ -34,7 +34,7 @@ public class PlayerHealthGUI : MonoBehaviour
         if (text != null && localPlayer != null)
         {
             text.text = localPlayer.GetHealth() + "";
-            healthBar.value = localPlayer.getHealth() / 100.0f;
+            healthBar.value = localPlayer.GetHealth() / 100.0f;
         }
     }
 
