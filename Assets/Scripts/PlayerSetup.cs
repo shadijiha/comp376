@@ -33,8 +33,8 @@ public class PlayerSetup : NetworkBehaviour
         GetComponent<Player>().Setup();
 
         // Create Player UI
-        //playerUIInstance = Instantiate(playerUIPrefab);
-        //playerUIInstance.name = playerUIPrefab.name;
+        playerUIInstance = Instantiate(playerUIPrefab);
+        playerUIInstance.name = playerUIPrefab.name;
     }
 
     public override void OnStartClient() {
@@ -58,7 +58,7 @@ public class PlayerSetup : NetworkBehaviour
 
     void OnDisable() {
         // Destroy Player UI
-        //Destroy(playerUIInstance);
+        Destroy(playerUIInstance);
 
 
         // Enable the scene camera when player object get destroyed
