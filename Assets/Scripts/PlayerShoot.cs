@@ -15,6 +15,7 @@ public class PlayerShoot : NetworkBehaviour
 
     private PlayerWeapon m_CurrentWeapon;
     private WeaponManager m_WeaponManager;
+    [SerializeField] private RectTransform crosshair;
     [SerializeField] private Camera cam;
     [SerializeField] private LayerMask mask;
 
@@ -40,7 +41,13 @@ public class PlayerShoot : NetworkBehaviour
     }
 
     // Update is called once per frame
-    void Update() {
+    void Update() 
+    {
+        if (crosshair == null)
+        {
+            crosshair = GameObject.FindObjectOfType<PlayerSetup>().playerUIInstance.GetComponentInChildren<DynamicCrosshair>().GetComponent<RectTransform>();
+        }
+
         m_CurrentWeapon = m_WeaponManager.GetCurrentWeapon();
 
         // Unify both methods of shooting (semi/full-auto) under one variable
@@ -71,12 +78,25 @@ public class PlayerShoot : NetworkBehaviour
         {
             Shoot();
         }
-        else if(m_CurrentWeapon.currentSpread > m_CurrentWeapon.minSpread)
-        { // If not shooting, recover from spread
+
+        // If not shooting, recover from spread
+        if (m_CurrentWeapon.readyToShoot && (m_CurrentWeapon.currentSpread > m_CurrentWeapon.minSpread))
+        { 
             m_CurrentWeapon.currentSpread -= m_CurrentWeapon.spreadRecovery;
             if (m_CurrentWeapon.currentSpread < m_CurrentWeapon.minSpread)
             {
                 m_CurrentWeapon.currentSpread = m_CurrentWeapon.minSpread;
+            }
+
+
+            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
+            {
+                crosshair.sizeDelta = new Vector2(m_CurrentWeapon.currentSpread * 250 * m_CurrentWeapon.movementSpread, 
+                    m_CurrentWeapon.currentSpread * 250 * m_CurrentWeapon.movementSpread);
+            }
+            else
+            {
+                crosshair.sizeDelta = new Vector2(m_CurrentWeapon.currentSpread * 250, m_CurrentWeapon.currentSpread * 250);
             }
         }
     }
@@ -193,6 +213,8 @@ public class PlayerShoot : NetworkBehaviour
         {
             m_CurrentWeapon.currentSpread = m_CurrentWeapon.maxSpread;
         }
+
+        crosshair.sizeDelta = new Vector2(m_CurrentWeapon.currentSpread * 250, m_CurrentWeapon.currentSpread * 250);
 
         // Consume ammunition
         --m_CurrentWeapon.currentLoadedAmmo;
