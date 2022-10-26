@@ -6,6 +6,10 @@ TagManager:
   tags:
   - UI
   - Fire
+
+  - helthpack
+  - landmine
+
   layers:
   - Default
   - TransparentFX
