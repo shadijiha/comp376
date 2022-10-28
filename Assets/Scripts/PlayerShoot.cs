@@ -10,7 +10,7 @@ using UnityEngine.Networking;
 [RequireComponent(typeof(WeaponManager))]
 public class PlayerShoot : NetworkBehaviour
 {
-    public const string PLAYER_TAG = "Player";
+    private const string PLAYER_TAG = "Player";
 
 
     private PlayerWeapon m_CurrentWeapon;
@@ -241,6 +241,6 @@ public class PlayerShoot : NetworkBehaviour
         Player p = GameManager.GetPlayer(hit_id);
         p.RpcTakeDamage(damage, src);
 
-        Debug.Log(hit_id + " has " + p.GetHealth());
+        Debug.Log(hit_id + " has " + p.getHealth());
     }
 }
