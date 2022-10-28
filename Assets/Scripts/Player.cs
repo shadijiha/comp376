@@ -46,7 +46,7 @@ public class Player : NetworkBehaviour
     }
 
     private IEnumerator Respawn() {
-        yield return new WaitForSeconds(GameManager.instance.MATCH_SETTINGS.PlayerRespawnTime);
+        yield return new WaitForSeconds(GameManager.instance.MATCH_SETTINGS.RESPAWN_TIME);
 
         SetDefaults();
         Transform spawnPoint = NetworkManager.singleton.GetStartPosition();
@@ -57,7 +57,7 @@ public class Player : NetworkBehaviour
     [ClientRpc]
     public void RpcTakeDamage(int amount, string damageSrc) {
 
-        if (IsDead())
+        if (isDead())
             return;
 
         currentHealth -= amount;
@@ -66,17 +66,11 @@ public class Player : NetworkBehaviour
         {
             Die();
 
-            currentHealth = 0;  // FOR GUI
-
             Player dmgSrcPlayerObject = GameManager.GetPlayer(damageSrc);
-            if (!(dmgSrcPlayerObject is null))
-            {
-                GameManagerServer.RegisterStat(dmgSrcPlayerObject, this);
-                GameManagerServer.LogStats();
-            }
+            GameManagerServer.RegisterStat(dmgSrcPlayerObject, this);
+            GameManagerServer.LogStats();
         }
     }
-
 
     public void SetDefaults() {
         isDead(false);
@@ -91,23 +85,11 @@ public class Player : NetworkBehaviour
             col.enabled = true;
     }
 
-    public int GetHealth() {
+    public int getHealth() {
         return currentHealth;
     }
 
-    public int GetMaxHealth()
-    {
-        return maxHealth;
-    }
-
-    public void HealBy(uint amount)
-    {
-        var vAmount = Math.Min(amount + currentHealth, maxHealth);
-        vAmount = Math.Max(vAmount, 0);
-        currentHealth = (int)vAmount;
-    }
-
-    public bool IsDead() {
+    public bool isDead() {
         return dead;
     }
 

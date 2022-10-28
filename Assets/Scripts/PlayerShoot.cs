@@ -10,7 +10,7 @@ using UnityEngine.Networking;
 [RequireComponent(typeof(WeaponManager))]
 public class PlayerShoot : NetworkBehaviour
 {
-    public const string PLAYER_TAG = "Player";
+    private const string PLAYER_TAG = "Player";
 
 
     private PlayerWeapon m_CurrentWeapon;
@@ -80,7 +80,7 @@ public class PlayerShoot : NetworkBehaviour
         }
 
         // If not shooting, recover from spread
-        if (m_CurrentWeapon.readyToShoot && (m_CurrentWeapon.currentSpread > m_CurrentWeapon.minSpread))
+        if (m_CurrentWeapon.readyToShoot)
         { 
             m_CurrentWeapon.currentSpread -= m_CurrentWeapon.spreadRecovery;
             if (m_CurrentWeapon.currentSpread < m_CurrentWeapon.minSpread)
@@ -88,16 +88,7 @@ public class PlayerShoot : NetworkBehaviour
                 m_CurrentWeapon.currentSpread = m_CurrentWeapon.minSpread;
             }
 
-
-            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
-            {
-                crosshair.sizeDelta = new Vector2(m_CurrentWeapon.currentSpread * 250 * m_CurrentWeapon.movementSpread, 
-                    m_CurrentWeapon.currentSpread * 250 * m_CurrentWeapon.movementSpread);
-            }
-            else
-            {
-                crosshair.sizeDelta = new Vector2(m_CurrentWeapon.currentSpread * 250, m_CurrentWeapon.currentSpread * 250);
-            }
+            UpdateCrosshair();
         }
     }
 
@@ -214,13 +205,26 @@ public class PlayerShoot : NetworkBehaviour
             m_CurrentWeapon.currentSpread = m_CurrentWeapon.maxSpread;
         }
 
-        crosshair.sizeDelta = new Vector2(m_CurrentWeapon.currentSpread * 250, m_CurrentWeapon.currentSpread * 250);
-
+        UpdateCrosshair();
+            
         // Consume ammunition
         --m_CurrentWeapon.currentLoadedAmmo;
 
         // Indicate the weapon is ready to fire again after the appropriate delay
         Invoke("ReadyToShoot", 1.0f / m_CurrentWeapon.fireRate);
+    }
+
+    void UpdateCrosshair()
+    {
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
+        {
+            crosshair.sizeDelta = new Vector2(m_CurrentWeapon.currentSpread * 250 * m_CurrentWeapon.movementSpread,
+                m_CurrentWeapon.currentSpread * 250 * m_CurrentWeapon.movementSpread);
+        }
+        else
+        {
+            crosshair.sizeDelta = new Vector2(m_CurrentWeapon.currentSpread * 250, m_CurrentWeapon.currentSpread * 250);
+        }
     }
 
     void ReadyToShoot()
@@ -237,6 +241,6 @@ public class PlayerShoot : NetworkBehaviour
         Player p = GameManager.GetPlayer(hit_id);
         p.RpcTakeDamage(damage, src);
 
-        Debug.Log(hit_id + " has " + p.GetHealth());
+        Debug.Log(hit_id + " has " + p.getHealth());
     }
 }
