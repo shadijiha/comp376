@@ -1,14 +1,15 @@
 ﻿using Assets.Scripts;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+
 public class Scoreboard : NetworkBehaviour
 {
     public Canvas ScoreboardCanvas;
     public Canvas PlayersCanvas;
     public Canvas PlayerTemplateCanvas;
 
+    private int previousNumOfPlayers = 0;
     private ICollection<Player> players;
     private PlayerStatsList playerStatsList;
     private Dictionary<Player, Canvas> playerStatsCanvas = new Dictionary<Player, Canvas>();
@@ -16,62 +17,80 @@ public class Scoreboard : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ScoreboardCanvas.gameObject.SetActive(true);
         ScoreboardCanvas.enabled = false;
+        PlayerTemplateCanvas.enabled = false;
+        UpdateScoreboard();
+    }
+
+    public override void OnStartClient()
+    {
         players = GameManager.GetPlayers();
+        previousNumOfPlayers = players.Count;
         playerStatsList = GameManagerServer.GetPlayerStatsList();
+        playerStatsList.Callback = PlayerStatsChanged;
+    }
+
+    /// Event callback when PlayerStatsList gets updated, and it updates the scoreboard.
+    void PlayerStatsChanged(PlayerStatsList.Operation op, int index)
+    {
+        UpdateScoreboard();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.Tab))
+        if (previousNumOfPlayers != players.Count)
         {
             // Reset the scoreboard whenever players are entering/leaving the game
-            if (playerStatsCanvas.Count != players.Count)
-            {
-                UnloadPlayerCanvases();
-                LoadPlayerScoreboard();
-                PositionPlayerCanvases();
-            }
+            UpdateScoreboard();
+            previousNumOfPlayers = players.Count;
+        }
+
+        if (Input.GetKey(KeyCode.Tab))
+        {
             // Update the deaths/kills of the players
-            RefreshScoreboard();
-        } 
+            UpdateScoreboard();
+        }
 
         ScoreboardCanvas.enabled = Input.GetKey(KeyCode.Tab);
     }
 
-    // Create the player canvases
-    private void LoadPlayerScoreboard()
+    private void UpdateScoreboard()
     {
-        playerStatsCanvas = new Dictionary<Player, Canvas>();
-        PlayerTemplateCanvas.enabled = true;
-        // Create a canvas from the template for each current player
-        foreach (var player in players)
-        {
-            var newPlayerCanvas = Instantiate(PlayerTemplateCanvas, PlayersCanvas.transform);
-            var playerNameText = newPlayerCanvas.transform.Find("PlayerName").GetComponent<TMPro.TextMeshProUGUI>();
-            playerNameText.text = player.name;
+        UnloadPlayerCanvases();
 
-            playerStatsCanvas.Add(player, newPlayerCanvas);
+        // Double loop to keep the player list order
+        foreach (var p in players)
+        {
+            foreach (var playerStats in playerStatsList)
+            {
+                if (!(playerStats.player != null && playerStats.player == p))
+                    continue;
+
+                // Create the player text canvas
+                Canvas playerScoreCanvas = Instantiate(PlayerTemplateCanvas, PlayersCanvas.transform);
+
+                // Update name text
+                var playerNameText = playerScoreCanvas.transform.Find("PlayerName").GetComponent<TMPro.TextMeshProUGUI>();
+                playerNameText.text = playerStats.player.name;
+
+                // Update kills and deaths
+                var playerKill = playerScoreCanvas.transform.Find("Kills").GetComponent<TMPro.TextMeshProUGUI>();
+                var playerDeath = playerScoreCanvas.transform.Find("Deaths").GetComponent<TMPro.TextMeshProUGUI>();
+                playerKill.text = playerStats.kills.ToString();
+                playerDeath.text = playerStats.death.ToString();
+
+                // Show canvas
+                playerScoreCanvas.enabled = true;
+
+                playerStatsCanvas.Add(playerStats.player, playerScoreCanvas);
+
+                // Stop searching for the player's stats
+                break;
+            }
         }
 
-        PlayerTemplateCanvas.enabled = false;
-    }
-
-    // Update the kills/deaths of the players.
-    private void RefreshScoreboard()
-    {
-        foreach (var playerStats in playerStatsList)
-        {
-            var currentPlayerStatsCanvas = playerStatsCanvas[playerStats.player];
-
-            var playerKill = currentPlayerStatsCanvas.transform.Find("Kills").GetComponent<TMPro.TextMeshProUGUI>();
-            var playerDeath = currentPlayerStatsCanvas.transform.Find("Deaths").GetComponent<TMPro.TextMeshProUGUI>();
-
-            playerKill.text = playerStats.kills.ToString();
-            playerDeath.text = playerStats.death.ToString();
-        }
+        PositionPlayerCanvases();
     }
 
     // Reset the player names from the scoreboard by destroying the canvas
@@ -82,6 +101,7 @@ public class Scoreboard : NetworkBehaviour
         {
             Destroy(canvas.gameObject);
         }
+        playerStatsCanvas = new Dictionary<Player, Canvas>();
     }
 
     // Helper method to position the player canvases in the scoreboard.
@@ -90,6 +110,8 @@ public class Scoreboard : NetworkBehaviour
         int i = 0; 
         foreach (var canvas in playerStatsCanvas.Values)
         {
+            canvas.transform.position = PlayerTemplateCanvas.transform.position;
+
             // Place canvas 
             canvas.transform.position += Vector3.down * PlayerTemplateCanvas.GetComponent<RectTransform>().rect.height * i;
             i++;
