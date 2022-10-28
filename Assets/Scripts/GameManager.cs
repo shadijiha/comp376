@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Reflection;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,31 +8,18 @@ public class GameManager : MonoBehaviour
 
     public MatchSettings MATCH_SETTINGS;
 
-    // UI
-    private Text currentColourText;
-    private Text nextColourTimer;
-
     private void Awake() {
         if (instance != null) {
             throw new Exception("More than 1 Game Manager in scene");
         }
 
         instance = this;
-
-        // Ui Text fields
-        currentColourText = GameObject.Find("CurrentColourText").GetComponent<Text>();
-        nextColourTimer = GameObject.Find("NextColourTimer").GetComponent<Text>();
     }
 
     // Need this to update UI
-    void Update() {
-        // Update UI
-        {
-            var timer = GameManagerServer.GetTimerDisplay();
-            TimeSpan ts = TimeSpan.FromSeconds(timer);
-            nextColourTimer.text = $"{ts.Minutes}:{ts.Seconds}";
-            currentColourText.text = "Colour: " + GameManagerServer.GetRoundColour().ToString("g");
-        }
+    void Update() 
+    {
+        
     }
 
     #region Player tracking
@@ -47,6 +32,8 @@ public class GameManager : MonoBehaviour
 
         players.Add(playerID, player);
         player.transform.name = playerID;
+        // Initialize PlayerStats for new player
+        GameManagerServer.InitPlayerStats(player);
     }
 
     public static void UnRegisterPlayer(string id) {
@@ -54,7 +41,12 @@ public class GameManager : MonoBehaviour
     }
 
     public static Player GetPlayer(string id) {
-        return players[id];
+        try {
+            return players[id];
+        }
+        catch (Exception) {
+            return null;
+        }       
     }
 
     public static ICollection<Player> GetPlayers() {

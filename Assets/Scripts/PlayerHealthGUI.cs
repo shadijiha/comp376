@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerHealthGUI : MonoBehaviour
 {
-    public Text text;
+    public TMP_Text text;
+    public Slider healthBar;
     private Player localPlayer;
 
     // How many players in the game
@@ -30,7 +32,10 @@ public class PlayerHealthGUI : MonoBehaviour
         }
 
         if (text != null && localPlayer != null)
-            text.text = localPlayer.getHealth() + "";
+        {
+            text.text = localPlayer.GetHealth() + "";
+            healthBar.value = localPlayer.GetHealth() / 100.0f;
+        }
     }
 
     public void UpdateGUI() {

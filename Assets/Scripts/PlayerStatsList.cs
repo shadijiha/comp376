@@ -3,12 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 using UnityEngine.Networking;
 
 namespace Assets.Scripts
 {
     public class PlayerStatsList : SyncListStruct<PlayerStats>
     {
+        public void InitPlayerStats(Player p)
+        {
+            PlayerStats copy = new PlayerStats()
+            {
+                player = p,
+                kills = 0,
+                death = 0
+            };
+
+            // Add new entry
+            Add(copy);
+        }
+
         public void IncrementKills(Player p)
         {
             for (int i = 0; i < Count; i++)
@@ -92,7 +106,8 @@ namespace Assets.Scripts
             StringBuilder builder = new StringBuilder();
 
             for (int i = 0; i < Count; i++) {
-                builder.Append(GetItem(i).ToString()).Append(", ");
+                if (this[i].player != null)
+                    builder.Append(GetItem(i).ToString()).Append(", ");
             }
 
             return builder.ToString();           
