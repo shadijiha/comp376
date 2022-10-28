@@ -13,7 +13,7 @@ public class PlayerSetup : NetworkBehaviour
 
     // These are here because we only want to show the crosshair and HP when we are in game
     [SerializeField] private GameObject playerUIPrefab;
-    private GameObject playerUIInstance;
+    public GameObject playerUIInstance;
 
     void Start() {
         if (!isLocalPlayer) {

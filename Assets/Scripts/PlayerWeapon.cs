@@ -5,9 +5,9 @@ using UnityEngine;
 [System.Serializable]
 public class PlayerWeapon
 {
-    public string name = "Test Weapon";
-    public int damage = 24;
-    public float range = 100f;
-    public float fireRate = 20.0f;
+    public string name;
+    public int damage, currentLoadedAmmo, magazineSize, currentSpareAmmo, maxAmmo, shotCount;
+    public float range, fireRate, currentSpread, minSpread, maxSpread, spreadIncrease, spreadRecovery, movementSpread, reloadTime;
+    public bool allowContinuousFire, reloading, readyToShoot, shooting;
     public GameObject model;
 }

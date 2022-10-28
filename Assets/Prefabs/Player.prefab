@@ -532,11 +532,71 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   primary:
-    name: Test Weapon
-    damage: 24
+    name: Test
+    damage: 10
+    currentLoadedAmmo: 100
+    magazineSize: 100
+    currentSpareAmmo: 1000
+    maxAmmo: 1000
+    shotCount: 1
     range: 100
     fireRate: 20
+    currentSpread: 0.1
+    minSpread: 0.1
+    maxSpread: 1
+    spreadIncrease: 0.1
+    spreadRecovery: 0.02
+    movementSpread: 2
+    reloadTime: 3
+    allowContinuousFire: 1
+    reloading: 0
+    readyToShoot: 1
+    shooting: 0
     model: {fileID: 2994441980592700789, guid: 61a32ddd00c5a3040b2a64d7d7f8e3a2, type: 3}
+  secondary:
+    name: 
+    damage: 0
+    currentLoadedAmmo: 0
+    magazineSize: 0
+    currentSpareAmmo: 0
+    maxAmmo: 0
+    shotCount: 0
+    range: 0
+    fireRate: 0
+    currentSpread: 0
+    minSpread: 0
+    maxSpread: 0
+    spreadIncrease: 0
+    spreadRecovery: 0
+    movementSpread: 0
+    reloadTime: 0
+    allowContinuousFire: 0
+    reloading: 0
+    readyToShoot: 0
+    shooting: 0
+    model: {fileID: 0}
+  super:
+    name: 
+    damage: 0
+    currentLoadedAmmo: 0
+    magazineSize: 0
+    currentSpareAmmo: 0
+    maxAmmo: 0
+    shotCount: 0
+    range: 0
+    fireRate: 0
+    currentSpread: 0
+    minSpread: 0
+    maxSpread: 0
+    spreadIncrease: 0
+    spreadRecovery: 0
+    movementSpread: 0
+    reloadTime: 0
+    allowContinuousFire: 0
+    reloading: 0
+    readyToShoot: 0
+    shooting: 0
+    model: {fileID: 0}
   weaponHolder: {fileID: 7854826190126884547}
 --- !u!114 &3608804135764910017
 MonoBehaviour:
