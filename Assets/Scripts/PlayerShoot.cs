@@ -10,7 +10,7 @@ using UnityEngine.Networking;
 [RequireComponent(typeof(WeaponManager))]
 public class PlayerShoot : NetworkBehaviour
 {
-    private const string PLAYER_TAG = "Player";
+    public const string PLAYER_TAG = "Player";
 
 
     private PlayerWeapon m_CurrentWeapon;
@@ -18,6 +18,9 @@ public class PlayerShoot : NetworkBehaviour
     [SerializeField] private RectTransform crosshair;
     [SerializeField] private Camera cam;
     [SerializeField] private LayerMask mask;
+
+    private bool    m_bMoving;
+    private float   m_fMovement;
 
     // Start is called before the first frame update
     void Start()
@@ -53,7 +56,15 @@ public class PlayerShoot : NetworkBehaviour
         // Unify both methods of shooting (semi/full-auto) under one variable
         if (m_CurrentWeapon.allowContinuousFire)
         {
-            m_CurrentWeapon.shooting = Input.GetButton("Fire1");
+            m_CurrentWeapon.shooting = Input.GetButton("Fire1") || Input.GetButtonDown("Fire1");
+            if (m_CurrentWeapon.shooting)
+            {
+                Debug.Log("Shooting Input");
+            }
+            else
+            {
+                Debug.Log("Shooting No Input");
+            }
         }
         else
         {
@@ -76,8 +87,11 @@ public class PlayerShoot : NetworkBehaviour
             !m_CurrentWeapon.reloading              && 
             m_CurrentWeapon.currentLoadedAmmo > 0)
         {
+            Debug.Log($"Shoot Invoke: [{m_CurrentWeapon.readyToShoot},{m_CurrentWeapon.shooting},{!m_CurrentWeapon.reloading},{m_CurrentWeapon.currentLoadedAmmo > 0}]");
             Shoot();
         }
+
+        m_fMovement = Mathf.Clamp(Mathf.Abs(Input.GetAxis("Horizontal")) + Mathf.Abs(Input.GetAxis("Vertical")), 0f, 1f);
 
         // If not shooting, recover from spread
         if (m_CurrentWeapon.readyToShoot)
@@ -172,14 +186,12 @@ public class PlayerShoot : NetworkBehaviour
             // We are shooting call shoot method on Server
             CmdOnShoot();
 
-            float xSpread = UnityEngine.Random.Range(-m_CurrentWeapon.currentSpread, m_CurrentWeapon.currentSpread);
-            float ySpread = UnityEngine.Random.Range(-m_CurrentWeapon.currentSpread, m_CurrentWeapon.currentSpread);
-
-            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
-            {
-                xSpread *= m_CurrentWeapon.movementSpread;
-                ySpread *= m_CurrentWeapon.movementSpread;
-            }
+            float xSpread = UnityEngine.Random.Range(
+                                            -m_CurrentWeapon.currentSpread - m_CurrentWeapon.currentSpread * m_fMovement, 
+                                            m_CurrentWeapon.currentSpread + m_CurrentWeapon.currentSpread * m_fMovement);
+            float ySpread = UnityEngine.Random.Range(
+                                            -m_CurrentWeapon.currentSpread - m_CurrentWeapon.currentSpread * m_fMovement, 
+                                            m_CurrentWeapon.currentSpread + m_CurrentWeapon.currentSpread * m_fMovement);
 
             Vector3 shotDirection = cam.transform.forward + new Vector3(xSpread, ySpread, 0);
 
@@ -216,15 +228,9 @@ public class PlayerShoot : NetworkBehaviour
 
     void UpdateCrosshair()
     {
-        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
-        {
-            crosshair.sizeDelta = new Vector2(m_CurrentWeapon.currentSpread * 250 * m_CurrentWeapon.movementSpread,
-                m_CurrentWeapon.currentSpread * 250 * m_CurrentWeapon.movementSpread);
-        }
-        else
-        {
-            crosshair.sizeDelta = new Vector2(m_CurrentWeapon.currentSpread * 250, m_CurrentWeapon.currentSpread * 250);
-        }
+        crosshair.sizeDelta     = new Vector2(  500 * (m_CurrentWeapon.currentSpread + m_CurrentWeapon.currentSpread * m_fMovement),
+                                                500 * (m_CurrentWeapon.currentSpread + m_CurrentWeapon.currentSpread * m_fMovement));
+        
     }
 
     void ReadyToShoot()
@@ -241,6 +247,6 @@ public class PlayerShoot : NetworkBehaviour
         Player p = GameManager.GetPlayer(hit_id);
         p.RpcTakeDamage(damage, src);
 
-        Debug.Log(hit_id + " has " + p.getHealth());
+        Debug.Log(hit_id + " has " + p.GetHealth());
     }
 }

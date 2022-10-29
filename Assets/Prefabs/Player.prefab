@@ -216,6 +216,7 @@ GameObject:
   - component: {fileID: 1172113867161608123}
   - component: {fileID: 1172113867161608122}
   - component: {fileID: 7275217721885231970}
+  - component: {fileID: 3608804135764910017}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -391,6 +392,7 @@ MonoBehaviour:
   - {fileID: 7976873734904968976}
   playerUIPrefab: {fileID: 7701344722933330505, guid: a0f2fe11526768c40bd2a1cbeb2b9e91,
     type: 3}
+  playerUIInstance: {fileID: 0}
 --- !u!153 &1172113867161608100
 ConfigurableJoint:
   m_ObjectHideFlags: 0
@@ -498,6 +500,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b2bf2c1d74eba542b479daebc7ee573, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  crosshair: {fileID: 0}
   cam: {fileID: 1172113867161608151}
   mask:
     serializedVersion: 2
@@ -597,6 +600,18 @@ MonoBehaviour:
     shooting: 0
     model: {fileID: 0}
   weaponHolder: {fileID: 7854826190126884547}
+--- !u!114 &3608804135764910017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1172113867161608157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fb6c66657c03af45b49b24d9b4aefc6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2512440469274021270
 GameObject:
   m_ObjectHideFlags: 0
