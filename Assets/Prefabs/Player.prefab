@@ -392,6 +392,7 @@ MonoBehaviour:
   - {fileID: 7976873734904968976}
   playerUIPrefab: {fileID: 7701344722933330505, guid: a0f2fe11526768c40bd2a1cbeb2b9e91,
     type: 3}
+  playerUIInstance: {fileID: 0}
 --- !u!153 &1172113867161608100
 ConfigurableJoint:
   m_ObjectHideFlags: 0
@@ -499,6 +500,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b2bf2c1d74eba542b479daebc7ee573, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  crosshair: {fileID: 0}
   cam: {fileID: 1172113867161608151}
   mask:
     serializedVersion: 2
