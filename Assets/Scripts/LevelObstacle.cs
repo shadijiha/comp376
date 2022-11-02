@@ -8,6 +8,10 @@ public class LevelObstacle : MonoBehaviour
     private Material material;
     private float originalAlpha = 1.0f;
 
+    private bool active = true;
+    private Vector3 normalLocalScale;
+    private Vector3 zeroScale = new Vector3 (0,0,0);
+
     [SerializeField] private GameManagerServer.Colour objectColour;
 
     // Start is called before the first frame update
@@ -18,6 +22,7 @@ public class LevelObstacle : MonoBehaviour
         
         material = GetComponent<Renderer>().material;
         originalAlpha = material.color.a;
+        this.normalLocalScale = this.transform.localScale;
     }
 
     // Update is called once per frame
@@ -28,17 +33,32 @@ public class LevelObstacle : MonoBehaviour
         // TODO: Optemize that
         if (currentColour == objectColour)
         {
-            colliderComponent.enabled = false;
+            //colliderComponent.enabled = false;
 
-            var oldColour = material.color;
-            material.SetColor("_Color", new Color(oldColour.r, oldColour.g, oldColour.b, 0.5f));
+            //var oldColour = material.color;
+            //material.SetColor("_Color", new Color(oldColour.r, oldColour.g, oldColour.b, 0.5f));
+            if(this.active == true)
+            {
+                this.active = false;
+                //this.gameObject.SetActive(false);
+                this.transform.localScale = zeroScale;
+
+            }
         }
         else
         {
-            colliderComponent.enabled = true;
+            //colliderComponent.enabled = true;
 
-            var oldColour = material.color;
-            material.SetColor("_Color", new Color(oldColour.r, oldColour.g, oldColour.b, originalAlpha));
+            //var oldColour = material.color;
+            //material.SetColor("_Color", new Color(oldColour.r, oldColour.g, oldColour.b, originalAlpha));
+            if (this.active == false)
+            {
+                //this.gameObject.SetActive(true);
+                this.active = true;
+                this.transform.localScale = normalLocalScale;
+                Debug.Log("After activating the block");
+
+            }
         }
     }
 }

@@ -12,7 +12,7 @@ public class GameManagerServer : NetworkBehaviour
     public const double ChangeColourTimer = 15;   // 15 seconds
 
     [SyncVar]
-    private Colour currentRoundColor = Colour.Green;
+    private Colour currentRoundColor = Colour.Yellow;
     
     [SyncVar]
     private double changeColourTimerDisplay = ChangeColourTimer; // in seconds
@@ -78,11 +78,11 @@ public class GameManagerServer : NetworkBehaviour
 
     public enum Colour
     {
-        Green = 0,
-        Yellow,
-        Orange,
+        //Green = 0,
+        Yellow = 0,
+        //Orange,
         Red,
-        Black,
+        //Black,
         Blue,
         Violet
     }
