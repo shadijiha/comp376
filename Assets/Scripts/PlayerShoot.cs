@@ -57,14 +57,6 @@ public class PlayerShoot : NetworkBehaviour
         if (m_CurrentWeapon.allowContinuousFire)
         {
             m_CurrentWeapon.shooting = Input.GetButton("Fire1") || Input.GetButtonDown("Fire1");
-            if (m_CurrentWeapon.shooting)
-            {
-                Debug.Log("Shooting Input");
-            }
-            else
-            {
-                Debug.Log("Shooting No Input");
-            }
         }
         else
         {
@@ -72,9 +64,9 @@ public class PlayerShoot : NetworkBehaviour
         }
 
         // Reload
-        if (Input.GetKeyDown(KeyCode.R) && 
+        if (Input.GetButtonDown("Reload") && 
             m_CurrentWeapon.currentLoadedAmmo < m_CurrentWeapon.magazineSize && 
-            m_CurrentWeapon.currentSpareAmmo > 0 &&
+            !(m_CurrentWeapon.currentSpareAmmo == 0)&&
             m_CurrentWeapon.reloading == false)
         {
             Debug.Log("Reload");
@@ -87,7 +79,6 @@ public class PlayerShoot : NetworkBehaviour
             !m_CurrentWeapon.reloading              && 
             m_CurrentWeapon.currentLoadedAmmo > 0)
         {
-            Debug.Log($"Shoot Invoke: [{m_CurrentWeapon.readyToShoot},{m_CurrentWeapon.shooting},{!m_CurrentWeapon.reloading},{m_CurrentWeapon.currentLoadedAmmo > 0}]");
             Shoot();
         }
 
@@ -161,16 +152,23 @@ public class PlayerShoot : NetworkBehaviour
     [Client]
     void ReloadFinished()
     {
-        if (m_CurrentWeapon.currentSpareAmmo    >=  m_CurrentWeapon.magazineSize)
+        if (m_CurrentWeapon.currentSpareAmmo        >=  m_CurrentWeapon.magazineSize)
         {
-            m_CurrentWeapon.currentLoadedAmmo   =   m_CurrentWeapon.magazineSize;
-            m_CurrentWeapon.currentSpareAmmo    -=  m_CurrentWeapon.magazineSize;
+            m_CurrentWeapon.currentLoadedAmmo       =   m_CurrentWeapon.magazineSize;
+            m_CurrentWeapon.currentSpareAmmo        -=  m_CurrentWeapon.magazineSize;
         }
-        else // If there is not enough spare ammo to fully refill the magazine, partially reload it instead.
+        else if (m_CurrentWeapon.currentSpareAmmo   >   0)
         {
-            m_CurrentWeapon.currentLoadedAmmo  +=   m_CurrentWeapon.currentSpareAmmo;
-            m_CurrentWeapon.currentSpareAmmo    =   0;
+            // If there is not enough spare ammo to fully refill the magazine, partially reload it instead.
+            m_CurrentWeapon.currentLoadedAmmo       +=  m_CurrentWeapon.currentSpareAmmo;
+            m_CurrentWeapon.currentSpareAmmo        =   0;
         }
+        else
+        {
+            // Infinite Ammo Weapon
+            m_CurrentWeapon.currentLoadedAmmo       =   m_CurrentWeapon.magazineSize;
+        }
+
         m_CurrentWeapon.reloading = false;
         Debug.Log("Reload Finished");
     }
@@ -196,12 +194,29 @@ public class PlayerShoot : NetworkBehaviour
             Vector3 shotDirection = cam.transform.forward + new Vector3(xSpread, ySpread, 0);
 
             RaycastHit hit;
-            if (Physics.Raycast(cam.transform.position, shotDirection, out hit, m_CurrentWeapon.range, mask))
+            if (Physics.Raycast(cam.transform.position, shotDirection, out hit, m_CurrentWeapon.maxRange, mask))
             {
                 // We hit Something
                 if (hit.collider.tag == PLAYER_TAG)
                 {
-                    CmdPlayerShot(hit.collider.name, this.name, m_CurrentWeapon.damage);
+                    int finalDamage = m_CurrentWeapon.damage;
+                    if (hit.distance > m_CurrentWeapon.falloffStart)
+                    {
+                        if (hit.distance < m_CurrentWeapon.falloffMax)
+                        {
+                            // Damage linearly falls off between the minimum falloff distance and the maximum falloff.
+                            float falloffPercent = (hit.distance - m_CurrentWeapon.falloffStart)/(m_CurrentWeapon.falloffMax - m_CurrentWeapon.falloffStart);
+                            finalDamage = Mathf.RoundToInt(
+                                (falloffPercent * m_CurrentWeapon.falloffDamage) +
+                                ((1 - falloffPercent) * m_CurrentWeapon.damage));
+                        }
+                        else
+                        {
+                            finalDamage = m_CurrentWeapon.falloffDamage;
+                        }
+                    }
+                    
+                    CmdPlayerShot(hit.collider.name, this.name, finalDamage);
                 }
 
                 // Play Hit effect on the server
@@ -230,7 +245,6 @@ public class PlayerShoot : NetworkBehaviour
     {
         crosshair.sizeDelta     = new Vector2(  500 * (m_CurrentWeapon.currentSpread + m_CurrentWeapon.currentSpread * m_fMovement),
                                                 500 * (m_CurrentWeapon.currentSpread + m_CurrentWeapon.currentSpread * m_fMovement));
-        
     }
 
     void ReadyToShoot()
