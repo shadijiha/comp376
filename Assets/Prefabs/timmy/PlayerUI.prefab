@@ -2019,7 +2019,7 @@ GameObject:
   - component: {fileID: 1542514663546088881}
   - component: {fileID: 1763514260930499}
   m_Layer: 5
-  m_Name: PlayerUIWithAmmo
+  m_Name: PlayerUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
