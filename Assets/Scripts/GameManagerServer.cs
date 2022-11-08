@@ -19,6 +19,14 @@ public class GameManagerServer : NetworkBehaviour
 
     private PlayerStatsList playersStats = new PlayerStatsList();
 
+    void Start()
+    {
+        if (isServer)
+        {
+            currentRoundColor = RandomColour();
+        }
+    }
+
     void FixedUpdate() {
         if (isServer) { 
             if (changeColourTimerDisplay < 1)
