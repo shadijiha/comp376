@@ -25,11 +25,13 @@ public class Pistol : PlayerWeapon
         fireRate                = 10.0f;
         currentSpread           = 0.0f;
         minSpread               = 0.01f;
-        maxSpread               = 0.20f;
-        spreadIncrease          = 0.04f;
-        spreadRecovery          = 0.01f;
+        maxSpread               = 0.10f;
+        spreadIncrease          = 0.03f;
+        spreadRecovery          = 0.005f;
         movementSpread          = 1.5f;
         reloadTime              = 1.0f;
+        drawTime                = 0.3f;
+        stowTime                = 0.4f;
         allowContinuousFire     = false;
         reloading               = false;
         readyToShoot            = true;

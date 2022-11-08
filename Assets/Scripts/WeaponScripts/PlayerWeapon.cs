@@ -28,6 +28,8 @@ public class PlayerWeapon
     public  float       spreadRecovery;
     public  float       movementSpread;
     public  float       reloadTime;
+    public  float       drawTime;
+    public  float       stowTime;
     public  bool        allowContinuousFire; 
     public  bool        reloading;
     public  bool        readyToShoot; 

@@ -87,7 +87,7 @@ public class PlayerShoot : NetworkBehaviour
         // If not shooting, recover from spread
         if (m_CurrentWeapon.readyToShoot)
         { 
-            m_CurrentWeapon.currentSpread -= m_CurrentWeapon.spreadRecovery;
+            m_CurrentWeapon.currentSpread -= m_CurrentWeapon.spreadRecovery * Time.deltaTime * 60;
             if (m_CurrentWeapon.currentSpread < m_CurrentWeapon.minSpread)
             {
                 m_CurrentWeapon.currentSpread = m_CurrentWeapon.minSpread;
@@ -121,7 +121,11 @@ public class PlayerShoot : NetworkBehaviour
     /// </summary>
     [ClientRpc]
     void RpcDoShootEffect() {
-        m_WeaponManager.GetCurrentWeaponGraphics().muzzelFlash.Play();
+        ParticleSystem particle = Instantiate(
+                                        m_WeaponManager.GetCurrentWeaponGraphics().muzzelFlash, 
+                                        GetComponentInChildren<ParticleOrigin>().gameObject.transform);
+
+        Destroy(particle.gameObject, 0.5f);
     }
 
     /// <summary>
@@ -152,25 +156,32 @@ public class PlayerShoot : NetworkBehaviour
     [Client]
     void ReloadFinished()
     {
-        if (m_CurrentWeapon.currentSpareAmmo        >=  m_CurrentWeapon.magazineSize)
+        if (!m_CurrentWeapon.reloading)
         {
-            m_CurrentWeapon.currentLoadedAmmo       =   m_CurrentWeapon.magazineSize;
-            m_CurrentWeapon.currentSpareAmmo        -=  m_CurrentWeapon.magazineSize;
-        }
-        else if (m_CurrentWeapon.currentSpareAmmo   >   0)
-        {
-            // If there is not enough spare ammo to fully refill the magazine, partially reload it instead.
-            m_CurrentWeapon.currentLoadedAmmo       +=  m_CurrentWeapon.currentSpareAmmo;
-            m_CurrentWeapon.currentSpareAmmo        =   0;
+            Debug.Log("Reload Aborted.");
         }
         else
         {
-            // Infinite Ammo Weapon
-            m_CurrentWeapon.currentLoadedAmmo       =   m_CurrentWeapon.magazineSize;
-        }
+            if (m_CurrentWeapon.currentSpareAmmo        >=  m_CurrentWeapon.magazineSize)
+            {
+                m_CurrentWeapon.currentLoadedAmmo       =   m_CurrentWeapon.magazineSize;
+                m_CurrentWeapon.currentSpareAmmo        -=  m_CurrentWeapon.magazineSize;
+            }
+            else if (m_CurrentWeapon.currentSpareAmmo   >   0)
+            {
+                // If there is not enough spare ammo to fully refill the magazine, partially reload it instead.
+                m_CurrentWeapon.currentLoadedAmmo       +=  m_CurrentWeapon.currentSpareAmmo;
+                m_CurrentWeapon.currentSpareAmmo        =   0;
+            }
+            else
+            {
+                // Infinite Ammo Weapon
+                m_CurrentWeapon.currentLoadedAmmo       =   m_CurrentWeapon.magazineSize;
+            }
 
-        m_CurrentWeapon.reloading = false;
-        Debug.Log("Reload Finished");
+            m_CurrentWeapon.reloading = false;
+            Debug.Log("Reload Finished");
+        }
     }
 
     [Client]
@@ -243,8 +254,8 @@ public class PlayerShoot : NetworkBehaviour
 
     void UpdateCrosshair()
     {
-        crosshair.sizeDelta     = new Vector2(  500 * (m_CurrentWeapon.currentSpread + m_CurrentWeapon.currentSpread * m_fMovement),
-                                                500 * (m_CurrentWeapon.currentSpread + m_CurrentWeapon.currentSpread * m_fMovement));
+        crosshair.sizeDelta     = new Vector2(  1000 * (m_CurrentWeapon.currentSpread + m_CurrentWeapon.currentSpread * m_fMovement),
+                                                1000 * (m_CurrentWeapon.currentSpread + m_CurrentWeapon.currentSpread * m_fMovement));
     }
 
     void ReadyToShoot()
