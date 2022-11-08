@@ -1178,12 +1178,12 @@ PrefabInstance:
     - target: {fileID: 313011085952832429, guid: c4b3467177fe17f44b4c1fe8737e9ec6,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 25
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 313011085952832429, guid: c4b3467177fe17f44b4c1fe8737e9ec6,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 25
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 313011085952832429, guid: c4b3467177fe17f44b4c1fe8737e9ec6,
         type: 3}
@@ -1245,10 +1245,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2180176601601388930, guid: c4b3467177fe17f44b4c1fe8737e9ec6,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 3527806849535365476, guid: c4b3467177fe17f44b4c1fe8737e9ec6,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -11
+      objectReference: {fileID: 0}
+    - target: {fileID: 4450743146113689302, guid: c4b3467177fe17f44b4c1fe8737e9ec6,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -11
+      objectReference: {fileID: 0}
     - target: {fileID: 4589066811902903764, guid: c4b3467177fe17f44b4c1fe8737e9ec6,
         type: 3}
       propertyPath: m_Name
       value: DynamicCrosshair
+      objectReference: {fileID: 0}
+    - target: {fileID: 7659002541990724920, guid: c4b3467177fe17f44b4c1fe8737e9ec6,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c4b3467177fe17f44b4c1fe8737e9ec6, type: 3}
