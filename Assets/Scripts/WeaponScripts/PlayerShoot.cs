@@ -162,10 +162,10 @@ public class PlayerShoot : NetworkBehaviour
         }
         else
         {
-            if (m_CurrentWeapon.currentSpareAmmo        >=  m_CurrentWeapon.magazineSize)
+            if (m_CurrentWeapon.currentSpareAmmo        >=  m_CurrentWeapon.magazineSize - m_CurrentWeapon.currentLoadedAmmo)
             {
                 m_CurrentWeapon.currentLoadedAmmo       =   m_CurrentWeapon.magazineSize;
-                m_CurrentWeapon.currentSpareAmmo        -=  m_CurrentWeapon.magazineSize;
+                m_CurrentWeapon.currentSpareAmmo        -=  m_CurrentWeapon.magazineSize - m_CurrentWeapon.currentLoadedAmmo;
             }
             else if (m_CurrentWeapon.currentSpareAmmo   >   0)
             {
