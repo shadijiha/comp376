@@ -493,7 +493,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b2bf2c1d74eba542b479daebc7ee573, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  crosshair: {fileID: 0}
+  crosshair: {fileID: 313011085952832429, guid: c4b3467177fe17f44b4c1fe8737e9ec6,
+    type: 3}
   cam: {fileID: 1172113867161608151}
   mask:
     serializedVersion: 2
@@ -621,9 +622,9 @@ MonoBehaviour:
     model: {fileID: 0}
   weaponHolder: {fileID: 7854826190126884547}
   mWeaponArr:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7471805642146190835, guid: 7e22e245148ac6f4a86cbcf9efcdf99b, type: 3}
+  - {fileID: 6328806803119589402, guid: c0f7273ab40c59d4a938cd41e9d29166, type: 3}
+  - {fileID: 4006320201810499399, guid: 53961e4e4fba37d44818275e66eb0a0e, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
