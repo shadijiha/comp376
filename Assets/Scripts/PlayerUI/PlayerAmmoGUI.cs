@@ -14,8 +14,7 @@ public class PlayerAmmoGUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Player localPlayer = GetComponentInParent<PlayerUISetup>().localPlayer;
-        weaponManager = localPlayer.GetComponent<WeaponManager>();
+        weaponManager = GetComponentInParent<PlayerUISetup>().weaponManager;
     }
 
     // Update is called once per frame
