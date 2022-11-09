@@ -216,7 +216,6 @@ GameObject:
   - component: {fileID: 1172113867161608123}
   - component: {fileID: 1172113867161608122}
   - component: {fileID: 7275217721885231970}
-  - component: {fileID: 3608804135764910017}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -533,37 +532,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f54a3643f6981804abe5b4f2b37447a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  primary:
-    name: Test
-    damage: 10
-    currentLoadedAmmo: 100
-    magazineSize: 100
-    currentSpareAmmo: 1000
-    maxAmmo: 1000
-    shotCount: 1
-    range: 100
-    fireRate: 20
-    currentSpread: 0.1
-    minSpread: 0.1
-    maxSpread: 1
-    spreadIncrease: 0.1
-    spreadRecovery: 0.02
-    movementSpread: 2
-    reloadTime: 3
-    allowContinuousFire: 1
-    reloading: 0
-    readyToShoot: 1
-    shooting: 0
-    model: {fileID: 2994441980592700789, guid: 61a32ddd00c5a3040b2a64d7d7f8e3a2, type: 3}
-  secondary:
-    name: 
+  mPrimary:
+    weaponType: 0
     damage: 0
     currentLoadedAmmo: 0
     magazineSize: 0
     currentSpareAmmo: 0
     maxAmmo: 0
     shotCount: 0
-    range: 0
+    burstCount: 0
+    burstIndex: 0
+    burstFireRate: 0
+    falloffDamage: 0
+    critMultiplier: 0
+    falloffStart: 0
+    falloffMax: 0
+    maxRange: 0
     fireRate: 0
     currentSpread: 0
     minSpread: 0
@@ -572,20 +556,29 @@ MonoBehaviour:
     spreadRecovery: 0
     movementSpread: 0
     reloadTime: 0
+    drawTime: 0
+    stowTime: 0
     allowContinuousFire: 0
     reloading: 0
     readyToShoot: 0
     shooting: 0
     model: {fileID: 0}
-  super:
-    name: 
+  mSecondary:
+    weaponType: 0
     damage: 0
     currentLoadedAmmo: 0
     magazineSize: 0
     currentSpareAmmo: 0
     maxAmmo: 0
     shotCount: 0
-    range: 0
+    burstCount: 0
+    burstIndex: 0
+    burstFireRate: 0
+    falloffDamage: 0
+    critMultiplier: 0
+    falloffStart: 0
+    falloffMax: 0
+    maxRange: 0
     fireRate: 0
     currentSpread: 0
     minSpread: 0
@@ -594,24 +587,56 @@ MonoBehaviour:
     spreadRecovery: 0
     movementSpread: 0
     reloadTime: 0
+    drawTime: 0
+    stowTime: 0
+    allowContinuousFire: 0
+    reloading: 0
+    readyToShoot: 0
+    shooting: 0
+    model: {fileID: 0}
+  mSuper:
+    weaponType: 0
+    damage: 0
+    currentLoadedAmmo: 0
+    magazineSize: 0
+    currentSpareAmmo: 0
+    maxAmmo: 0
+    shotCount: 0
+    burstCount: 0
+    burstIndex: 0
+    burstFireRate: 0
+    falloffDamage: 0
+    critMultiplier: 0
+    falloffStart: 0
+    falloffMax: 0
+    maxRange: 0
+    fireRate: 0
+    currentSpread: 0
+    minSpread: 0
+    maxSpread: 0
+    spreadIncrease: 0
+    spreadRecovery: 0
+    movementSpread: 0
+    reloadTime: 0
+    drawTime: 0
+    stowTime: 0
     allowContinuousFire: 0
     reloading: 0
     readyToShoot: 0
     shooting: 0
     model: {fileID: 0}
   weaponHolder: {fileID: 7854826190126884547}
---- !u!114 &3608804135764910017
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1172113867161608157}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8fb6c66657c03af45b49b24d9b4aefc6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  mWeaponArr:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &2512440469274021270
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,13 +6,6 @@ using TMPText = TMPro.TMP_Text;
 
 public class PlayerAmmoGUI : MonoBehaviour
 {
-    [Header("Current Ammo")]
-    [SerializeField] private TMPText currentAmmo;
-    [SerializeField] private TMPText magazineSize;
-    [Header("Current Spare")]
-    [SerializeField] private TMPText currentSpare;
-    [SerializeField] private TMPText maxSpare;
-
     [SerializeField] private TMPText ammoText;
     [SerializeField] private TMPText spareText;
 
