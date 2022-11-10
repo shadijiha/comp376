@@ -18,8 +18,8 @@ public class SMG : PlayerWeapon
         burstIndex              = 0;
         burstFireRate           = 1;
         critMultiplier          = 1.5f;
-        falloffStart            = 25f;
-        falloffMax              = 60f;
+        falloffStart            = 15f;
+        falloffMax              = 30f;
         falloffDamage           = 5;
         maxRange                = 200f;
         fireRate                = 15.0f;

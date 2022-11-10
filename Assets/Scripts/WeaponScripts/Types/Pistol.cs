@@ -18,8 +18,8 @@ public class Pistol : PlayerWeapon
         burstIndex              = 0;
         burstFireRate           = 1;
         critMultiplier          = 2.0f;
-        falloffStart            = 40f;
-        falloffMax              = 60f;
+        falloffStart            = 20f;
+        falloffMax              = 40f;
         falloffDamage           = 8;
         maxRange                = 200f;
         fireRate                = 10.0f;
