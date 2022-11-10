@@ -32,9 +32,12 @@ public class PlayerSetup : NetworkBehaviour
         // Setup the player
         GetComponent<Player>().Setup();
 
-        // Create Player UI
-        playerUIInstance = Instantiate(playerUIPrefab);
-        playerUIInstance.name = playerUIPrefab.name;
+        // Create Player UI for local player only
+        if (isLocalPlayer)
+        {
+            playerUIInstance = Instantiate(playerUIPrefab);
+            playerUIInstance.name = playerUIPrefab.name;
+        }
     }
 
     public override void OnStartClient() {
