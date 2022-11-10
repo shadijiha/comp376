@@ -8,7 +8,7 @@ public class Pistol : PlayerWeapon
     public Pistol()
     {
         weaponType              = WeaponType.Sidearm;
-        damage                  = 12;
+        damage                  = 20;
         currentLoadedAmmo       = 10;
         magazineSize            = 10;
         currentSpareAmmo        = -1;
@@ -20,7 +20,7 @@ public class Pistol : PlayerWeapon
         critMultiplier          = 2.0f;
         falloffStart            = 20f;
         falloffMax              = 40f;
-        falloffDamage           = 8;
+        falloffDamage           = 12;
         maxRange                = 200f;
         fireRate                = 10.0f;
         currentSpread           = 0.005f;

@@ -8,7 +8,7 @@ public class SMG : PlayerWeapon
     public SMG()
     {
         weaponType              = WeaponType.SMG;
-        damage                  = 8;
+        damage                  = 10;
         currentLoadedAmmo       = 30;
         magazineSize            = 30;
         currentSpareAmmo        = 180;
@@ -20,7 +20,7 @@ public class SMG : PlayerWeapon
         critMultiplier          = 1.5f;
         falloffStart            = 15f;
         falloffMax              = 30f;
-        falloffDamage           = 5;
+        falloffDamage           = 7;
         maxRange                = 200f;
         fireRate                = 15.0f;
         currentSpread           = 0.01f;
