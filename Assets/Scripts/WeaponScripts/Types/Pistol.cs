@@ -18,8 +18,8 @@ public class Pistol : PlayerWeapon
         burstIndex              = 0;
         burstFireRate           = 1;
         critMultiplier          = 2.0f;
-        falloffStart            = 40f;
-        falloffMax              = 60f;
+        falloffStart            = 20f;
+        falloffMax              = 40f;
         falloffDamage           = 8;
         maxRange                = 200f;
         fireRate                = 10.0f;
@@ -28,7 +28,7 @@ public class Pistol : PlayerWeapon
         maxSpread               = 0.10f;
         spreadIncrease          = 0.03f;
         spreadRecovery          = 0.005f;
-        movementSpread          = 1.5f;
+        movementSpread          = 0.5f;
         reloadTime              = 1.0f;
         drawTime                = 0.3f;
         stowTime                = 0.4f;
@@ -38,6 +38,13 @@ public class Pistol : PlayerWeapon
         shooting                = false;
 
         //burstInfo               = new BurstInfo();
+        cameraRecoilInfo        = new CameraRecoilInfo()
+                                    {
+                                        returnSpeed = 20f,
+                                        rotationSpeed = 10f,
+                                        recoilRotation = new Vector3(5f, 1f, 0f)
+                                    };
+
         model                   = WeaponManager.msWeaponArr[(int)weaponType];
     }
 

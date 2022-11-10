@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/DebugScene.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
+    path: Assets/Scenes/map_laserTag/goodWithPlayer.unity
+    guid: 0cc25700b87c57345acdbec820011f7e
   m_configObjects: {}

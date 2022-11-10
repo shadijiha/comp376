@@ -18,8 +18,8 @@ public class SMG : PlayerWeapon
         burstIndex              = 0;
         burstFireRate           = 1;
         critMultiplier          = 1.5f;
-        falloffStart            = 25f;
-        falloffMax              = 60f;
+        falloffStart            = 15f;
+        falloffMax              = 30f;
         falloffDamage           = 5;
         maxRange                = 200f;
         fireRate                = 15.0f;
@@ -28,7 +28,7 @@ public class SMG : PlayerWeapon
         maxSpread               = 0.15f;
         spreadIncrease          = 0.01f;
         spreadRecovery          = 0.005f;
-        movementSpread          = 1.2f;
+        movementSpread          = 0.2f;
         reloadTime              = 1.0f;
         drawTime                = 0.4f;
         stowTime                = 0.5f;
@@ -36,6 +36,13 @@ public class SMG : PlayerWeapon
         reloading               = false;
         readyToShoot            = true;
         shooting                = false;
+
+        cameraRecoilInfo        = new CameraRecoilInfo()
+                                    {
+                                        returnSpeed = 20f,
+                                        rotationSpeed = 10f,
+                                        recoilRotation = new Vector3(10f, 2f, 2f)
+                                    };
         model                   = WeaponManager.msWeaponArr[(int)weaponType];
     }
 
