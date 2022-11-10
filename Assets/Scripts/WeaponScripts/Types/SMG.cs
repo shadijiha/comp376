@@ -8,7 +8,7 @@ public class SMG : PlayerWeapon
     public SMG()
     {
         weaponType              = WeaponType.SMG;
-        damage                  = 8;
+        damage                  = 10;
         currentLoadedAmmo       = 30;
         magazineSize            = 30;
         currentSpareAmmo        = 180;
@@ -20,13 +20,13 @@ public class SMG : PlayerWeapon
         critMultiplier          = 1.5f;
         falloffStart            = 15f;
         falloffMax              = 30f;
-        falloffDamage           = 5;
+        falloffDamage           = 7;
         maxRange                = 200f;
         fireRate                = 15.0f;
-        currentSpread           = 0.02f;
-        minSpread               = 0.02f;
-        maxSpread               = 0.15f;
-        spreadIncrease          = 0.01f;
+        currentSpread           = 0.01f;
+        minSpread               = 0.01f;
+        maxSpread               = 0.10f;
+        spreadIncrease          = 0.005f;
         spreadRecovery          = 0.005f;
         movementSpread          = 0.2f;
         reloadTime              = 1.0f;
@@ -40,8 +40,8 @@ public class SMG : PlayerWeapon
         cameraRecoilInfo        = new CameraRecoilInfo()
                                     {
                                         returnSpeed = 20f,
-                                        rotationSpeed = 10f,
-                                        recoilRotation = new Vector3(10f, 2f, 2f)
+                                        rotationSpeed = 8f,
+                                        recoilRotation = new Vector3(8f, 2f, 2f)
                                     };
         model                   = WeaponManager.msWeaponArr[(int)weaponType];
     }

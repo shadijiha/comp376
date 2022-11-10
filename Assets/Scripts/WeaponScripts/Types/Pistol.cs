@@ -8,7 +8,7 @@ public class Pistol : PlayerWeapon
     public Pistol()
     {
         weaponType              = WeaponType.Sidearm;
-        damage                  = 12;
+        damage                  = 20;
         currentLoadedAmmo       = 10;
         magazineSize            = 10;
         currentSpareAmmo        = -1;
@@ -20,11 +20,11 @@ public class Pistol : PlayerWeapon
         critMultiplier          = 2.0f;
         falloffStart            = 20f;
         falloffMax              = 40f;
-        falloffDamage           = 8;
+        falloffDamage           = 12;
         maxRange                = 200f;
         fireRate                = 10.0f;
-        currentSpread           = 0.0f;
-        minSpread               = 0.01f;
+        currentSpread           = 0.005f;
+        minSpread               = 0.005f;
         maxSpread               = 0.10f;
         spreadIncrease          = 0.03f;
         spreadRecovery          = 0.005f;
@@ -42,7 +42,7 @@ public class Pistol : PlayerWeapon
                                     {
                                         returnSpeed = 20f,
                                         rotationSpeed = 10f,
-                                        recoilRotation = new Vector3(5f, 1f, 0f)
+                                        recoilRotation = new Vector3(7f, 1f, 0f)
                                     };
 
         model                   = WeaponManager.msWeaponArr[(int)weaponType];
