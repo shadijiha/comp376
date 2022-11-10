@@ -3,9 +3,9 @@ using UnityEngine.Networking;
 using System.Collections;
 
 //[RequireComponent(typeof(HealthFunctions))]
-public class LandMine : NetworkBehaviour
+public class AmmoPack : NetworkBehaviour
 {
-    [SerializeField] private int damage = 20;
+    [SerializeField] private int ammoRestorePercent = 50;
 
     private IEnumerator Respawn()
     {
@@ -34,11 +34,18 @@ public class LandMine : NetworkBehaviour
     {
         if (collision.gameObject.tag.Contains(PlayerShoot.PLAYER_TAG))
         {
-            var playerScript = collision.gameObject.GetComponent<Player>();
-            playerScript.RpcTakeDamage(damage, "LAND_MINE");
+            var primary = collision.gameObject.GetComponent<WeaponManager>().mPrimary;
 
-            Disable();
-            StartCoroutine(Respawn());
+            if (primary.currentSpareAmmo < primary.maxAmmo)
+            {
+                primary.currentSpareAmmo = (int)Mathf.Min(
+                                        primary.currentSpareAmmo + primary.maxAmmo * ammoRestorePercent / 100.0f,
+                                        primary.maxAmmo);
+
+
+                Disable();
+                StartCoroutine(Respawn());
+            }
         }
 
     }

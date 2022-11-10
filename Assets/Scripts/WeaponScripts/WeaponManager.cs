@@ -9,8 +9,8 @@ public class WeaponManager : NetworkBehaviour
     public const string WEAPON_LAYER = "Weapon";
 
                         public  static  GameObject[]    msWeaponArr     = new GameObject[10];
-    [SerializeField]    private         PlayerWeapon    mPrimary;
-    [SerializeField]    private         PlayerWeapon    mSecondary;
+    [SerializeField]    public          PlayerWeapon    mPrimary;
+    [SerializeField]    public          PlayerWeapon    mSecondary;
     [SerializeField]    private         PlayerWeapon    mSuper;
     [SerializeField]    private         Transform       weaponHolder;
     [SerializeField]    private         GameObject[]    mWeaponArr      = new GameObject[10];

@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 1949510558635146287}
   - component: {fileID: 1949510558635146286}
   - component: {fileID: 1949510558635146273}
-  - component: {fileID: 8470598504741282071}
+  - component: {fileID: 6465161921097139992}
   m_Layer: 0
-  m_Name: LandMine
+  m_Name: Ammo_Pack
   m_TagString: helthpack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -145,7 +145,7 @@ MonoBehaviour:
     i15: 0
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
---- !u!114 &8470598504741282071
+--- !u!114 &6465161921097139992
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -157,4 +157,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cab7b03c6a302442a108c97e0e236fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 20
+  ammoRestorePercent: 50
