@@ -53,6 +53,17 @@ public class GameManager : MonoBehaviour
         return players.Values;
     }
 
+    public static Player GetLocalPlayer()
+    {
+        foreach (Player player in GetPlayers())
+        {
+            if (player.isLocalPlayer)
+                return player;
+        }
+
+        throw new InvalidOperationException("Local player does not exist");
+    }
+
     #endregion
 
 }

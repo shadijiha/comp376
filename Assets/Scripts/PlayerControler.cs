@@ -12,6 +12,17 @@ public class PlayerControler : MonoBehaviour
     private bool jumpOnCooldown;
     public readonly float JUMP_COOLDOWN = 1.0f;    // In Seconds
 
+    //Animatior
+    public Animator animator;
+    public bool isSprinting = false;
+    public bool isJumping = false;
+
+    private Vector3 movHorizontal;
+    private Vector3 movVertical;
+
+    float xMov;
+    float zMov;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,12 +37,25 @@ public class PlayerControler : MonoBehaviour
         //    Cursor.lockState = CursorLockMode.Locked;
 
 
-        // Calculate the movement velocity as a 3D vector
-        float xMov = Input.GetAxisRaw("Horizontal");
-        float zMov = Input.GetAxisRaw("Vertical");
 
-        Vector3 movHorizontal = transform.right * xMov;
-        Vector3 movVertical = transform.forward * zMov;
+        // Calculate the movement velocity as a 3D vector
+        xMov = Input.GetAxisRaw("Horizontal");
+        zMov = Input.GetAxisRaw("Vertical");
+
+        if (Input.GetKey(KeyCode.LeftShift) && zMov >= 0.01)
+        {
+            isSprinting = true;
+            speed = 10f;
+        }
+        else
+        {
+            isSprinting = false;
+            speed = 5f;
+        }
+        movHorizontal = transform.right * xMov;
+        movVertical = transform.forward * (zMov);
+
+
 
         // Final movement vector
         Vector3 velocity = (movHorizontal + movVertical).normalized * speed;
@@ -56,10 +80,22 @@ public class PlayerControler : MonoBehaviour
         // Listen for the space bar
         if (Input.GetKeyDown(KeyCode.Space) && !jumpOnCooldown)
         {
+            isJumping = true;
             motor.Jump();
             jumpOnCooldown = true;
             Invoke("ClearCooldown", JUMP_COOLDOWN);
         }
+        else
+        {
+            isJumping =false;
+        }
+
+        //Animation
+        animator.SetFloat("xSpeed", xMov);
+        animator.SetFloat("zSpeed", zMov);
+        animator.SetBool("isSprinting", isSprinting);
+        animator.SetBool("isJumping", isJumping);
+
     }
 
     /// <summary>
