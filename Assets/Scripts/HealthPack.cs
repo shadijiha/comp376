@@ -6,6 +6,17 @@ public class HealthPack : NetworkBehaviour
 {
     [SerializeField] private uint healing = 20;
 
+    float currentAngle = 0;
+    void Update() {
+        transform.rotation = Quaternion.Euler(new Vector3(
+                                    90,
+                                    0 ,
+                                    currentAngle));
+
+        currentAngle += 30 * Time.deltaTime;
+        currentAngle = currentAngle % 360;
+    }
+
     private IEnumerator Respawn()
     {
         yield return new WaitForSeconds(GameManager.instance.MATCH_SETTINGS.HealthPackRespawnTime);
@@ -31,10 +42,14 @@ public class HealthPack : NetworkBehaviour
         if (collision.gameObject.tag.Contains(PlayerShoot.PLAYER_TAG))
         {
             var playerScript = collision.gameObject.GetComponent<Player>();
-            playerScript.HealBy(healing);
 
-            Disable();
-            StartCoroutine(Respawn());
+            if (playerScript.GetHealth() < playerScript.GetMaxHealth())
+            {
+                playerScript.HealBy(healing);
+
+                Disable();
+                StartCoroutine(Respawn());
+            }
         }
     }
 }

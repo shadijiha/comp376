@@ -8,6 +8,8 @@ public class PlayerControler : MonoBehaviour
     [SerializeField] private float speed = 5f;
     [SerializeField] private float sensitivity = 3.5f; // In the future this should be in the game settings
 
+    private bool isEnabled;
+
     private PlayerMotor motor;
     private bool jumpOnCooldown;
     public readonly float JUMP_COOLDOWN = 1.0f;    // In Seconds
@@ -32,11 +34,15 @@ public class PlayerControler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Lock the cursor
-        //if (Cursor.lockState != CursorLockMode.Locked)
-        //    Cursor.lockState = CursorLockMode.Locked;
-
-
+        // Stop any player movement if isEnabled is false;
+        // Mainly used when game is pause.
+        if (!isEnabled)
+        {
+            motor.Move(Vector3.zero);
+            motor.Rotate(Vector3.zero);
+            motor.RotateCamera(0);
+            return;
+        }
 
         // Calculate the movement velocity as a 3D vector
         xMov = Input.GetAxisRaw("Horizontal");
@@ -104,5 +110,10 @@ public class PlayerControler : MonoBehaviour
     void ClearCooldown()
     {
         jumpOnCooldown = false;
+    }
+
+    public void EnableMovement(bool enable)
+    {
+        isEnabled = enable;
     }
 }
