@@ -8,6 +8,7 @@ public class EscapeMenuGUI : MonoBehaviour
 
     private bool menuEnabled;
     private PlayerControler playerController;
+    private PlayerShoot playerShoot;
 
     // Start is called before the first frame update
     void Start()
@@ -17,6 +18,7 @@ public class EscapeMenuGUI : MonoBehaviour
 
         Player localPlayer = GetComponentInParent<PlayerUISetup>().localPlayer;
         playerController = localPlayer.GetComponent<PlayerControler>();
+        playerShoot = localPlayer.GetComponent<PlayerShoot>();
     }
 
     // Update is called once per frame
@@ -28,6 +30,7 @@ public class EscapeMenuGUI : MonoBehaviour
         Cursor.lockState = menuEnabled ? CursorLockMode.None : CursorLockMode.Locked;
 
         playerController.EnableMovement(!menuEnabled);
+        playerShoot.enabled = !menuEnabled;
         escapeMenuPanel.SetActive(menuEnabled);
     }
 
