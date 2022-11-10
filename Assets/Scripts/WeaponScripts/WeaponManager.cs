@@ -84,7 +84,9 @@ public class WeaponManager : NetworkBehaviour
     private void Equip(PlayerWeapon weapon)
     {
         //weaponHolder.position, weaponHolder.rotation
-        weapon.model = (GameObject)Instantiate(msWeaponArr[(int)weapon.weaponType]);
+        weapon.model = (GameObject)Instantiate(
+            msWeaponArr[(int)weapon.weaponType]);
+        weapon.model.transform.position = weaponHolder.transform.position;
         weapon.model.transform.SetParent(weaponHolder);
 
         mCurrentGraphics = weapon.model.GetComponentInChildren<WeaponGraphics>();
