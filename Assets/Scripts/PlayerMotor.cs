@@ -8,8 +8,9 @@ public class PlayerMotor : MonoBehaviour
 {
     [SerializeField] private Camera cam;
 
-    private Vector3 velocity = Vector3.zero;
-    private Vector3 rotation = Vector3.zero;
+    private Vector3 velocity            = Vector3.zero;
+    private Vector3 rotation            = Vector3.zero;
+    private Vector3 additionalRotation  = Vector3.zero;
 
     private float cameraRotationX = 0f;
     private float currentCameraRotationX = 0.0f;
@@ -49,6 +50,13 @@ public class PlayerMotor : MonoBehaviour
         this.rotation = rot;
     }
 
+    public void AddRotation (Vector3 rot)
+    {
+        Debug.Log($"Pre-Add: {rotation}");
+        additionalRotation += rot;
+        Debug.Log($"Post-Add: {rotation}");
+    }
+
     /// <summary>
     ///  Gets a CAMERA rotation vector and replaces the old one
     /// </summary>
@@ -79,15 +87,18 @@ public class PlayerMotor : MonoBehaviour
     /// </summary>
     private void PerformRotation()
     {
-        rb.MoveRotation(rb.rotation * Quaternion.Euler(rotation));
+        Debug.Log($"PerformRotation: {rotation}");
+        rb.MoveRotation(rb.rotation * Quaternion.Euler(rotation + additionalRotation));
 
         if (cam != null) {
             // Set our rotation and Clamp it
             currentCameraRotationX -= cameraRotationX;
-            currentCameraRotationX = Mathf.Clamp(currentCameraRotationX, -cameraRotationLimit, cameraRotationLimit);
+            currentCameraRotationX = Mathf.Clamp(currentCameraRotationX + additionalRotation.x, -cameraRotationLimit, cameraRotationLimit);
 
             // Apply rotation to the transform of our camera
             cam.transform.localEulerAngles = new Vector3(currentCameraRotationX, 0.0f, 0.0f);
         }
+
+        additionalRotation = Vector3.zero;
     }
 }

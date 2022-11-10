@@ -13,11 +13,13 @@ public class PlayerShoot : NetworkBehaviour
     public const string PLAYER_TAG = "Player";
 
 
-    private PlayerWeapon m_CurrentWeapon;
-    private WeaponManager m_WeaponManager;
-    [SerializeField] private RectTransform crosshair;
-    [SerializeField] private Camera cam;
-    [SerializeField] private LayerMask mask;
+                        private PlayerWeapon    m_CurrentWeapon;
+                        private WeaponManager   m_WeaponManager;
+    [SerializeField]    private RectTransform   crosshair;
+    [SerializeField]    private Camera          cam;
+    [SerializeField]    private LayerMask       mask;
+    [SerializeField]    private CameraRecoil    cameraRecoil;
+    [SerializeField]    private ModelRecoil     modelRecoil;
 
     private bool    m_bMoving;
     private float   m_fMovement;
@@ -35,7 +37,6 @@ public class PlayerShoot : NetworkBehaviour
         m_WeaponManager = GetComponent<WeaponManager>();
 
         m_CurrentWeapon = m_WeaponManager.GetCurrentWeapon();
-
 
         // Load the weapon so the player doesn't need to reload before first using it.
         m_CurrentWeapon.currentLoadedAmmo   = m_CurrentWeapon.magazineSize;
@@ -79,6 +80,8 @@ public class PlayerShoot : NetworkBehaviour
             !m_CurrentWeapon.reloading              && 
             m_CurrentWeapon.currentLoadedAmmo > 0)
         {
+            cameraRecoil.Shoot(cam);
+            //modelRecoil.Shoot();
             Shoot();
         }
 
@@ -196,13 +199,15 @@ public class PlayerShoot : NetworkBehaviour
             CmdOnShoot();
 
             float xSpread = UnityEngine.Random.Range(
-                                            -m_CurrentWeapon.currentSpread - m_CurrentWeapon.currentSpread * m_fMovement, 
-                                            m_CurrentWeapon.currentSpread + m_CurrentWeapon.currentSpread * m_fMovement);
+                                            -m_CurrentWeapon.currentSpread - m_CurrentWeapon.currentSpread * m_fMovement * m_CurrentWeapon.movementSpread, 
+                                            m_CurrentWeapon.currentSpread + m_CurrentWeapon.currentSpread * m_fMovement * m_CurrentWeapon.movementSpread);
             float ySpread = UnityEngine.Random.Range(
-                                            -m_CurrentWeapon.currentSpread - m_CurrentWeapon.currentSpread * m_fMovement, 
-                                            m_CurrentWeapon.currentSpread + m_CurrentWeapon.currentSpread * m_fMovement);
-
-            Vector3 shotDirection = cam.transform.forward + new Vector3(xSpread, ySpread, 0);
+                                            -m_CurrentWeapon.currentSpread - m_CurrentWeapon.currentSpread * m_fMovement * m_CurrentWeapon.movementSpread, 
+                                            m_CurrentWeapon.currentSpread + m_CurrentWeapon.currentSpread * m_fMovement * m_CurrentWeapon.movementSpread);
+            
+            // Round out the vector so that spread is more circular than square.
+            Vector3 baseSpread      = new Vector3(xSpread, ySpread, 0);
+            Vector3 shotDirection   = cam.transform.forward + baseSpread;
 
             RaycastHit hit;
             if (Physics.Raycast(cam.transform.position, shotDirection, out hit, m_CurrentWeapon.maxRange, mask))
@@ -254,8 +259,8 @@ public class PlayerShoot : NetworkBehaviour
 
     void UpdateCrosshair()
     {
-        crosshair.sizeDelta     = new Vector2(  1000 * (m_CurrentWeapon.currentSpread + m_CurrentWeapon.currentSpread * m_fMovement),
-                                                1000 * (m_CurrentWeapon.currentSpread + m_CurrentWeapon.currentSpread * m_fMovement));
+        crosshair.sizeDelta     = new Vector2(  1000 * (m_CurrentWeapon.currentSpread + m_CurrentWeapon.currentSpread * m_fMovement * m_CurrentWeapon.movementSpread),
+                                                1000 * (m_CurrentWeapon.currentSpread + m_CurrentWeapon.currentSpread * m_fMovement * m_CurrentWeapon.movementSpread));
     }
 
     void ReadyToShoot()
