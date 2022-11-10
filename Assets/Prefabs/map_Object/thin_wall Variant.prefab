@@ -11,7 +11,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.001, y: 0.03, z: 0.02}
+  m_Size: {x: 0.002, y: 0.032, z: 0.022}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &379934031729284647
 PrefabInstance:
@@ -83,7 +83,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 4d7ec403dd546eb4f949b3f34a158f4f,
         type: 3}
       propertyPath: m_Name
-      value: thin_wall
+      value: thin_wall Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4d7ec403dd546eb4f949b3f34a158f4f, type: 3}
