@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerControler : MonoBehaviour
 {
     [SerializeField] private float speed = 5f;
-    [SerializeField] private float sensitivity = 3.0f; // In the future this should be in the game settings
+    [SerializeField] private float sensitivity = 3.5f; // In the future this should be in the game settings
 
     private bool isEnabled;
 
