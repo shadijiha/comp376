@@ -359,7 +359,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  sensitivity: 10
+  sensitivity: 5
   animator: {fileID: 185597601041941295}
   isSprinting: 0
   isJumping: 0
