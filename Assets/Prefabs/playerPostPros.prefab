@@ -493,8 +493,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b2bf2c1d74eba542b479daebc7ee573, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  crosshair: {fileID: 313011085952832429, guid: c4b3467177fe17f44b4c1fe8737e9ec6,
-    type: 3}
+  crosshair: {fileID: 0}
   cam: {fileID: 1172113867161608151}
   mask:
     serializedVersion: 2
