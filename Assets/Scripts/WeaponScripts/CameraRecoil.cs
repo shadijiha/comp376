@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraRecoil : MonoBehaviour
 {
-    PlayerWeapon.CameraRecoilInfo mRecoilInfo;
+    public  PlayerWeapon.CameraRecoilInfo mRecoilInfo;
     public  PlayerMotor playerMotor;
     private Vector3     currentRotation;
     private Vector3     rotation;
