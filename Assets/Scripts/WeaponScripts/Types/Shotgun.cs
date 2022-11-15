@@ -41,8 +41,9 @@ public class Shotgun : PlayerWeapon
                                     {
                                         returnSpeed = 10f,
                                         rotationSpeed = 50f,
-                                        recoilRotation = new Vector3(25f, 5f, 5f)
+                                        recoilRotation = new Vector3(50f, 5f, 5f)
                                     };
+
         model                   = WeaponManager.msWeaponArr[(int)weaponType];
     }
 

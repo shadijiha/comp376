@@ -15,7 +15,7 @@ public class WeaponManager : NetworkBehaviour
     [SerializeField]    private         Transform       weaponHolder;
     [SerializeField]    private         GameObject[]    mWeaponArr      = new GameObject[10];
     [SerializeField]    private         CameraRecoil    mCameraRecoil;
-  //[SerializeField]    private         ModelRecoil     mModelRecoil;
+    [SerializeField]    private         ModelRecoil     mModelRecoil;
                         private         PlayerWeapon    mCurrent;
                         private         PlayerWeapon    mNextWeapon;
                         private         WeaponGraphics  mCurrentGraphics;
@@ -38,7 +38,8 @@ public class WeaponManager : NetworkBehaviour
 
         Equip(mPrimary);
         mCurrent = mPrimary;
-        mCameraRecoil.UpdateRotationInfo(mCurrent.cameraRecoilInfo);
+        mCameraRecoil.UpdateRecoilInfo(mCurrent.cameraRecoilInfo);
+        mModelRecoil.UpdateRecoilInfo(mCurrent.modelRecoilInfo);
         mCurrent.model.SetActive(true);
 
         // Create Sidearm
@@ -81,13 +82,17 @@ public class WeaponManager : NetworkBehaviour
         return mCurrentGraphics;
     }
 
+    public ModelRecoil GetModelRecoil() {
+        return mWeaponArr[(int)mCurrent.weaponType].GetComponent<ModelRecoil>();
+    }
+
     private void Equip(PlayerWeapon weapon)
     {
         //weaponHolder.position, weaponHolder.rotation
         weapon.model = (GameObject)Instantiate(
             msWeaponArr[(int)weapon.weaponType]);
-        weapon.model.transform.position = weaponHolder.transform.position;
         weapon.model.transform.SetParent(weaponHolder);
+        weapon.model.transform.position = weaponHolder.transform.position;
 
         mCurrentGraphics = weapon.model.GetComponentInChildren<WeaponGraphics>();
         if (mCurrentGraphics == null)
@@ -121,8 +126,8 @@ public class WeaponManager : NetworkBehaviour
         // Switch active weapon
         mCurrent = mNextWeapon;
         mCurrent.model.SetActive(true);
-        mCameraRecoil.UpdateRotationInfo(mCurrent.cameraRecoilInfo);
-        //mCurrent.model.transform.position = weaponHolder.transform.position;
+        mCameraRecoil.UpdateRecoilInfo(mCurrent.cameraRecoilInfo);
+        mModelRecoil.UpdateRecoilInfo(mCurrent.modelRecoilInfo);
 
         // Todo: Trigger drawing animation here.
         //

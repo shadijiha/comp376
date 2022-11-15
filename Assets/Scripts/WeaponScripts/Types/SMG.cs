@@ -39,10 +39,24 @@ public class SMG : PlayerWeapon
 
         cameraRecoilInfo        = new CameraRecoilInfo()
                                     {
-                                        returnSpeed = 20f,
-                                        rotationSpeed = 8f,
-                                        recoilRotation = new Vector3(8f, 2f, 2f)
+                                        rotationSpeed       = 8f,
+                                        returnSpeed         = 20f,
+                                        recoilRotation      = new Vector3(8f,       2f,         2f)
                                     };
+
+        modelRecoilInfo         = new ModelRecoilInfo()
+                                    {
+                                        positionRecoilSpeed = 20f,
+                                        rotationRecoilSpeed = 20f,
+                                        positionReturnSpeed = 30f,
+                                        rotationReturnSpeed = 40f,
+
+                                        RecoilRotation      = new Vector3(15,       5,          7),
+                                        MinRecoilRotation   = new Vector3(7.5f,     2.5f,       3.5f),
+                                        RecoilKick          = new Vector3(0.025f,   0.01f,      -0.1f),
+                                        MinRecoilKick       = new Vector3(0.0125f,  0.005f,     -0.05f)
+                                    };
+
         model                   = WeaponManager.msWeaponArr[(int)weaponType];
     }
 
