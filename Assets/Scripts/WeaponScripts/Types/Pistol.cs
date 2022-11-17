@@ -40,9 +40,22 @@ public class Pistol : PlayerWeapon
         //burstInfo               = new BurstInfo();
         cameraRecoilInfo        = new CameraRecoilInfo()
                                     {
-                                        returnSpeed = 20f,
-                                        rotationSpeed = 10f,
-                                        recoilRotation = new Vector3(7f, 1f, 0f)
+                                        returnSpeed         = 20f,
+                                        rotationSpeed       = 10f,
+                                        recoilRotation      = new Vector3(7f,       1f,         0f)
+                                    };
+
+                modelRecoilInfo         = new ModelRecoilInfo()
+                                    {
+                                        positionRecoilSpeed = 20f,
+                                        rotationRecoilSpeed = 20f,
+                                        positionReturnSpeed = 20f,
+                                        rotationReturnSpeed = 40f,
+
+                                        RecoilRotation      = new Vector3(30,       10,         15),
+                                        MinRecoilRotation   = new Vector3(15f,      5f,         7.5f),
+                                        RecoilKick          = new Vector3(0.05f,    0.02f,      -0.25f),
+                                        MinRecoilKick       = new Vector3(0.025f,   0.01f,     -0.125f)
                                     };
 
         model                   = WeaponManager.msWeaponArr[(int)weaponType];

@@ -25,7 +25,7 @@ public class Shotgun : PlayerWeapon
         fireRate                = 1.0f;
         currentSpread           = 0.25f;
         minSpread               = 0.25f;
-        maxSpread               = 0.50f;
+        maxSpread               = 0.25f;
         spreadIncrease          = 0.25f;
         spreadRecovery          = 0.01f;
         movementSpread          = 0.0f;
@@ -39,10 +39,24 @@ public class Shotgun : PlayerWeapon
 
         cameraRecoilInfo        = new CameraRecoilInfo()
                                     {
-                                        returnSpeed = 10f,
-                                        rotationSpeed = 50f,
-                                        recoilRotation = new Vector3(25f, 5f, 5f)
+                                        returnSpeed         = 10f,
+                                        rotationSpeed       = 30f,
+                                        recoilRotation      = new Vector3(20f,      2.5f,       2.5f)
                                     };
+
+        modelRecoilInfo         = new ModelRecoilInfo()
+                                    {
+                                        positionRecoilSpeed = 50f,
+                                        rotationRecoilSpeed = 25f,
+                                        positionReturnSpeed = 5f,
+                                        rotationReturnSpeed = 10f,
+
+                                        RecoilRotation      = new Vector3(-180f,         5f,          5f),
+                                        MinRecoilRotation   = new Vector3(-180f,        2.5f,       2.5f),
+                                        RecoilKick          = new Vector3(0.1f,         0.1f,       -0.5f),
+                                        MinRecoilKick       = new Vector3(0.05f,        0.05f,      -0.25f)
+                                    };
+
         model                   = WeaponManager.msWeaponArr[(int)weaponType];
     }
 

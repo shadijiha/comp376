@@ -52,9 +52,7 @@ public class PlayerMotor : MonoBehaviour
 
     public void AddRotation (Vector3 rot)
     {
-        Debug.Log($"Pre-Add: {rotation}");
         additionalRotation += rot;
-        Debug.Log($"Post-Add: {rotation}");
     }
 
     /// <summary>
@@ -87,7 +85,6 @@ public class PlayerMotor : MonoBehaviour
     /// </summary>
     private void PerformRotation()
     {
-        Debug.Log($"PerformRotation: {rotation}");
         rb.MoveRotation(rb.rotation * Quaternion.Euler(rotation + additionalRotation));
 
         if (cam != null) {

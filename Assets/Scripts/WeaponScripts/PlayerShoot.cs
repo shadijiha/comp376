@@ -53,6 +53,7 @@ public class PlayerShoot : NetworkBehaviour
         }
 
         m_CurrentWeapon = m_WeaponManager.GetCurrentWeapon();
+        //modelRecoil = m_WeaponManager.GetModelRecoil();
 
         // Unify both methods of shooting (semi/full-auto) under one variable
         if (m_CurrentWeapon.allowContinuousFire)
@@ -81,7 +82,7 @@ public class PlayerShoot : NetworkBehaviour
             m_CurrentWeapon.currentLoadedAmmo > 0)
         {
             cameraRecoil.Shoot(cam);
-            //modelRecoil.Shoot();
+            modelRecoil.Shoot();
             Shoot();
         }
 

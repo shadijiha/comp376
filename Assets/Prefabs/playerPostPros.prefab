@@ -29,7 +29,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: -0.004}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 7854826190126884547}
+  - {fileID: 6245292359081435570}
   - {fileID: 4071287382665742730}
   m_Father: {fileID: 9163480204513723737}
   m_RootOrder: 0
@@ -501,7 +501,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   cameraRecoil: {fileID: 8935510258853908927}
-  modelRecoil: {fileID: 0}
+  modelRecoil: {fileID: 4063427409264756806}
 --- !u!114 &1172113867161608122
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -560,6 +560,19 @@ MonoBehaviour:
     reloading: 0
     readyToShoot: 0
     shooting: 0
+    cameraRecoilInfo:
+      rotationSpeed: 0
+      returnSpeed: 0
+      recoilRotation: {x: 0, y: 0, z: 0}
+    modelRecoilInfo:
+      positionRecoilSpeed: 0
+      rotationRecoilSpeed: 0
+      positionReturnSpeed: 0
+      rotationReturnSpeed: 0
+      RecoilRotation: {x: 0, y: 0, z: 0}
+      MinRecoilRotation: {x: 0, y: 0, z: 0}
+      RecoilKick: {x: 0, y: 0, z: 0}
+      MinRecoilKick: {x: 0, y: 0, z: 0}
     model: {fileID: 0}
   mSecondary:
     weaponType: 0
@@ -591,6 +604,19 @@ MonoBehaviour:
     reloading: 0
     readyToShoot: 0
     shooting: 0
+    cameraRecoilInfo:
+      rotationSpeed: 0
+      returnSpeed: 0
+      recoilRotation: {x: 0, y: 0, z: 0}
+    modelRecoilInfo:
+      positionRecoilSpeed: 0
+      rotationRecoilSpeed: 0
+      positionReturnSpeed: 0
+      rotationReturnSpeed: 0
+      RecoilRotation: {x: 0, y: 0, z: 0}
+      MinRecoilRotation: {x: 0, y: 0, z: 0}
+      RecoilKick: {x: 0, y: 0, z: 0}
+      MinRecoilKick: {x: 0, y: 0, z: 0}
     model: {fileID: 0}
   mSuper:
     weaponType: 0
@@ -622,11 +648,25 @@ MonoBehaviour:
     reloading: 0
     readyToShoot: 0
     shooting: 0
+    cameraRecoilInfo:
+      rotationSpeed: 0
+      returnSpeed: 0
+      recoilRotation: {x: 0, y: 0, z: 0}
+    modelRecoilInfo:
+      positionRecoilSpeed: 0
+      rotationRecoilSpeed: 0
+      positionReturnSpeed: 0
+      rotationReturnSpeed: 0
+      RecoilRotation: {x: 0, y: 0, z: 0}
+      MinRecoilRotation: {x: 0, y: 0, z: 0}
+      RecoilKick: {x: 0, y: 0, z: 0}
+      MinRecoilKick: {x: 0, y: 0, z: 0}
     model: {fileID: 0}
   weaponHolder: {fileID: 7854826190126884547}
   mWeaponArr:
   - {fileID: 7471805642146190835, guid: 7e22e245148ac6f4a86cbcf9efcdf99b, type: 3}
   - {fileID: 6328806803119589402, guid: c0f7273ab40c59d4a938cd41e9d29166, type: 3}
+  - {fileID: 4006320201810499399, guid: 53961e4e4fba37d44818275e66eb0a0e, type: 3}
   - {fileID: 4006320201810499399, guid: 53961e4e4fba37d44818275e66eb0a0e, type: 3}
   - {fileID: 0}
   - {fileID: 0}
@@ -634,8 +674,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
   mCameraRecoil: {fileID: 8935510258853908927}
+  mModelRecoil: {fileID: 4063427409264756806}
 --- !u!136 &-6136463975189771937
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -717,6 +757,37 @@ CapsuleCollider:
   m_Height: 0.6
   m_Direction: 2
   m_Center: {x: 0, y: 0.55, z: 0.1}
+--- !u!1 &1674023247596139348
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6245292359081435570}
+  m_Layer: 8
+  m_Name: BasePosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6245292359081435570
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1674023247596139348}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.3, y: -0.2, z: 0.7}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 174300355385010638}
+  m_Father: {fileID: 1172113867161608158}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1689404840354880773
 GameObject:
   m_ObjectHideFlags: 0
@@ -823,13 +894,71 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2512440469274021270}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0.3, y: -0.2, z: 0.62}
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1172113867161608158}
+  m_Father: {fileID: 174300355385010638}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!1 &7411847716698015386
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 174300355385010638}
+  - component: {fileID: 4063427409264756806}
+  m_Layer: 8
+  m_Name: RotationAnchor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &174300355385010638
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7411847716698015386}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.3, y: -0.2, z: 0.7}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 7854826190126884547}
+  m_Father: {fileID: 6245292359081435570}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4063427409264756806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7411847716698015386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fabab3aebf6455d4e8704e9361ca955a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mBasePosition: {fileID: 6245292359081435570}
+  mRotationAnchor: {fileID: 174300355385010638}
+  mRecoilInfo:
+    positionRecoilSpeed: 0
+    rotationRecoilSpeed: 0
+    positionReturnSpeed: 0
+    rotationReturnSpeed: 0
+    RecoilRotation: {x: 0, y: 0, z: 0}
+    MinRecoilRotation: {x: 0, y: 0, z: 0}
+    RecoilKick: {x: 0, y: 0, z: 0}
+    MinRecoilKick: {x: 0, y: 0, z: 0}
+  rotationRecoil: {x: 0, y: 0, z: 0}
+  positionRecoil: {x: 0, y: 0, z: 0}
+  rotation: {x: 0, y: 0, z: 0}
 --- !u!1 &7415393646411263799
 GameObject:
   m_ObjectHideFlags: 0
@@ -1009,9 +1138,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f17bfe347f888954da70561ab0908b48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 6
-  returnSpeed: 25
-  RecoilRotation: {x: 2, y: 2, z: 2}
+  mRecoilInfo:
+    rotationSpeed: 0
+    returnSpeed: 0
+    recoilRotation: {x: 0, y: 0, z: 0}
   playerMotor: {fileID: 1172113867161608124}
 --- !u!1001 &7532548875828271557
 PrefabInstance:

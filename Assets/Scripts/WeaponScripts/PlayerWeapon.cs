@@ -36,7 +36,8 @@ public class PlayerWeapon
     public  bool                shooting;
 
     public  CameraRecoilInfo    cameraRecoilInfo;
-    public  BurstInfo           burstInfo;
+    public  ModelRecoilInfo     modelRecoilInfo;
+    public  BurstInfo?          burstInfo;
     public  GameObject          model;
 
     public GameObject GetModel()
@@ -53,6 +54,7 @@ public class PlayerWeapon
         Rifle
     }
 
+    [System.Serializable]
     public struct BurstInfo 
     {
         public  int     burstCount;
@@ -61,6 +63,7 @@ public class PlayerWeapon
         public  float   burstSpread;
     }
 
+    [System.Serializable]
     public struct CameraRecoilInfo
     {
         public  float   rotationSpeed;
@@ -68,6 +71,20 @@ public class PlayerWeapon
         public  Vector3 recoilRotation;
     }
 
+    [System.Serializable]
+    public struct ModelRecoilInfo
+    {
+	    public	float		positionRecoilSpeed;
+	    public	float		rotationRecoilSpeed;
+	    public	float		positionReturnSpeed;
+	    public	float		rotationReturnSpeed;
+	    public	Vector3		RecoilRotation;
+	    public	Vector3		MinRecoilRotation;
+	    public	Vector3		RecoilKick;
+	    public	Vector3		MinRecoilKick;
+    }
+
+    [System.Serializable]
     protected struct ProjectileInfo
     {
         
