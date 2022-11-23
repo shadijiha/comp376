@@ -1,0 +1,113 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+[System.Serializable]
+public class Sniper : PlayerWeapon
+{
+    public  float   normalFoV               = 90f;
+    public  float   normalMinSpread         = 0.05f;
+    public  float   normalSpreadRecovery    = 0.005f;
+    public  float   normalMovementSpread    = 1.5f;
+    public  float   normalSpreadIncrease    = 0.05f;
+    public  float   normalSpeedMult         = 1f;
+
+    public  float   zoomFoV                 = 15f;
+    public  float   zoomMinSpread           = 0.001f;
+    public  float   zoomSpreadRecovery      = 0.01f;
+    public  float   zoomMovementSpread      = 0.5f;
+    public  float   zoomSpreadIncrease      = 0.05f;
+    public  float   zoomSpeedMult           = 0.3f;
+
+    private Color   visible                 = new Color(255f, 255f, 255f, 255f);
+    private Color   faded                   = new Color(255f, 255f, 255f, 0f);
+
+    public Sniper()
+    {
+        weaponType              = WeaponType.Sniper;
+        damage                  = 60;
+        currentLoadedAmmo       = 5;
+        magazineSize            = 5;
+        currentSpareAmmo        = 40;
+        maxAmmo                 = 40;
+        shotCount               = 1;
+        critMultiplier          = 3.0f;
+        falloffStart            = 200f;
+        falloffMax              = 200f;
+        falloffDamage           = 60;
+        maxRange                = 200f;
+        fireRate                = 1.0f;
+        currentSpread           = 0.05f;
+        minSpread               = normalMinSpread;
+        maxSpread               = 0.10f;
+        spreadIncrease          = normalSpreadIncrease;
+        spreadRecovery          = normalSpreadRecovery;
+        movementSpread          = normalMovementSpread;
+        reloadTime              = 1.0f;
+        drawTime                = 0.3f;
+        stowTime                = 0.4f;
+        zoomFoV                 = 15f;
+        allowContinuousFire     = false;
+        reloading               = false;
+        readyToShoot            = true;
+        shooting                = false;
+        speedMultiplier         = 0.3f;
+
+        burstInfo               = new BurstInfo();
+        cameraRecoilInfo        = new CameraRecoilInfo()
+                                    {
+                                        returnSpeed         = 5f,
+                                        rotationSpeed       = 30f,
+                                        recoilRotation      = new Vector3(25f,       5f,         5f)
+                                    };
+
+        modelRecoilInfo         = new ModelRecoilInfo()
+                                    {
+                                        positionRecoilSpeed = 20f,
+                                        rotationRecoilSpeed = 20f,
+                                        positionReturnSpeed = 5f,
+                                        rotationReturnSpeed = 40f,
+
+                                        RecoilRotation      = new Vector3(-90,      25,         25),
+                                        MinRecoilRotation   = new Vector3(-45f,     12.5f,      12.5f),
+                                        RecoilKick          = new Vector3(0.1f,     0.1f,       -0.5f),
+                                        MinRecoilKick       = new Vector3(0.05f,    0.05f,      -0.25f)
+                                    };
+
+        model                   = WeaponManager.msWeaponArr[(int)weaponType];
+    }
+
+    public override void AltFireActivate(PlayerShoot playerShoot)
+    {
+        if (!altFire)
+        {
+            playerShoot.weaponCam.fieldOfView = zoomFoV;
+            this.minSpread              = zoomMinSpread;
+            this.spreadRecovery         = zoomSpreadRecovery;
+            this.spreadIncrease         = zoomSpreadIncrease;
+            this.movementSpread         = zoomMovementSpread;
+            this.speedMultiplier        = zoomSpeedMult;
+
+            scope.color                 = visible;
+
+            altFire                     = true;
+        }
+    }
+
+    public override void AltFireDeactivate(PlayerShoot playerShoot)
+    {
+        if (altFire)
+        {
+            playerShoot.weaponCam.fieldOfView = normalFoV;
+            this.minSpread              = normalMinSpread;
+            this.spreadRecovery         = normalSpreadRecovery;
+            this.spreadIncrease         = normalSpreadIncrease;
+            this.movementSpread         = normalMovementSpread;
+            this.speedMultiplier        = normalSpeedMult;
+
+            scope.color                 = faded;
+
+            altFire                     = false;
+        }
+    }
+}

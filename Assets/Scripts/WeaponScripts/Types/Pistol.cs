@@ -14,9 +14,6 @@ public class Pistol : PlayerWeapon
         currentSpareAmmo        = -1;
         maxAmmo                 = -1;
         shotCount               = 1;
-        burstCount              = 1;
-        burstIndex              = 0;
-        burstFireRate           = 1;
         critMultiplier          = 2.0f;
         falloffStart            = 20f;
         falloffMax              = 40f;
@@ -25,8 +22,8 @@ public class Pistol : PlayerWeapon
         fireRate                = 10.0f;
         currentSpread           = 0.005f;
         minSpread               = 0.005f;
-        maxSpread               = 0.10f;
-        spreadIncrease          = 0.03f;
+        maxSpread               = 0.05f;
+        spreadIncrease          = 0.02f;
         spreadRecovery          = 0.005f;
         movementSpread          = 0.5f;
         reloadTime              = 1.0f;
@@ -45,15 +42,15 @@ public class Pistol : PlayerWeapon
                                         recoilRotation      = new Vector3(7f,       1f,         0f)
                                     };
 
-                modelRecoilInfo         = new ModelRecoilInfo()
+        modelRecoilInfo         = new ModelRecoilInfo()
                                     {
                                         positionRecoilSpeed = 20f,
                                         rotationRecoilSpeed = 20f,
                                         positionReturnSpeed = 20f,
                                         rotationReturnSpeed = 40f,
 
-                                        RecoilRotation      = new Vector3(30,       10,         15),
-                                        MinRecoilRotation   = new Vector3(15f,      5f,         7.5f),
+                                        RecoilRotation      = new Vector3(-30,      10,         15),
+                                        MinRecoilRotation   = new Vector3(-15f,     5f,         7.5f),
                                         RecoilKick          = new Vector3(0.05f,    0.02f,      -0.25f),
                                         MinRecoilKick       = new Vector3(0.025f,   0.01f,     -0.125f)
                                     };
@@ -61,8 +58,4 @@ public class Pistol : PlayerWeapon
         model                   = WeaponManager.msWeaponArr[(int)weaponType];
     }
 
-    public new GameObject GetModel()
-    {
-        return model;
-    }
 }

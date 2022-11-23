@@ -14,19 +14,16 @@ public class SMG : PlayerWeapon
         currentSpareAmmo        = 180;
         maxAmmo                 = 180;
         shotCount               = 1;
-        burstCount              = 1;
-        burstIndex              = 0;
-        burstFireRate           = 1;
         critMultiplier          = 1.5f;
         falloffStart            = 15f;
         falloffMax              = 30f;
         falloffDamage           = 7;
         maxRange                = 200f;
         fireRate                = 15.0f;
-        currentSpread           = 0.01f;
-        minSpread               = 0.01f;
-        maxSpread               = 0.10f;
-        spreadIncrease          = 0.005f;
+        currentSpread           = 0.02f;
+        minSpread               = 0.02f;
+        maxSpread               = 0.075f;
+        spreadIncrease          = 0.003f;
         spreadRecovery          = 0.005f;
         movementSpread          = 0.2f;
         reloadTime              = 1.0f;
@@ -51,8 +48,8 @@ public class SMG : PlayerWeapon
                                         positionReturnSpeed = 30f,
                                         rotationReturnSpeed = 40f,
 
-                                        RecoilRotation      = new Vector3(15,       5,          7),
-                                        MinRecoilRotation   = new Vector3(7.5f,     2.5f,       3.5f),
+                                        RecoilRotation      = new Vector3(-15,      5,          7),
+                                        MinRecoilRotation   = new Vector3(-7.5f,    2.5f,       3.5f),
                                         RecoilKick          = new Vector3(0.025f,   0.01f,      -0.1f),
                                         MinRecoilKick       = new Vector3(0.0125f,  0.005f,     -0.05f)
                                     };
@@ -60,8 +57,4 @@ public class SMG : PlayerWeapon
         model                   = WeaponManager.msWeaponArr[(int)weaponType];
     }
 
-    public new GameObject GetModel()
-    {
-        return model;
-    }
 }

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Networking;
 
 /**
@@ -14,12 +15,17 @@ public class PlayerShoot : NetworkBehaviour
 
 
                         private PlayerWeapon    m_CurrentWeapon;
-                        private WeaponManager   m_WeaponManager;
-    [SerializeField]    private RectTransform   crosshair;
-    [SerializeField]    private Camera          cam;
-    [SerializeField]    private LayerMask       mask;
-    [SerializeField]    private CameraRecoil    cameraRecoil;
-    [SerializeField]    private ModelRecoil     modelRecoil;
+                        private PlayerControler m_controler;
+                        private PlayerMotor     m_motor;
+                        private Vector3         m_previousPosition;
+                        public  WeaponManager   m_WeaponManager;
+    [SerializeField]    public  RectTransform   crosshair;
+    [SerializeField]    public  Camera          cam;
+    [SerializeField]    public  Camera          weaponCam;
+    [SerializeField]    public  LayerMask       mask;
+    [SerializeField]    public  CameraRecoil    cameraRecoil;
+    [SerializeField]    public  ModelRecoil     modelRecoil;
+    [SerializeField]    public  AudioSource     weaponSound;
 
     private bool    m_bMoving;
     private float   m_fMovement;
@@ -35,6 +41,8 @@ public class PlayerShoot : NetworkBehaviour
         // Make the gun in the gun layer for the purpose of the weapon camera
         // The weapon camera is responsible of preventing weapon cliping
         m_WeaponManager = GetComponent<WeaponManager>();
+        m_controler     = GetComponent<PlayerControler>();
+        m_motor         = GetComponent<PlayerMotor>();
 
         m_CurrentWeapon = m_WeaponManager.GetCurrentWeapon();
 
@@ -42,6 +50,8 @@ public class PlayerShoot : NetworkBehaviour
         m_CurrentWeapon.currentLoadedAmmo   = m_CurrentWeapon.magazineSize;
         m_CurrentWeapon.currentSpareAmmo    = m_CurrentWeapon.maxAmmo;
         m_CurrentWeapon.readyToShoot        = true;
+
+        //mask &= LayerMask.NameToLayer("RemotePlayerLayer");
     }
 
     // Update is called once per frame
@@ -49,11 +59,15 @@ public class PlayerShoot : NetworkBehaviour
     {
         if (crosshair == null)
         {
-            crosshair = GameObject.FindObjectOfType<PlayerSetup>().playerUIInstance.GetComponentInChildren<DynamicCrosshair>().GetComponent<RectTransform>();
+            crosshair               = GameObject.FindObjectOfType<PlayerSetup>().playerUIInstance.GetComponentInChildren<DynamicCrosshair>().GetComponent<RectTransform>();
+        }
+
+        if (m_CurrentWeapon.scope == null)
+        {
+            m_CurrentWeapon.scope   = GameObject.FindObjectOfType<PlayerSetup>().playerUIInstance.GetComponentInChildren<ScopeOverlay>().GetComponent<Image>();
         }
 
         m_CurrentWeapon = m_WeaponManager.GetCurrentWeapon();
-        //modelRecoil = m_WeaponManager.GetModelRecoil();
 
         // Unify both methods of shooting (semi/full-auto) under one variable
         if (m_CurrentWeapon.allowContinuousFire)
@@ -64,6 +78,19 @@ public class PlayerShoot : NetworkBehaviour
         {
             m_CurrentWeapon.shooting = Input.GetButtonDown("Fire1");
         }
+
+        //Alt Fire
+        if (Input.GetButton("Fire2"))
+        {
+            m_CurrentWeapon.AltFireActivate(this);
+        }
+        else
+        {
+            m_CurrentWeapon.AltFireDeactivate(this);
+        }
+
+        // Update player movement speed.
+        m_controler.SetSpeedMultiplier(m_CurrentWeapon.speedMultiplier);
 
         // Reload
         if (Input.GetButtonDown("Reload") && 
@@ -81,12 +108,11 @@ public class PlayerShoot : NetworkBehaviour
             !m_CurrentWeapon.reloading              && 
             m_CurrentWeapon.currentLoadedAmmo > 0)
         {
-            cameraRecoil.Shoot(cam);
-            modelRecoil.Shoot();
             Shoot();
         }
 
-        m_fMovement = Mathf.Clamp(Mathf.Abs(Input.GetAxis("Horizontal")) + Mathf.Abs(Input.GetAxis("Vertical")), 0f, 1f);
+        // Update current movement speed
+        m_fMovement = Mathf.Lerp(m_fMovement, Mathf.Clamp(m_motor.currentVelocity * 10, 0f, 2f), 5f * Time.deltaTime);
 
         // If not shooting, recover from spread
         if (m_CurrentWeapon.readyToShoot)
@@ -96,16 +122,17 @@ public class PlayerShoot : NetworkBehaviour
             {
                 m_CurrentWeapon.currentSpread = m_CurrentWeapon.minSpread;
             }
-
-            UpdateCrosshair();
         }
+
+        
+        UpdateCrosshair();
     }
 
     /// <summary>
     /// Called on the server when the player shoots
     /// </summary>
     [Command]
-    void CmdOnShoot() {
+    public void CmdOnShoot() {
         RpcDoShootEffect();
     }
 
@@ -115,7 +142,7 @@ public class PlayerShoot : NetworkBehaviour
     /// <param name="pos">The hit point</param>
     /// <param name="normal">The hit normal</param>
     [Command]
-    void CmdOnHit(Vector3 pos, Vector3 normal) {
+    public void CmdOnHit(Vector3 pos, Vector3 normal) {
         RpcDoHitEffect(pos, normal);
     }
 
@@ -124,7 +151,7 @@ public class PlayerShoot : NetworkBehaviour
     /// shoot effect
     /// </summary>
     [ClientRpc]
-    void RpcDoShootEffect() {
+    public void RpcDoShootEffect() {
         ParticleSystem particle = Instantiate(
                                         m_WeaponManager.GetCurrentWeaponGraphics().muzzelFlash, 
                                         GetComponentInChildren<ParticleOrigin>().gameObject.transform);
@@ -138,7 +165,7 @@ public class PlayerShoot : NetworkBehaviour
     /// <param name="pos">The hit point</param>
     /// <param name="normal">The surface normal</param>
     [ClientRpc]
-    void RpcDoHitEffect(Vector3 pos, Vector3 normal) {
+    public void RpcDoHitEffect(Vector3 pos, Vector3 normal) {
         GameObject temp = (GameObject)Instantiate(m_WeaponManager.GetCurrentWeaponGraphics().hitEffectPrefab, pos, Quaternion.LookRotation(normal));
         Destroy(temp, 2.0f);
     }
@@ -147,7 +174,7 @@ public class PlayerShoot : NetworkBehaviour
     /// Sets the weapon to reloading and invokes the ReloadFinished function after the reload time is completed.
     /// </summary>
     [Client]
-    void Reload()
+    public void Reload()
     {
         m_CurrentWeapon.reloading = true;
         Debug.Log("Reload Start");
@@ -158,7 +185,7 @@ public class PlayerShoot : NetworkBehaviour
     /// Reloads the weapon, subtracting from the spareAmmo and refilling the magazine.
     /// </summary>
     [Client]
-    void ReloadFinished()
+    public void ReloadFinished()
     {
         if (!m_CurrentWeapon.reloading)
         {
@@ -189,88 +216,28 @@ public class PlayerShoot : NetworkBehaviour
     }
 
     [Client]
-    void Shoot()
+    public void Shoot()
     {
-        m_CurrentWeapon.readyToShoot = false;
+        m_CurrentWeapon.readyToShoot    = false;
 
-        // If there are multiple shots to fire, cast them all at once
-        for (int shotNumber = 0; shotNumber < m_CurrentWeapon.shotCount; ++shotNumber)
-        {
-            // We are shooting call shoot method on Server
-            CmdOnShoot();
+        (string, float) invokeDetails   = m_CurrentWeapon.Shoot(this);
 
-            float xSpread = UnityEngine.Random.Range(
-                                            -m_CurrentWeapon.currentSpread - m_CurrentWeapon.currentSpread * m_fMovement * m_CurrentWeapon.movementSpread, 
-                                            m_CurrentWeapon.currentSpread + m_CurrentWeapon.currentSpread * m_fMovement * m_CurrentWeapon.movementSpread);
-            float ySpread = UnityEngine.Random.Range(
-                                            -m_CurrentWeapon.currentSpread - m_CurrentWeapon.currentSpread * m_fMovement * m_CurrentWeapon.movementSpread, 
-                                            m_CurrentWeapon.currentSpread + m_CurrentWeapon.currentSpread * m_fMovement * m_CurrentWeapon.movementSpread);
-            
-            // Round out the vector so that spread is more circular than square.
-            Vector3 baseSpread      = new Vector3(xSpread, ySpread, 0);
-            Vector3 shotDirection   = cam.transform.forward + baseSpread;
-
-            RaycastHit hit;
-            if (Physics.Raycast(cam.transform.position, shotDirection, out hit, m_CurrentWeapon.maxRange, mask))
-            {
-                // We hit Something
-                if (hit.collider.tag == PLAYER_TAG)
-                {
-                    int finalDamage = m_CurrentWeapon.damage;
-                    if (hit.distance > m_CurrentWeapon.falloffStart)
-                    {
-                        if (hit.distance < m_CurrentWeapon.falloffMax)
-                        {
-                            // Damage linearly falls off between the minimum falloff distance and the maximum falloff.
-                            float falloffPercent = (hit.distance - m_CurrentWeapon.falloffStart)/(m_CurrentWeapon.falloffMax - m_CurrentWeapon.falloffStart);
-                            finalDamage = Mathf.RoundToInt(
-                                (falloffPercent * m_CurrentWeapon.falloffDamage) +
-                                ((1 - falloffPercent) * m_CurrentWeapon.damage));
-                        }
-                        else
-                        {
-                            finalDamage = m_CurrentWeapon.falloffDamage;
-                        }
-                    }
-                    
-                    CmdPlayerShot(hit.collider.name, this.name, finalDamage);
-                }
-
-                // Play Hit effect on the server
-                CmdOnHit(hit.point, hit.normal);
-            }
-        }
-
-        //Adjust spread
-        m_CurrentWeapon.currentSpread += m_CurrentWeapon.spreadIncrease;
-
-        if(m_CurrentWeapon.currentSpread > m_CurrentWeapon.maxSpread)
-        {
-            m_CurrentWeapon.currentSpread = m_CurrentWeapon.maxSpread;
-        }
-
-        UpdateCrosshair();
-            
-        // Consume ammunition
-        --m_CurrentWeapon.currentLoadedAmmo;
-
-        // Indicate the weapon is ready to fire again after the appropriate delay
-        Invoke("ReadyToShoot", 1.0f / m_CurrentWeapon.fireRate);
+        Invoke(invokeDetails.Item1, invokeDetails.Item2);
     }
 
-    void UpdateCrosshair()
+    public void UpdateCrosshair()
     {
-        crosshair.sizeDelta     = new Vector2(  1000 * (m_CurrentWeapon.currentSpread + m_CurrentWeapon.currentSpread * m_fMovement * m_CurrentWeapon.movementSpread),
-                                                1000 * (m_CurrentWeapon.currentSpread + m_CurrentWeapon.currentSpread * m_fMovement * m_CurrentWeapon.movementSpread));
+        crosshair.sizeDelta     = new Vector2(  1500 * (m_CurrentWeapon.currentSpread + m_CurrentWeapon.currentSpread * m_fMovement * m_CurrentWeapon.movementSpread),
+                                                1500 * (m_CurrentWeapon.currentSpread + m_CurrentWeapon.currentSpread * m_fMovement * m_CurrentWeapon.movementSpread));
     }
 
-    void ReadyToShoot()
+    public void ReadyToShoot()
     {
         m_CurrentWeapon.readyToShoot = true;
     }
 
     [Command]
-    void CmdPlayerShot(string hit_id, string src, int damage) {
+    public void CmdPlayerShot(string hit_id, string src, int damage) {
         // Do the damage stuff
         Debug.Log(hit_id + " has been shot");
 

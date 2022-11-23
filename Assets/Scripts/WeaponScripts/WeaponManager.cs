@@ -31,7 +31,7 @@ public class WeaponManager : NetworkBehaviour
         }
 
         // Equip Each weapon.
-        mPrimary = new SMG
+        mPrimary = new Sniper
         {
             readyToShoot = true
         };
@@ -54,19 +54,19 @@ public class WeaponManager : NetworkBehaviour
     void Update()
     {
         // Weapon Switching
-        if (Input.GetButtonDown("Primary") && mPrimary != mCurrent && mPrimary != null)
+        if (Input.GetButtonDown("Primary") && !mCurrent.altFire && mPrimary != mCurrent && mPrimary != null)
         { 
             mNextWeapon = mPrimary;
             mCurrent.reloading = false;
             Invoke(nameof(Stow), mCurrent.stowTime);
         }
-        if (Input.GetButtonDown("Secondary") && mSecondary != mCurrent && mSecondary != null)
+        if (Input.GetButtonDown("Secondary") && !mCurrent.altFire && mSecondary != mCurrent && mSecondary != null)
         {
             mNextWeapon = mSecondary;
             mCurrent.reloading = false;
             Invoke(nameof(Stow), mCurrent.stowTime);
         }
-        if (Input.GetButtonDown("Super") && mSuper != mCurrent && mSuper != null)
+        if (Input.GetButtonDown("Super") && !mCurrent.altFire && mSuper != mCurrent && mSuper != null)
         {
             mNextWeapon = mSuper;
             mCurrent.reloading = false;

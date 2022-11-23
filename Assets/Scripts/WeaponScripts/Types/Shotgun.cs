@@ -14,20 +14,17 @@ public class Shotgun : PlayerWeapon
         currentSpareAmmo        = 42;
         maxAmmo                 = 42;
         shotCount               = 15;
-        burstCount              = 1;
-        burstIndex              = 0;
-        burstFireRate           = 1;
         critMultiplier          = 1.25f;
         falloffStart            = 10f;
         falloffMax              = 30f;
         falloffDamage           = 3;
         maxRange                = 200f;
         fireRate                = 1.0f;
-        currentSpread           = 0.25f;
-        minSpread               = 0.25f;
-        maxSpread               = 0.25f;
-        spreadIncrease          = 0.25f;
-        spreadRecovery          = 0.01f;
+        currentSpread           = 0.15f;
+        minSpread               = 0.15f;
+        maxSpread               = 0.15f;
+        spreadIncrease          = 0.0f;
+        spreadRecovery          = 0.1f;
         movementSpread          = 0.0f;
         reloadTime              = 1.75f;
         drawTime                = 0.7f;
@@ -60,8 +57,4 @@ public class Shotgun : PlayerWeapon
         model                   = WeaponManager.msWeaponArr[(int)weaponType];
     }
 
-    public new GameObject GetModel()
-    {
-        return model;
-    }
 }
