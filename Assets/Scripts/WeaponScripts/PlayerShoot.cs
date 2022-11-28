@@ -24,6 +24,10 @@ public class PlayerShoot : NetworkBehaviour
     private bool    m_bMoving;
     private float   m_fMovement;
 
+    public GameObject laserShot;
+    //public GameObject laserShotTarget;
+    Ray ray;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -119,6 +123,14 @@ public class PlayerShoot : NetworkBehaviour
         RpcDoHitEffect(pos, normal);
     }
 
+    
+    [Command]
+    void CmdOnHitLaser(Vector3 rayOrigine, Vector3 endPoint, float laserShotSpeed)
+    {
+        ShootLaser(rayOrigine, endPoint, laserShotSpeed);
+    }
+    
+
     /// <summary>
     /// Called on all clients when we need to do a
     /// shoot effect
@@ -187,6 +199,40 @@ public class PlayerShoot : NetworkBehaviour
             Debug.Log("Reload Finished");
         }
     }
+    
+    
+    public void ShootLaser(Vector3 shotOriginPosition, Vector3 endPoint,  float laserShotSpeed)
+    {
+        GameObject shot = Instantiate(laserShot, shotOriginPosition, Quaternion.LookRotation(endPoint - shotOriginPosition));
+        //Quaternion.identity);
+        shot.GetComponent<Rigidbody>().velocity = (endPoint- shotOriginPosition) * laserShotSpeed;
+        //shot.GetComponent<Rigidbody>().velocity += (endPoint - shotOriginPosition) * laserShotSpeed* Time.deltaTime;
+        GameObject.Destroy(shot, 2f);
+    }
+
+
+    /*
+    public GameObject ShootLaser3(Vector3 shotOriginPosition, Vector3 endPoint, float laserShotSpeed, Vector3 normal)
+    {
+        GameObject target = Instantiate(laserShotTarget, endPoint, Quaternion.LookRotation(normal));
+        GameObject shot = Instantiate(laserShot, shotOriginPosition, Quaternion.identity);
+        //Quaternion.identity);
+        //shot.GetComponent<Rigidbody>().AddForce(direction * 1f);
+        //shot.GetComponent<Rigidbody>().velocity = (endPoint - shotOriginPosition) * laserShotSpeed;
+        return shot;
+    }
+    
+
+    public GameObject ShootLaser4(Vector3 shotOriginPosition, Vector3 endPoint, float laserShotSpeed, Vector3 normal)
+    {
+        GameObject target = Instantiate(laserShotTarget, shotOriginPosition, Quaternion.identity);
+        GameObject shot = Instantiate(laserShot, shotOriginPosition, Quaternion.identity);
+        //Quaternion.identity);
+        //shot.GetComponent<Rigidbody>().AddForce(direction * 1f);
+        target.GetComponent<Rigidbody>().velocity = (endPoint - shotOriginPosition) * laserShotSpeed;
+        return shot;
+    }
+    */
 
     [Client]
     void Shoot()
@@ -210,10 +256,17 @@ public class PlayerShoot : NetworkBehaviour
             Vector3 baseSpread      = new Vector3(xSpread, ySpread, 0);
             Vector3 shotDirection   = cam.transform.forward + baseSpread;
 
+            
+
             RaycastHit hit;
-            if (Physics.Raycast(cam.transform.position, shotDirection, out hit, m_CurrentWeapon.maxRange, mask))
+            ray.direction = cam.transform.forward;
+            ray.origin = cam.transform.position;
+            if (Physics.Raycast(ray.origin, shotDirection, out hit, m_CurrentWeapon.maxRange, mask))
+            // if (Physics.Raycast(cam.transform.position, shotDirection, out hit, m_CurrentWeapon.maxRange, mask))
             {
                 // We hit Something
+                //ShootLaser(ray.origin, hit.point, 1f); //hit.point
+
                 if (hit.collider.tag == PLAYER_TAG)
                 {
                     int finalDamage = m_CurrentWeapon.damage;
@@ -238,6 +291,10 @@ public class PlayerShoot : NetworkBehaviour
 
                 // Play Hit effect on the server
                 CmdOnHit(hit.point, hit.normal);
+                
+                //Simulate laser bolt
+                CmdOnHitLaser(ray.origin, hit.point, 0.5f);
+
             }
         }
 
