@@ -124,7 +124,7 @@ public class PlayerShoot : NetworkBehaviour
     }
 
     
-    [Command]
+    //[Command]
     void CmdOnHitLaser(Vector3 rayOrigine, Vector3 endPoint, float laserShotSpeed)
     {
         ShootLaser(rayOrigine, endPoint, laserShotSpeed);
@@ -273,7 +273,7 @@ public class PlayerShoot : NetworkBehaviour
 
                 //Simulate laser bolt
                 
-                CmdOnHitLaser(GetComponentInChildren<ParticleOrigin>().gameObject.transform.position, hit.point, 4f);
+                CmdOnHitLaser(GetComponentInChildren<ParticleOrigin>().gameObject.transform.position, hit.point, 8f);
                 ///CmdOnHitLaser(ray.origin, hit.point, 0.5f);
 
             }

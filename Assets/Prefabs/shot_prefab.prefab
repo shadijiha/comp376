@@ -103,7 +103,7 @@ MonoBehaviour:
   m_startPos: {x: 0, y: 0, z: 0}
   m_endPos: {x: 0, y: 0, z: 50}
   m_lineColor: {r: 0.041251317, g: 0.069148056, b: 0.9716981, a: 0}
-  m_lineWidth: 50
+  m_lineWidth: 200
   m_lightSaberFactor: 0.901
 --- !u!108 &10825254
 Light:
@@ -118,7 +118,7 @@ Light:
   m_Shape: 0
   m_Color: {r: 0.04050548, g: 0.032395888, b: 0.9811321, a: 1}
   m_Intensity: 20
-  m_Range: 5
+  m_Range: 3
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
