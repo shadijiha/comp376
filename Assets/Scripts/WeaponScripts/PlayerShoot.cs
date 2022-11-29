@@ -206,33 +206,12 @@ public class PlayerShoot : NetworkBehaviour
         GameObject shot = Instantiate(laserShot, shotOriginPosition, Quaternion.LookRotation(endPoint - shotOriginPosition));
         //Quaternion.identity);
         shot.GetComponent<Rigidbody>().velocity = (endPoint- shotOriginPosition) * laserShotSpeed;
-        //shot.GetComponent<Rigidbody>().velocity += (endPoint - shotOriginPosition) * laserShotSpeed* Time.deltaTime;
+
         GameObject.Destroy(shot, 2f);
     }
 
 
-    /*
-    public GameObject ShootLaser3(Vector3 shotOriginPosition, Vector3 endPoint, float laserShotSpeed, Vector3 normal)
-    {
-        GameObject target = Instantiate(laserShotTarget, endPoint, Quaternion.LookRotation(normal));
-        GameObject shot = Instantiate(laserShot, shotOriginPosition, Quaternion.identity);
-        //Quaternion.identity);
-        //shot.GetComponent<Rigidbody>().AddForce(direction * 1f);
-        //shot.GetComponent<Rigidbody>().velocity = (endPoint - shotOriginPosition) * laserShotSpeed;
-        return shot;
-    }
-    
-
-    public GameObject ShootLaser4(Vector3 shotOriginPosition, Vector3 endPoint, float laserShotSpeed, Vector3 normal)
-    {
-        GameObject target = Instantiate(laserShotTarget, shotOriginPosition, Quaternion.identity);
-        GameObject shot = Instantiate(laserShot, shotOriginPosition, Quaternion.identity);
-        //Quaternion.identity);
-        //shot.GetComponent<Rigidbody>().AddForce(direction * 1f);
-        target.GetComponent<Rigidbody>().velocity = (endPoint - shotOriginPosition) * laserShotSpeed;
-        return shot;
-    }
-    */
+  
 
     [Client]
     void Shoot()
@@ -291,9 +270,11 @@ public class PlayerShoot : NetworkBehaviour
 
                 // Play Hit effect on the server
                 CmdOnHit(hit.point, hit.normal);
-                
+
                 //Simulate laser bolt
-                CmdOnHitLaser(ray.origin, hit.point, 0.5f);
+                
+                CmdOnHitLaser(GetComponentInChildren<ParticleOrigin>().gameObject.transform.position, hit.point, 4f);
+                ///CmdOnHitLaser(ray.origin, hit.point, 0.5f);
 
             }
         }

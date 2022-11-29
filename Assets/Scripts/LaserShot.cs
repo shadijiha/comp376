@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using VolumetricLines;
 
 public class LaserShot : NetworkBehaviour
 {
@@ -14,7 +15,7 @@ public class LaserShot : NetworkBehaviour
     private Vector3 velocity;
     private Light light;
     private Color color;
-    //private VolumetricLineBehavior vbl;
+    private VolumetricLineBehavior vbl;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,7 +24,7 @@ public class LaserShot : NetworkBehaviour
         counterToAcel = 0.25f;
         accelCounter = 1f;
         light = gameObject.GetComponent<Light>();
-        //vbl = gameObject.GetComponent<VolumetricLineBehavior>();
+        vbl = gameObject.GetComponent<VolumetricLineBehavior>();
         //color = light.color;
 
         veloMag = gameObject.GetComponent<Rigidbody>().velocity.magnitude;
