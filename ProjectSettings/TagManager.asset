@@ -8,6 +8,7 @@ TagManager:
   - Fire
   - helthpack
   - landmine
+  - laserCollider
   layers:
   - Default
   - TransparentFX
