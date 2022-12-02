@@ -15,107 +15,123 @@ public class handlerPairingWall : MonoBehaviour
     {
         listBlueWall = GameObject.FindObjectsOfType<teleportScript>();
         originalNumberWall = listBlueWall.Length;
+        checkAllPartnerWall();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-
-
+   
         if (Input.GetKeyDown("y"))
         {
             Debug.Log(listBlueWall[0].gameObject.name);
             Debug.Log(originalNumberWall);
-            wallPairing();
+           
         }
     }
 
-    private void wallPairing()
+    private void checkAllPartnerWall()
     {
-        int currentNumberWall = originalNumberWall;
-        int randomIndex;
-        int nextIndex = -2; //used if the first index point to an empty cell.
-        GameObject[] pairingList = new GameObject[3];
-        foreach(teleportScript element in listBlueWall){
-            Debug.Log(element.gameObject.name);
-        }
-
-        int emergencyBreak = 0;
-        while (currentNumberWall > 0)
+        for(int indexWall = 0; indexWall < originalNumberWall; indexWall++)
         {
-            
-            for (int i = 0; i < 2; i++)
+            if (!listBlueWall[indexWall].setpartnerPosition())
             {
-                randomIndex = Random.Range(1, originalNumberWall);
-                randomIndex--;
-                if (listBlueWall[randomIndex] != null)
-                {
-                    pairingList[i] = listBlueWall[randomIndex].gameObject;
-                    listBlueWall[randomIndex] = null;
-                    currentNumberWall--;
+                Debug.Log("This wall does not have a partner");
+            }
 
-                    Debug.Log("paired wall numbr" + currentNumberWall);
-                }
-                else // find the next available gameObject
+            else
+            {
+                listBlueWall[indexWall].getPartnerPossTest();
+            }
+        }
+    }
+
+    /*
+        private void wallPairing()
+        {
+            int currentNumberWall = originalNumberWall;
+            int randomIndex;
+            int nextIndex = -2; //used if the first index point to an empty cell.
+            GameObject[] pairingList = new GameObject[3];
+            foreach(teleportScript element in listBlueWall){
+                Debug.Log(element.gameObject.name);
+            }
+
+            int emergencyBreak = 0;
+            while (currentNumberWall > 0)
+            {
+
+                for (int i = 0; i < 2; i++)
                 {
-                    nextIndex = findNextIndex(randomIndex);
+                    randomIndex = Random.Range(1, originalNumberWall);
+                    randomIndex--;
+                    if (listBlueWall[randomIndex] != null)
+                    {
+                        pairingList[i] = listBlueWall[randomIndex].gameObject;
+                        listBlueWall[randomIndex] = null;
+                        currentNumberWall--;
+
+                        Debug.Log("paired wall numbr" + currentNumberWall);
+                    }
+                    else // find the next available gameObject
+                    {
+                        nextIndex = findNextIndex(randomIndex);
+                        if (nextIndex == -1) //return -1 if the function was not able to  find  a valid GameObject
+                        {
+                            Debug.Log("problem When assigning the pairing");
+                        }
+                        else
+                        {
+                            pairingList[i] = listBlueWall[nextIndex].gameObject;
+                            listBlueWall[nextIndex] = null;
+                            currentNumberWall--;
+
+                            Debug.Log("paired wall numbr" + currentNumberWall);
+                        }
+
+
+                    }
+                    if (nextIndex == -1) //return -1 if the function was not able to  find  a valid GameObject
+                    {
+                        Debug.Log("problem When assigning the pairing");
+                    }
+                    nextIndex = -2;
+                }
+                if(currentNumberWall == 1)
+                {
+                    nextIndex = findNextIndex(0); // find the last wall
                     if (nextIndex == -1) //return -1 if the function was not able to  find  a valid GameObject
                     {
                         Debug.Log("problem When assigning the pairing");
                     }
                     else
                     {
-                        pairingList[i] = listBlueWall[nextIndex].gameObject;
-                        listBlueWall[nextIndex] = null;
-                        currentNumberWall--;
-
-                        Debug.Log("paired wall numbr" + currentNumberWall);
+                        pairingList[2] = listBlueWall[nextIndex].gameObject;
+                        pairingList[2] = null;
                     }
-
-
                 }
-                if (nextIndex == -1) //return -1 if the function was not able to  find  a valid GameObject
+               for ( int y = 0; y < pairingList.Length;y++)
+               {
+                    pairingList[y] = null;
+               }
+
+                emergencyBreak++;
+                if(emergencyBreak == 100)
                 {
-                    Debug.Log("problem When assigning the pairing");
+                    currentNumberWall = 0;
                 }
-                nextIndex = -2;
+
             }
-            if(currentNumberWall == 1)
+            foreach (teleportScript element in listBlueWall)
             {
-                nextIndex = findNextIndex(0); // find the last wall
-                if (nextIndex == -1) //return -1 if the function was not able to  find  a valid GameObject
-                {
-                    Debug.Log("problem When assigning the pairing");
-                }
-                else
-                {
-                    pairingList[2] = listBlueWall[nextIndex].gameObject;
-                    pairingList[2] = null;
-                }
+                Debug.Log(element);
             }
-           for ( int y = 0; y < pairingList.Length;y++)
-           {
-                pairingList[y] = null;
-           }
 
-            emergencyBreak++;
-            if(emergencyBreak == 100)
-            {
-                currentNumberWall = 0;
-            }
+
+
 
         }
-        foreach (teleportScript element in listBlueWall)
-        {
-            Debug.Log(element);
-        }
-
-
-
-
-
-    }
+    */
 
     private int findNextIndex(int originalIndex)
     {
