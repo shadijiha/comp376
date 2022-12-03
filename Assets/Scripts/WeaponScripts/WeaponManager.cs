@@ -37,7 +37,7 @@ public class WeaponManager : NetworkBehaviour
         }
 
         // Equip Each weapon.
-        mPrimary = new BurstPistol
+        mPrimary = new ShotRifle
         {
             readyToShoot = true
         };
@@ -49,13 +49,13 @@ public class WeaponManager : NetworkBehaviour
         mCurrent.model.SetActive(true);
 
         // Create Sidearm
-        mSecondary = new AutoShotgun
+        mSecondary = new BurstPistol
         {
             readyToShoot = false
         };
         Equip(mSecondary);
 
-        mSuper      = new ShotRifle
+        mSuper      = new RocketLauncher
         {
             readyToShoot = false
         };
