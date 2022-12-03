@@ -510,7 +510,7 @@ MonoBehaviour:
     m_Bits: 2560
   cameraRecoil: {fileID: 8935510258853908927}
   modelRecoil: {fileID: 4063427409264756806}
-  weaponSound: {fileID: 1092208653471882773}
+  laserShot: {fileID: 136330, guid: 9a0c3383523899643a8d0661cfaca4e4, type: 3}
 --- !u!114 &1172113867161608122
 MonoBehaviour:
   m_ObjectHideFlags: 0

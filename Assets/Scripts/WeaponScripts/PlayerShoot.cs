@@ -30,6 +30,10 @@ public class PlayerShoot : NetworkBehaviour
     private bool    m_bMoving;
     private float   m_fMovement;
 
+    public GameObject laserShot;
+    //public GameObject laserShotTarget;
+    Ray ray;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -146,6 +150,14 @@ public class PlayerShoot : NetworkBehaviour
         RpcDoHitEffect(pos, normal);
     }
 
+    
+    //[Command]
+    void CmdOnHitLaser(Vector3 rayOrigine, Vector3 endPoint, float laserShotSpeed)
+    {
+        ShootLaser(rayOrigine, endPoint, laserShotSpeed);
+    }
+    
+
     /// <summary>
     /// Called on all clients when we need to do a
     /// shoot effect
@@ -221,6 +233,19 @@ public class PlayerShoot : NetworkBehaviour
             Debug.Log("Reload Finished");
         }
     }
+    
+    
+    public void ShootLaser(Vector3 shotOriginPosition, Vector3 endPoint,  float laserShotSpeed)
+    {
+        GameObject shot = Instantiate(laserShot, shotOriginPosition, Quaternion.LookRotation(endPoint - shotOriginPosition));
+        //Quaternion.identity);
+        shot.GetComponent<Rigidbody>().velocity = (endPoint- shotOriginPosition) * laserShotSpeed;
+
+        GameObject.Destroy(shot, 2f);
+    }
+
+
+  
 
     [Client]
     public void Shoot()

@@ -87,6 +87,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BlueObstacle
       objectReference: {fileID: 0}
+    - target: {fileID: 5330659293929714857, guid: 4b46f4bde8ac63248aa8bc7c4834536c,
+        type: 3}
+      propertyPath: m_TagString
+      value: laserCollider
+      objectReference: {fileID: 0}
     - target: {fileID: 5330659293929714858, guid: 4b46f4bde8ac63248aa8bc7c4834536c,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
