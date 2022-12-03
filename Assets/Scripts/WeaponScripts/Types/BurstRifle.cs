@@ -20,12 +20,12 @@ public class BurstRifle : PlayerWeapon
         falloffDamage           = 10;
         maxRange                = 200f;
         fireRate                = 3.0f;
-        currentSpread           = 0.005f;
-        minSpread               = 0.005f;
-        maxSpread               = 0.05f;
-        spreadIncrease          = 0.005f;
-        spreadRecovery          = 0.005f;
-        movementSpread          = 2.0f;
+        currentSpread           = 0.01f;
+        minSpread               = 0.01f;
+        maxSpread               = 0.1f;
+        spreadIncrease          = 0.01f;
+        spreadRecovery          = 0.01f;
+        movementSpread          = 1.0f;
         reloadTime              = 1.75f;
         drawTime                = 0.8f;
         stowTime                = 0.9f;
@@ -76,7 +76,7 @@ public class BurstRifle : PlayerWeapon
             playerShoot.CmdOnShoot();
 
             Vector3 shotDirection = UnityEngine.Random.insideUnitSphere *
-                                    (currentSpread + currentSpread * movementSpread) +
+                                    (currentSpread + currentSpread * movementSpread * playerShoot.m_fMovement) +
                                     playerShoot.cam.transform.forward;
 
             shotDirection.Normalize();
@@ -109,6 +109,7 @@ public class BurstRifle : PlayerWeapon
 
                 // Play Hit effect on the server
                 playerShoot.CmdOnHit(hit.point, hit.normal);
+                playerShoot.CmdOnHitLaser(playerShoot.GetComponentInChildren<ParticleOrigin>().gameObject.transform.position, hit.point, 8f);
             }
         }
 
@@ -123,9 +124,6 @@ public class BurstRifle : PlayerWeapon
         // Consume ammunition
         --currentLoadedAmmo;
         ++burstInfo.burstIndex;
-
-        playerShoot.weaponSound.Play();
-
 
         if (burstInfo.burstIndex < burstInfo.burstCount)
         {

@@ -54,7 +54,7 @@ public class PlayerWeapon
             playerShoot.CmdOnShoot();
 
             Vector3 shotDirection = UnityEngine.Random.insideUnitSphere * 
-                                    (currentSpread + currentSpread * movementSpread) + 
+                                    (currentSpread + currentSpread * movementSpread * playerShoot.m_fMovement) + 
                                     playerShoot.cam.transform.forward;
 
             shotDirection.Normalize();
@@ -87,6 +87,7 @@ public class PlayerWeapon
 
                 // Play Hit effect on the server
                 playerShoot.CmdOnHit(hit.point, hit.normal);
+                playerShoot.CmdOnHitLaser(playerShoot.GetComponentInChildren<ParticleOrigin>().gameObject.transform.position, hit.point, 8f);
             }
         }
 
@@ -187,11 +188,5 @@ public class PlayerWeapon
 	    public	Vector3		MinRecoilRotation;
 	    public	Vector3		RecoilKick;
 	    public	Vector3		MinRecoilKick;
-    }
-
-    [System.Serializable]
-    protected struct ProjectileInfo
-    {
-        
     }
 }

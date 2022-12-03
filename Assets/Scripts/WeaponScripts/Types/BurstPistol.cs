@@ -75,7 +75,7 @@ public class BurstPistol : PlayerWeapon
             playerShoot.CmdOnShoot();
 
             Vector3 shotDirection = UnityEngine.Random.insideUnitSphere *
-                                    (currentSpread + currentSpread * movementSpread) +
+                                    (currentSpread + currentSpread * movementSpread * playerShoot.m_fMovement) +
                                     playerShoot.cam.transform.forward;
 
             shotDirection.Normalize();
@@ -108,6 +108,7 @@ public class BurstPistol : PlayerWeapon
 
                 // Play Hit effect on the server
                 playerShoot.CmdOnHit(hit.point, hit.normal);
+                playerShoot.CmdOnHitLaser(playerShoot.GetComponentInChildren<ParticleOrigin>().gameObject.transform.position, hit.point, 8f);
             }
         }
 
@@ -122,9 +123,6 @@ public class BurstPistol : PlayerWeapon
         // Consume ammunition
         --currentLoadedAmmo;
         ++burstInfo.burstIndex;
-
-        playerShoot.weaponSound.Play();
-
 
         if (burstInfo.burstIndex < burstInfo.burstCount)
         {

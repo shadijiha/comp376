@@ -19,11 +19,11 @@ public class LightSMG : PlayerWeapon
         falloffMax              = 30f;
         falloffDamage           = 6;
         maxRange                = 200f;
-        fireRate                = 15.0f;
-        currentSpread           = 0.02f;
-        minSpread               = 0.02f;
-        maxSpread               = 0.1f;
-        spreadIncrease          = 0.003f;
+        fireRate                = 18.0f;
+        currentSpread           = 0.05f;
+        minSpread               = 0.05f;
+        maxSpread               = 0.25f;
+        spreadIncrease          = 0.005f;
         spreadRecovery          = 0.005f;
         movementSpread          = 0.2f;
         reloadTime              = 1.0f;
@@ -36,9 +36,9 @@ public class LightSMG : PlayerWeapon
 
         cameraRecoilInfo        = new CameraRecoilInfo()
                                     {
-                                        rotationSpeed       = 8f,
+                                        rotationSpeed       = 10f,
                                         returnSpeed         = 20f,
-                                        recoilRotation      = new Vector3(8f,       2f,         2f)
+                                        recoilRotation      = new Vector3(10f,       2f,         2f)
                                     };
 
         modelRecoilInfo         = new ModelRecoilInfo()

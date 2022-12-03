@@ -23,7 +23,7 @@ public class HeavySMG : PlayerWeapon
         currentSpread           = 0.025f;
         minSpread               = 0.025f;
         maxSpread               = 0.15f;
-        spreadIncrease          = 0.003f;
+        spreadIncrease          = 0.002f;
         spreadRecovery          = 0.005f;
         movementSpread          = 0.2f;
         reloadTime              = 1.0f;
@@ -36,9 +36,9 @@ public class HeavySMG : PlayerWeapon
 
         cameraRecoilInfo        = new CameraRecoilInfo()
                                     {
-                                        rotationSpeed       = 8f,
+                                        rotationSpeed       = 5f,
                                         returnSpeed         = 20f,
-                                        recoilRotation      = new Vector3(8f,       2f,         2f)
+                                        recoilRotation      = new Vector3(5f,       2f,         2f)
                                     };
 
         modelRecoilInfo         = new ModelRecoilInfo()

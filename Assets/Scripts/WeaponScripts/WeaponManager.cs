@@ -49,13 +49,13 @@ public class WeaponManager : NetworkBehaviour
         mCurrent.model.SetActive(true);
 
         // Create Sidearm
-        mSecondary = new MachinePistol
+        mSecondary = new BurstRifle
         {
             readyToShoot = false
         };
         Equip(mSecondary);
 
-        mSuper      = new RocketLauncher
+        mSuper      = new DoubleRifle
         {
             readyToShoot = false
         };

@@ -26,9 +26,9 @@ public class PlayerShoot : NetworkBehaviour
     [SerializeField]    public  CameraRecoil    cameraRecoil;
     [SerializeField]    public  ModelRecoil     modelRecoil;
     [SerializeField]    public  AudioSource     weaponSound;
+                        public  float           m_fMovement;
 
-    private bool    m_bMoving;
-    private float   m_fMovement;
+    private bool    m_bMoving; 
 
     public GameObject laserShot;
     //public GameObject laserShotTarget;
@@ -152,7 +152,7 @@ public class PlayerShoot : NetworkBehaviour
 
     
     //[Command]
-    void CmdOnHitLaser(Vector3 rayOrigine, Vector3 endPoint, float laserShotSpeed)
+    public void CmdOnHitLaser(Vector3 rayOrigine, Vector3 endPoint, float laserShotSpeed)
     {
         ShootLaser(rayOrigine, endPoint, laserShotSpeed);
     }
@@ -259,8 +259,8 @@ public class PlayerShoot : NetworkBehaviour
 
     public void UpdateCrosshair()
     {
-        crosshair.sizeDelta     = new Vector2(  800 * (m_CurrentWeapon.currentSpread + m_CurrentWeapon.currentSpread * m_fMovement * m_CurrentWeapon.movementSpread),
-                                                800 * (m_CurrentWeapon.currentSpread + m_CurrentWeapon.currentSpread * m_fMovement * m_CurrentWeapon.movementSpread));
+        crosshair.sizeDelta     = new Vector2(  500 * (m_CurrentWeapon.currentSpread + m_CurrentWeapon.currentSpread * m_fMovement * m_CurrentWeapon.movementSpread),
+                                                500 * (m_CurrentWeapon.currentSpread + m_CurrentWeapon.currentSpread * m_fMovement * m_CurrentWeapon.movementSpread));
     }
 
     public void ReadyToShoot()

@@ -44,9 +44,9 @@ public class BurstSMG : PlayerWeapon
 
         cameraRecoilInfo        = new CameraRecoilInfo()
                                     {
-                                        rotationSpeed       = 8f,
-                                        returnSpeed         = 10f,
-                                        recoilRotation      = new Vector3(6f,       2f,         2f)
+                                        rotationSpeed       = 10f,
+                                        returnSpeed         = 15f,
+                                        recoilRotation      = new Vector3(4f,       2f,         0f)
                                     };
 
         modelRecoilInfo         = new ModelRecoilInfo()
@@ -75,7 +75,7 @@ public class BurstSMG : PlayerWeapon
             playerShoot.CmdOnShoot();
 
             Vector3 shotDirection = UnityEngine.Random.insideUnitSphere *
-                                    (currentSpread + currentSpread * movementSpread) +
+                                    (currentSpread + currentSpread * movementSpread * playerShoot.m_fMovement) +
                                     playerShoot.cam.transform.forward;
 
             shotDirection.Normalize();
@@ -108,6 +108,7 @@ public class BurstSMG : PlayerWeapon
 
                 // Play Hit effect on the server
                 playerShoot.CmdOnHit(hit.point, hit.normal);
+                playerShoot.CmdOnHitLaser(playerShoot.GetComponentInChildren<ParticleOrigin>().gameObject.transform.position, hit.point, 8f);
             }
         }
 
@@ -122,9 +123,6 @@ public class BurstSMG : PlayerWeapon
         // Consume ammunition
         --currentLoadedAmmo;
         ++burstInfo.burstIndex;
-
-        playerShoot.weaponSound.Play();
-
 
         if (burstInfo.burstIndex < burstInfo.burstCount)
         {

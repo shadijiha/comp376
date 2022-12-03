@@ -9,10 +9,10 @@ public class DoubleRifle : PlayerWeapon
     {
         weaponType              = WeaponType.DoubleRifle;
         damage                  = 18;
-        currentLoadedAmmo       = 8;
-        magazineSize            = 8;
-        currentSpareAmmo        = 40;
-        maxAmmo                 = 40;
+        currentLoadedAmmo       = 16;
+        magazineSize            = 16;
+        currentSpareAmmo        = 80;
+        maxAmmo                 = 80;
         shotCount               = 2;
         critMultiplier          = 1.5f;
         falloffStart            = 50f;
@@ -20,13 +20,13 @@ public class DoubleRifle : PlayerWeapon
         falloffDamage           = 12;
         maxRange                = 200f;
         fireRate                = 2.0f;
-        currentSpread           = 0.01f;
-        minSpread               = 0.01f;
-        maxSpread               = 0.03f;
-        spreadIncrease          = 0.01f;
+        currentSpread           = 0.02f;
+        minSpread               = 0.02f;
+        maxSpread               = 0.05f;
+        spreadIncrease          = 0.005f;
         spreadRecovery          = 0.01f;
-        movementSpread          = 2.0f;
-        reloadTime              = 2.0f;
+        movementSpread          = 1.0f;
+        reloadTime              = 1.0f;
         drawTime                = 0.9f;
         stowTime                = 1.1f;
         allowContinuousFire     = false;
@@ -60,7 +60,7 @@ public class DoubleRifle : PlayerWeapon
                                         burstCount              = 2,
                                         burstIndex              = 0,
                                         burstFireRate           = 8,
-                                        burstSpread             = 0.01f
+                                        burstSpread             = 0.005f
                                     };
 
         model                   = WeaponManager.msWeaponArr[(int)weaponType];
@@ -76,7 +76,7 @@ public class DoubleRifle : PlayerWeapon
             playerShoot.CmdOnShoot();
 
             Vector3 shotDirection = UnityEngine.Random.insideUnitSphere *
-                                    (currentSpread + currentSpread * movementSpread) +
+                                    (currentSpread + currentSpread * movementSpread * playerShoot.m_fMovement) +
                                     playerShoot.cam.transform.forward;
 
             shotDirection.Normalize();
@@ -109,6 +109,7 @@ public class DoubleRifle : PlayerWeapon
 
                 // Play Hit effect on the server
                 playerShoot.CmdOnHit(hit.point, hit.normal);
+                playerShoot.CmdOnHitLaser(playerShoot.GetComponentInChildren<ParticleOrigin>().gameObject.transform.position, hit.point, 8f);
             }
         }
 
@@ -122,10 +123,8 @@ public class DoubleRifle : PlayerWeapon
 
         // Consume ammunition
         --currentLoadedAmmo;
+        --currentLoadedAmmo;
         ++burstInfo.burstIndex;
-
-        playerShoot.weaponSound.Play();
-
 
         if (burstInfo.burstIndex < burstInfo.burstCount)
         {

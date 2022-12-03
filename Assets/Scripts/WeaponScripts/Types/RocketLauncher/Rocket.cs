@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class Rocket : MonoBehaviour
 {
@@ -62,7 +63,7 @@ public class Rocket : MonoBehaviour
                 player.RpcTakeDamage(m_contactDamage, m_owner);
             }
 
-            Destroy(Instantiate(m_explosion, transform.position, transform.rotation).gameObject, 1.0f);
+            CmdExplode();
                 
             int             hits            = Physics.OverlapSphereNonAlloc(transform.position, m_MaxRadius, m_hits, m_targetMask);
             List<Player>    playersToHit    = new List<Player>();
@@ -108,5 +109,15 @@ public class Rocket : MonoBehaviour
         m_active    = true;
 
         transform.parent = null;
+    }
+
+    [Command]
+    public void CmdExplode() {
+        RpcExplode();
+    }
+
+    [ClientRpc]
+    public void RpcExplode() {
+        Destroy(Instantiate(m_explosion, transform.position, transform.rotation).gameObject, 1.0f);
     }
 }

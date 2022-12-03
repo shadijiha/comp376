@@ -23,7 +23,7 @@ public class AutoRifle : PlayerWeapon
         currentSpread           = 0.01f;
         minSpread               = 0.01f;
         maxSpread               = 0.075f;
-        spreadIncrease          = 0.002f;
+        spreadIncrease          = 0.003f;
         spreadRecovery          = 0.004f;
         movementSpread          = 2.0f;
         reloadTime              = 1.75f;
