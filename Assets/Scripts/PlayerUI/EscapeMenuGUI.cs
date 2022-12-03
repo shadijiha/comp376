@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Networking;
 public class EscapeMenuGUI : MonoBehaviour
 {
     [SerializeField] private GameObject escapeMenuPanel;
@@ -9,6 +9,8 @@ public class EscapeMenuGUI : MonoBehaviour
     private bool menuEnabled;
     private PlayerControler playerController;
     private PlayerShoot playerShoot;
+
+    private NetworkManager manager;
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +21,8 @@ public class EscapeMenuGUI : MonoBehaviour
         Player localPlayer = GetComponentInParent<PlayerUISetup>().localPlayer;
         playerController = localPlayer.GetComponent<PlayerControler>();
         playerShoot = localPlayer.GetComponent<PlayerShoot>();
+
+        manager = NetworkManager.singleton;
     }
 
     // Update is called once per frame
@@ -41,6 +45,10 @@ public class EscapeMenuGUI : MonoBehaviour
 
     public void Quit()
     {
+        var match = manager.matchInfo;
+        manager.matchMaker.DropConnection(match.networkId, match.nodeId, HostGame.RequestDomain, manager.OnDropConnection);
+        manager.StopHost(); // TODO implement Migration
+
         Application.Quit();
     }
 }
