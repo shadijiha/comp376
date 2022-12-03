@@ -15,17 +15,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: ebec8da7dfbe5a546af8a8bfe0dee43d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.6063614
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ebec8da7dfbe5a546af8a8bfe0dee43d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.147
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ebec8da7dfbe5a546af8a8bfe0dee43d,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 9.936448
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ebec8da7dfbe5a546af8a8bfe0dee43d,
         type: 3}
@@ -65,7 +65,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: ebec8da7dfbe5a546af8a8bfe0dee43d,
         type: 3}
       propertyPath: m_Name
-      value: shotGun_scaled
+      value: shotGun_prefab
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ebec8da7dfbe5a546af8a8bfe0dee43d, type: 3}
