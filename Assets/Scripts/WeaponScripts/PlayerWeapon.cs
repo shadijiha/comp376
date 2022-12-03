@@ -29,11 +29,14 @@ public class PlayerWeapon
     public  float               drawTime;
     public  float               stowTime;
     public  float               speedMultiplier         = 1f; 
-    public  bool                allowContinuousFire; 
+    public  bool                allowContinuousFire;
+
     public  bool                reloading;
     public  bool                readyToShoot; 
     public  bool                shooting;
     public  bool                altFire                 = false;
+    public  bool                hasted                  = false;
+    public  bool                amplified               = false;
 
     public  CameraRecoilInfo    cameraRecoilInfo;
     public  ModelRecoilInfo     modelRecoilInfo;
@@ -56,11 +59,9 @@ public class PlayerWeapon
 
             shotDirection.Normalize();
 
-            Debug.Log($"Shoot: {playerShoot.cam.transform.position} -> {shotDirection}");
             RaycastHit hit;
             if (Physics.Raycast(playerShoot.cam.transform.position, shotDirection, out hit, maxRange, playerShoot.mask))
             {
-                Debug.Log($"Hit: {hit.collider.name}");
                 // We hit Something
                 if (hit.collider.tag == PlayerShoot.PLAYER_TAG)
                 {
@@ -106,7 +107,7 @@ public class PlayerWeapon
         --currentLoadedAmmo;
 
         // Must return the method to invoke, as invoke isn't possible without being a unity behavior.
-        return (nameof(playerShoot.ReadyToShoot), 1.0f / fireRate);
+        return (nameof(playerShoot.ReadyToShoot), 1.0f / (hasted ? fireRate * 1.5f : fireRate));
     }   
 
     // Base behavior alt fire does nothing, exists to be overridden for special weapons
@@ -126,6 +127,9 @@ public class PlayerWeapon
         currentLoadedAmmo   = magazineSize;
         currentSpareAmmo    = maxAmmo;
         readyToShoot        = true;
+        reloading           = false;
+        altFire             = false;
+        shooting            = false;
     }
 
     public GameObject GetModel()
@@ -136,11 +140,23 @@ public class PlayerWeapon
     public enum WeaponType
     {
         Invalid,
-        Sidearm,
-        SMG,
-        Shotgun,
-        Rifle,
-        Sniper
+        MarksmanPistol,
+        BurstPistol,
+        MachinePistol,
+        LightSMG,
+        BurstSMG,
+        HeavySMG,
+        TacticalShotgun,
+        AutoShotgun,
+        Scattergun,
+        AutoRifle,
+        BurstRifle,
+        DoubleRifle,
+        HeavySniper,
+        ScoutRifle,
+        ShotRifle,
+        RocketLauncher,
+        FlameThrower
     }
 
     [System.Serializable]

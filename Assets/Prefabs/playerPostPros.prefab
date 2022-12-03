@@ -57,7 +57,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0.01
   far clip plane: 1000
   field of view: 60
   orthographic: 0
@@ -369,6 +369,7 @@ MonoBehaviour:
   sprintSpeed: 7.5
   speedMultiplier: 1
   sensitivity: 5
+  jumpScanDist: 1.5
   animator: {fileID: 185597601041941295}
   isSprinting: 0
   isJumping: 0
@@ -689,13 +690,21 @@ MonoBehaviour:
   mWeaponArr:
   - {fileID: 7471805642146190835, guid: 7e22e245148ac6f4a86cbcf9efcdf99b, type: 3}
   - {fileID: 6328806803119589402, guid: c0f7273ab40c59d4a938cd41e9d29166, type: 3}
+  - {fileID: 6328806803119589402, guid: c0f7273ab40c59d4a938cd41e9d29166, type: 3}
+  - {fileID: 6328806803119589402, guid: c0f7273ab40c59d4a938cd41e9d29166, type: 3}
   - {fileID: 4006320201810499399, guid: 53961e4e4fba37d44818275e66eb0a0e, type: 3}
   - {fileID: 4006320201810499399, guid: 53961e4e4fba37d44818275e66eb0a0e, type: 3}
   - {fileID: 4006320201810499399, guid: 53961e4e4fba37d44818275e66eb0a0e, type: 3}
-  - {fileID: 4006320201810499399, guid: 53961e4e4fba37d44818275e66eb0a0e, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 1146217897203267030, guid: 51b9d46f8d655b34c86172e049109dfc, type: 3}
+  - {fileID: 1146217897203267030, guid: 51b9d46f8d655b34c86172e049109dfc, type: 3}
+  - {fileID: 1146217897203267030, guid: 51b9d46f8d655b34c86172e049109dfc, type: 3}
+  - {fileID: 7047363406514348174, guid: ede680acbb86de4478fa24965a4832c5, type: 3}
+  - {fileID: 7047363406514348174, guid: ede680acbb86de4478fa24965a4832c5, type: 3}
+  - {fileID: 7047363406514348174, guid: ede680acbb86de4478fa24965a4832c5, type: 3}
+  - {fileID: 7047363406514348174, guid: ede680acbb86de4478fa24965a4832c5, type: 3}
+  - {fileID: 7047363406514348174, guid: ede680acbb86de4478fa24965a4832c5, type: 3}
+  - {fileID: 7047363406514348174, guid: ede680acbb86de4478fa24965a4832c5, type: 3}
+  - {fileID: 5489371966703966416, guid: ed86893edfc4c854b996d6591426aac7, type: 3}
   - {fileID: 0}
   mCameraRecoil: {fileID: 8935510258853908927}
   mModelRecoil: {fileID: 4063427409264756806}
@@ -900,7 +909,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1674023247596139348}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.3, y: -0.2, z: 0.7}
+  m_LocalPosition: {x: 0.2, y: -0.2, z: 0.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 174300355385010638}
@@ -1045,7 +1054,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7411847716698015386}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.3, y: -0.2, z: 0.7}
+  m_LocalPosition: {x: 0.35, y: -0.25, z: 0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7854826190126884547}
@@ -1104,7 +1113,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7415393646411263799}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1172113867161608158}
@@ -1133,7 +1142,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0.01
   far clip plane: 1000
   field of view: 90
   orthographic: 0

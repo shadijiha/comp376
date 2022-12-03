@@ -176,9 +176,16 @@ public class PlayerShoot : NetworkBehaviour
     [Client]
     public void Reload()
     {
-        m_CurrentWeapon.reloading = true;
-        Debug.Log("Reload Start");
-        Invoke("ReloadFinished", m_CurrentWeapon.reloadTime);
+        if (m_CurrentWeapon.currentSpareAmmo == 0)
+        {
+            return;
+        }
+        else
+        {
+            m_CurrentWeapon.reloading = true;
+            Debug.Log("Reload Start");
+            Invoke("ReloadFinished", (m_CurrentWeapon.hasted ? m_CurrentWeapon.reloadTime * 0.5f : m_CurrentWeapon.reloadTime));
+        }
     }
 
     /// <summary>
@@ -227,8 +234,8 @@ public class PlayerShoot : NetworkBehaviour
 
     public void UpdateCrosshair()
     {
-        crosshair.sizeDelta     = new Vector2(  1500 * (m_CurrentWeapon.currentSpread + m_CurrentWeapon.currentSpread * m_fMovement * m_CurrentWeapon.movementSpread),
-                                                1500 * (m_CurrentWeapon.currentSpread + m_CurrentWeapon.currentSpread * m_fMovement * m_CurrentWeapon.movementSpread));
+        crosshair.sizeDelta     = new Vector2(  800 * (m_CurrentWeapon.currentSpread + m_CurrentWeapon.currentSpread * m_fMovement * m_CurrentWeapon.movementSpread),
+                                                800 * (m_CurrentWeapon.currentSpread + m_CurrentWeapon.currentSpread * m_fMovement * m_CurrentWeapon.movementSpread));
     }
 
     public void ReadyToShoot()

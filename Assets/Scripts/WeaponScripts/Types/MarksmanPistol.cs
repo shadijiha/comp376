@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class Pistol : PlayerWeapon
+public class MarksmanPistol : PlayerWeapon
 {
-    public Pistol()
+    public MarksmanPistol()
     {
-        weaponType              = WeaponType.Sidearm;
-        damage                  = 20;
-        currentLoadedAmmo       = 10;
-        magazineSize            = 10;
+        weaponType              = WeaponType.MarksmanPistol;
+        damage                  = 18;
+        currentLoadedAmmo       = 12;
+        magazineSize            = 12;
         currentSpareAmmo        = -1;
         maxAmmo                 = -1;
         shotCount               = 1;
@@ -25,8 +25,8 @@ public class Pistol : PlayerWeapon
         maxSpread               = 0.05f;
         spreadIncrease          = 0.02f;
         spreadRecovery          = 0.005f;
-        movementSpread          = 0.5f;
-        reloadTime              = 1.0f;
+        movementSpread          = 0.4f;
+        reloadTime              = 0.8f;
         drawTime                = 0.3f;
         stowTime                = 0.4f;
         allowContinuousFire     = false;
@@ -34,7 +34,6 @@ public class Pistol : PlayerWeapon
         readyToShoot            = true;
         shooting                = false;
 
-        //burstInfo               = new BurstInfo();
         cameraRecoilInfo        = new CameraRecoilInfo()
                                     {
                                         returnSpeed         = 20f,
@@ -57,5 +56,4 @@ public class Pistol : PlayerWeapon
 
         model                   = WeaponManager.msWeaponArr[(int)weaponType];
     }
-
 }

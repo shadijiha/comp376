@@ -9,6 +9,7 @@ public class PlayerControler : MonoBehaviour
     [SerializeField] private float sprintSpeed      = 7.5f;
     [SerializeField] private float speedMultiplier  = 1f;
     [SerializeField] private float sensitivity      = 3.5f; // In the future this should be in the game settings
+    [SerializeField] private float jumpScanDist     = 1.5f;
 
     private bool isEnabled;
 
@@ -84,14 +85,13 @@ public class PlayerControler : MonoBehaviour
         // Apply CAMERA rotation
         motor.RotateCamera(cameraRotationX);
 
-        // Todo: Jump Cooldown with proper model scales
-        //if (!jumpOnCooldown)
-        //{
-        //    Physics.Raycast(Vector3.down)
-        //}
+        if (!jumpOnCooldown)
+        {
+            grounded = Physics.Raycast(transform.position, Vector3.down, jumpScanDist);
+        }
 
         // Listen for the space bar
-        if (Input.GetKeyDown(KeyCode.Space) && !jumpOnCooldown)
+        if (Input.GetKeyDown(KeyCode.Space) && grounded)
         {
             isJumping = true;
             motor.Jump();

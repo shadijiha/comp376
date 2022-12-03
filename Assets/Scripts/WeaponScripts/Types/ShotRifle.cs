@@ -3,62 +3,62 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class Sniper : PlayerWeapon
+public class ShotRifle : PlayerWeapon
 {
     public  float   normalFoV               = 90f;
     public  float   normalMinSpread         = 0.05f;
     public  float   normalSpreadRecovery    = 0.005f;
-    public  float   normalMovementSpread    = 1.5f;
+    public  float   normalMovementSpread    = 0.25f;
     public  float   normalSpreadIncrease    = 0.05f;
     public  float   normalSpeedMult         = 1f;
 
-    public  float   zoomFoV                 = 15f;
-    public  float   zoomMinSpread           = 0.001f;
+    public  float   zoomFoV                 = 50f;
+    public  float   zoomMinSpread           = 0.025f;
     public  float   zoomSpreadRecovery      = 0.01f;
-    public  float   zoomMovementSpread      = 0.5f;
-    public  float   zoomSpreadIncrease      = 0.05f;
-    public  float   zoomSpeedMult           = 0.3f;
+    public  float   zoomMovementSpread      = 0.2f;
+    public  float   zoomSpreadIncrease      = 0.025f;
+    public  float   zoomSpeedMult           = 0.6f;
 
     private Color   visible                 = new Color(255f, 255f, 255f, 255f);
     private Color   faded                   = new Color(255f, 255f, 255f, 0f);
 
-    public Sniper()
+    public ShotRifle()
     {
-        weaponType              = WeaponType.Sniper;
-        damage                  = 60;
-        currentLoadedAmmo       = 5;
-        magazineSize            = 5;
-        currentSpareAmmo        = 40;
-        maxAmmo                 = 40;
-        shotCount               = 1;
-        critMultiplier          = 3.0f;
-        falloffStart            = 200f;
+        weaponType              = WeaponType.ShotRifle;
+        damage                  = 8;
+        currentLoadedAmmo       = 7;
+        magazineSize            = 7;
+        currentSpareAmmo        = 49;
+        maxAmmo                 = 49;
+        shotCount               = 8;
+        critMultiplier          = 2.5f;
+        falloffStart            = 50f;
         falloffMax              = 200f;
-        falloffDamage           = 60;
+        falloffDamage           = 6;
         maxRange                = 200f;
-        fireRate                = 1.0f;
-        currentSpread           = 0.05f;
+        fireRate                = 1.5f;
+        currentSpread           = 0.02f;
         minSpread               = normalMinSpread;
-        maxSpread               = 0.10f;
+        maxSpread               = 0.1f;
         spreadIncrease          = normalSpreadIncrease;
         spreadRecovery          = normalSpreadRecovery;
         movementSpread          = normalMovementSpread;
-        reloadTime              = 1.0f;
-        drawTime                = 0.3f;
-        stowTime                = 0.4f;
-        zoomFoV                 = 15f;
+        reloadTime              = 1.5f;
+        drawTime                = 0.8f;
+        stowTime                = 1.0f;
+        zoomFoV                 = 30f;
         allowContinuousFire     = false;
         reloading               = false;
         readyToShoot            = true;
         shooting                = false;
-        speedMultiplier         = 0.3f;
+        speedMultiplier         = normalSpeedMult;
 
         burstInfo               = new BurstInfo();
         cameraRecoilInfo        = new CameraRecoilInfo()
                                     {
                                         returnSpeed         = 5f,
                                         rotationSpeed       = 30f,
-                                        recoilRotation      = new Vector3(25f,       5f,         5f)
+                                        recoilRotation      = new Vector3(15f,       4f,         4f)
                                     };
 
         modelRecoilInfo         = new ModelRecoilInfo()
@@ -68,8 +68,8 @@ public class Sniper : PlayerWeapon
                                         positionReturnSpeed = 5f,
                                         rotationReturnSpeed = 40f,
 
-                                        RecoilRotation      = new Vector3(-90,      25,         25),
-                                        MinRecoilRotation   = new Vector3(-45f,     12.5f,      12.5f),
+                                        RecoilRotation      = new Vector3(-60f,     20f,        20f),
+                                        MinRecoilRotation   = new Vector3(-30f,     10f,        10f),
                                         RecoilKick          = new Vector3(0.1f,     0.1f,       -0.5f),
                                         MinRecoilKick       = new Vector3(0.05f,    0.05f,      -0.25f)
                                     };

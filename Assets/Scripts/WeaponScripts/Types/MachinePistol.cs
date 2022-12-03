@@ -3,30 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class SMG : PlayerWeapon
+public class MachinePistol : PlayerWeapon
 {
-    public SMG()
+    public MachinePistol()
     {
-        weaponType              = WeaponType.SMG;
-        damage                  = 10;
+        weaponType              = WeaponType.MachinePistol;
+        damage                  = 5;
         currentLoadedAmmo       = 30;
         magazineSize            = 30;
-        currentSpareAmmo        = 180;
-        maxAmmo                 = 180;
+        currentSpareAmmo        = -1;
+        maxAmmo                 = -1;
         shotCount               = 1;
-        critMultiplier          = 1.5f;
-        falloffStart            = 15f;
-        falloffMax              = 30f;
-        falloffDamage           = 7;
+        critMultiplier          = 1.25f;
+        falloffStart            = 10f;
+        falloffMax              = 25f;
+        falloffDamage           = 3;
         maxRange                = 200f;
-        fireRate                = 15.0f;
-        currentSpread           = 0.02f;
-        minSpread               = 0.02f;
-        maxSpread               = 0.075f;
-        spreadIncrease          = 0.003f;
+        fireRate                = 20.0f;
+        currentSpread           = 0.03f;
+        minSpread               = 0.03f;
+        maxSpread               = 0.2f;
+        spreadIncrease          = 0.005f;
         spreadRecovery          = 0.005f;
-        movementSpread          = 0.2f;
-        reloadTime              = 1.0f;
+        movementSpread          = 0.25f;
+        reloadTime              = 0.8f;
         drawTime                = 0.4f;
         stowTime                = 0.5f;
         allowContinuousFire     = true;
@@ -38,7 +38,7 @@ public class SMG : PlayerWeapon
                                     {
                                         rotationSpeed       = 8f,
                                         returnSpeed         = 20f,
-                                        recoilRotation      = new Vector3(8f,       2f,         2f)
+                                        recoilRotation      = new Vector3(10f,       3f,         3f)
                                     };
 
         modelRecoilInfo         = new ModelRecoilInfo()
@@ -50,11 +50,10 @@ public class SMG : PlayerWeapon
 
                                         RecoilRotation      = new Vector3(-15,      5,          7),
                                         MinRecoilRotation   = new Vector3(-7.5f,    2.5f,       3.5f),
-                                        RecoilKick          = new Vector3(0.025f,   0.01f,      -0.1f),
-                                        MinRecoilKick       = new Vector3(0.0125f,  0.005f,     -0.05f)
+                                        RecoilKick          = new Vector3(0.05f,   0.02f,       -0.2f),
+                                        MinRecoilKick       = new Vector3(0.025f,  0.01f,       -0.1f)
                                     };
 
         model                   = WeaponManager.msWeaponArr[(int)weaponType];
     }
-
 }

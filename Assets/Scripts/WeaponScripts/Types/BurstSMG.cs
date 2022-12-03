@@ -3,72 +3,66 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class Rifle : PlayerWeapon
+public class BurstSMG : PlayerWeapon
 {
-    public Rifle()
+    public BurstSMG()
     {
-        weaponType              = WeaponType.Rifle;
-        damage                  = 20;
-        currentLoadedAmmo       = 18;
-        magazineSize            = 18;
-        currentSpareAmmo        = 120;
-        maxAmmo                 = 120;
+        weaponType              = WeaponType.BurstSMG;
+        damage                  = 8;
+        currentLoadedAmmo       = 40;
+        magazineSize            = 40;
+        currentSpareAmmo        = 200;
+        maxAmmo                 = 200;
         shotCount               = 1;
-        critMultiplier          = 1.75f;
-        falloffStart            = 50f;
-        falloffMax              = 100f;
-        falloffDamage           = 10;
+        critMultiplier          = 1.5f;
+        falloffStart            = 20f;
+        falloffMax              = 40f;
+        falloffDamage           = 6;
         maxRange                = 200f;
-        fireRate                = 3.0f;
-        currentSpread           = 0.005f;
-        minSpread               = 0.005f;
+        fireRate                = 5.0f;
+        currentSpread           = 0.015f;
+        minSpread               = 0.015f;
         maxSpread               = 0.05f;
-        spreadIncrease          = 0.005f;
+        spreadIncrease          = 0.002f;
         spreadRecovery          = 0.005f;
-        movementSpread          = 2.0f;
-        reloadTime              = 1.75f;
-        drawTime                = 0.8f;
-        stowTime                = 0.9f;
-        allowContinuousFire     = false;
+        movementSpread          = 0.2f;
+        reloadTime              = 1.2f;
+        drawTime                = 0.5f;
+        stowTime                = 0.6f;
+        allowContinuousFire     = true;
         reloading               = false;
         readyToShoot            = true;
         shooting                = false;
 
-        cameraRecoilInfo        = new CameraRecoilInfo()
-                                    {
-                                        returnSpeed = 20f,
-                                        rotationSpeed = 15f,
-                                        recoilRotation = new Vector3(4f, 1.5f, 1.5f)
-                                    };
-
-        
-        modelRecoilInfo         = new ModelRecoilInfo()
-                                    {
-                                        positionRecoilSpeed = 10f,
-                                        rotationRecoilSpeed = 10f,
-                                        positionReturnSpeed = 20f,
-                                        rotationReturnSpeed = 20f,
-
-                                        RecoilRotation      = new Vector3(-5,       5,          7),
-                                        MinRecoilRotation   = new Vector3(-2.5f,    2.5f,       3.5f),
-                                        RecoilKick          = new Vector3(0.1f,     0.1f,       -0.2f),
-                                        MinRecoilKick       = new Vector3(0.05f,    0.05f,      -0.1f)
-                                    };
-
         burstInfo               = new BurstInfo()
                                     {
-                                        burstCount              = 3,
+                                        burstCount              = 5,
                                         burstIndex              = 0,
-                                        burstFireRate           = 15,
-                                        burstSpread             = 0.005f
+                                        burstFireRate           = 25,
+                                        burstSpread             = 0.002f
+                                    };
+
+        cameraRecoilInfo        = new CameraRecoilInfo()
+                                    {
+                                        rotationSpeed       = 8f,
+                                        returnSpeed         = 10f,
+                                        recoilRotation      = new Vector3(6f,       2f,         2f)
+                                    };
+
+        modelRecoilInfo         = new ModelRecoilInfo()
+                                    {
+                                        positionRecoilSpeed = 20f,
+                                        rotationRecoilSpeed = 20f,
+                                        positionReturnSpeed = 30f,
+                                        rotationReturnSpeed = 40f,
+
+                                        RecoilRotation      = new Vector3(-15,      5,          7),
+                                        MinRecoilRotation   = new Vector3(-7.5f,    2.5f,       3.5f),
+                                        RecoilKick          = new Vector3(0.025f,   0.01f,      -0.1f),
+                                        MinRecoilKick       = new Vector3(0.0125f,  0.005f,     -0.05f)
                                     };
 
         model                   = WeaponManager.msWeaponArr[(int)weaponType];
-    }
-
-    public new GameObject GetModel()
-    {
-        return model;
     }
 
     // Burst Shooting Behavior override
@@ -139,7 +133,7 @@ public class Rifle : PlayerWeapon
             playerShoot.UpdateCrosshair();
 
             // Indicate the weapon is ready to fire again after the appropriate delay
-            return (nameof(this.Shoot), 1.0f / burstInfo.burstFireRate);
+            return (nameof(this.Shoot), 1.0f / (hasted ? burstInfo.burstFireRate * 1.5f : burstInfo.burstFireRate));
         }
         else
         {
@@ -161,7 +155,7 @@ public class Rifle : PlayerWeapon
             burstInfo.burstIndex = 0;
 
             // Indicate the weapon is ready to fire again after the appropriate delay
-            return (nameof(playerShoot.ReadyToShoot), 1.0f / fireRate);
+            return (nameof(playerShoot.ReadyToShoot), 1.0f / (hasted ? fireRate * 1.5f : fireRate));
         }
     }
 }
