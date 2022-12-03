@@ -43,6 +43,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0.005
       objectReference: {fileID: 0}
+    - target: {fileID: 5638307417708442925, guid: 7e22e245148ac6f4a86cbcf9efcdf99b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 5902660536662026208, guid: 7e22e245148ac6f4a86cbcf9efcdf99b,
         type: 3}
       propertyPath: m_RootOrder
@@ -118,10 +123,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rifle
       objectReference: {fileID: 0}
+    - target: {fileID: 7471805642146190835, guid: 7e22e245148ac6f4a86cbcf9efcdf99b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 9191276916084056367, guid: 7e22e245148ac6f4a86cbcf9efcdf99b,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 4e4ec98e32f826447b9ad49b86966f19, type: 2}
+      objectReference: {fileID: 2100000, guid: e897d5ccae658f54795a8ff1b1f29db8, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7e22e245148ac6f4a86cbcf9efcdf99b, type: 3}

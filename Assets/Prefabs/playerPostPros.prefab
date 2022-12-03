@@ -510,6 +510,8 @@ MonoBehaviour:
     m_Bits: 2560
   cameraRecoil: {fileID: 8935510258853908927}
   modelRecoil: {fileID: 4063427409264756806}
+  weaponSound: {fileID: 0}
+  m_fMovement: 0
   laserShot: {fileID: 136330, guid: 9a0c3383523899643a8d0661cfaca4e4, type: 3}
 --- !u!114 &1172113867161608122
 MonoBehaviour:
@@ -568,6 +570,8 @@ MonoBehaviour:
     readyToShoot: 0
     shooting: 0
     altFire: 0
+    hasted: 0
+    amplified: 0
     cameraRecoilInfo:
       rotationSpeed: 0
       returnSpeed: 0
@@ -617,6 +621,8 @@ MonoBehaviour:
     readyToShoot: 0
     shooting: 0
     altFire: 0
+    hasted: 0
+    amplified: 0
     cameraRecoilInfo:
       rotationSpeed: 0
       returnSpeed: 0
@@ -666,6 +672,8 @@ MonoBehaviour:
     readyToShoot: 0
     shooting: 0
     altFire: 0
+    hasted: 0
+    amplified: 0
     cameraRecoilInfo:
       rotationSpeed: 0
       returnSpeed: 0
@@ -701,9 +709,9 @@ MonoBehaviour:
   - {fileID: 7047363406514348174, guid: ede680acbb86de4478fa24965a4832c5, type: 3}
   - {fileID: 7047363406514348174, guid: ede680acbb86de4478fa24965a4832c5, type: 3}
   - {fileID: 7047363406514348174, guid: ede680acbb86de4478fa24965a4832c5, type: 3}
-  - {fileID: 7047363406514348174, guid: ede680acbb86de4478fa24965a4832c5, type: 3}
-  - {fileID: 7047363406514348174, guid: ede680acbb86de4478fa24965a4832c5, type: 3}
-  - {fileID: 7047363406514348174, guid: ede680acbb86de4478fa24965a4832c5, type: 3}
+  - {fileID: 1614237395207838004, guid: 5bdcddf0e9758a14ba115ef8113cafd3, type: 3}
+  - {fileID: 1614237395207838004, guid: 5bdcddf0e9758a14ba115ef8113cafd3, type: 3}
+  - {fileID: 1614237395207838004, guid: 5bdcddf0e9758a14ba115ef8113cafd3, type: 3}
   - {fileID: 5489371966703966416, guid: ed86893edfc4c854b996d6591426aac7, type: 3}
   - {fileID: 0}
   mCameraRecoil: {fileID: 8935510258853908927}

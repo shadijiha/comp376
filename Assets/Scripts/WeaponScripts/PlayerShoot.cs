@@ -102,7 +102,6 @@ public class PlayerShoot : NetworkBehaviour
             !(m_CurrentWeapon.currentSpareAmmo == 0)&&
             m_CurrentWeapon.reloading == false)
         {
-            Debug.Log("Reload");
             Reload();
         }
 
@@ -195,7 +194,6 @@ public class PlayerShoot : NetworkBehaviour
         else
         {
             m_CurrentWeapon.reloading = true;
-            Debug.Log("Reload Start");
             Invoke("ReloadFinished", (m_CurrentWeapon.hasted ? m_CurrentWeapon.reloadTime * 0.5f : m_CurrentWeapon.reloadTime));
         }
     }
@@ -230,7 +228,6 @@ public class PlayerShoot : NetworkBehaviour
             }
 
             m_CurrentWeapon.reloading = false;
-            Debug.Log("Reload Finished");
         }
     }
     

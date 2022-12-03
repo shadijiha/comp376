@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 7497261644931324773}
   - component: {fileID: 8676752119703199080}
   - component: {fileID: 9048983586074660740}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Rocket3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -211,7 +211,7 @@ GameObject:
   - component: {fileID: 2120221383983232848}
   - component: {fileID: 8784483424302855568}
   - component: {fileID: 2508118136283155771}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cylinder.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -290,7 +290,7 @@ GameObject:
   - component: {fileID: 8666264616935226412}
   - component: {fileID: 7903617285629156865}
   - component: {fileID: 3123006305009371024}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -337,7 +337,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 203f62153a1aa4947b7256fa18707b4e, type: 2}
+  - {fileID: 2100000, guid: 587750e63fae8b740a45e015c805fda8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -369,7 +369,7 @@ GameObject:
   - component: {fileID: 1030719092157230661}
   - component: {fileID: 155545930635022620}
   - component: {fileID: 5711554114905869880}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cylinder.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -448,7 +448,7 @@ GameObject:
   - component: {fileID: 5144793116801286762}
   - component: {fileID: 2989320098468827406}
   - component: {fileID: 2804625363808311771}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: RocketLauncher
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -523,7 +523,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1802197048835862285}
   - component: {fileID: 433467611054723645}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: FirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -567,7 +567,7 @@ GameObject:
   - component: {fileID: 7991374025431314989}
   - component: {fileID: 4563822608428833146}
   - component: {fileID: 3236485344787003770}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cylinder.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -651,7 +651,7 @@ GameObject:
   - component: {fileID: 4173109450238797589}
   - component: {fileID: 8481310090950105448}
   - component: {fileID: 591590206522909597}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Rocket2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -852,7 +852,7 @@ GameObject:
   - component: {fileID: 7366508184887213636}
   - component: {fileID: 1924404976502966007}
   - component: {fileID: 2049904539189518937}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Rocket1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1077,7 +1077,7 @@ GameObject:
   - component: {fileID: 2077838260812038064}
   - component: {fileID: 763130316416605636}
   - component: {fileID: 2530135492319253342}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1161,7 +1161,7 @@ GameObject:
   - component: {fileID: 4505158066368849394}
   - component: {fileID: 6782521383918567239}
   - component: {fileID: 5426947312193797603}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Rocket0
   m_TagString: Untagged
   m_Icon: {fileID: 0}

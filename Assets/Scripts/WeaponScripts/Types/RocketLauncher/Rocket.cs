@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class Rocket : MonoBehaviour
+public class Rocket : NetworkBehaviour
 {
     private readonly float  m_COLLISION_DELAY   = 0.01f;
     private readonly float  m_LIFETIME          = 20f;
