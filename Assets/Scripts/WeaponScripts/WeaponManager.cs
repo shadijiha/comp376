@@ -141,4 +141,15 @@ public class WeaponManager : NetworkBehaviour
     {
         mCurrent.readyToShoot = true;
     }
+
+
+    public void AmplifyDamage()
+    {
+        Debug.Log("call Amplify Damage");
+    }
+
+    public void Haste()
+    {
+        Debug.Log("call Hast");
+    }
 }

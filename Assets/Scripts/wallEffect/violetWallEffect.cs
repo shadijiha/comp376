@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class wallEffectDetection : MonoBehaviour
+public class violetWallEffect : MonoBehaviour
 {
-
-   
     // Start is called before the first frame update
     void Start()
     {
@@ -18,9 +16,10 @@ public class wallEffectDetection : MonoBehaviour
         
     }
 
-    private void OnTriggerStay(Collider other)
+    public void boostPlayerHaste(GameObject player)
     {
-        Debug.Log(other);
-        GetComponent<MiddleManWallEffect>().callWallEffect(other.gameObject);
+
+        player.GetComponent<WeaponManager>().Haste();
+
     }
 }

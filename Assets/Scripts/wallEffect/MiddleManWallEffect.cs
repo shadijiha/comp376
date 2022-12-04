@@ -11,7 +11,9 @@ public class MiddleManWallEffect : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        parrentWall = this.transform.parent.gameObject;
+
+        //parrentWall = this.transform.parent.gameObject;
+        parrentWall = this.gameObject;
         parentColour = gameObject.GetComponentInParent<LevelObstacle>().GetColour();
     }
 
@@ -27,18 +29,20 @@ public class MiddleManWallEffect : MonoBehaviour
         switch (colourEffect)
         {
             case GameManagerServer.Colour.Blue:
-                print("Call function Teleport of TBA");
+                //print("Call function Teleport of TBA");
                 parrentWall.GetComponent<teleportScript>().teleportPlayer(player);
                 break;
             case GameManagerServer.Colour.Red:
-                print("Call function boost shoting speed of player");   
+                //print("Call function boost shoting speed of player");
+                parrentWall.GetComponent<redWallEffect>().boostPlayerDomage(player);
                 break;
             case GameManagerServer.Colour.Yellow:
-                print(" Call function healOverTime of player");
+                //print(" Call function healOverTime of player");
                 parrentWall.GetComponent<greenWallEffect>().healPlayerHoverTime(player);
                 break;
             case GameManagerServer.Colour.Violet:
-                print("call function explosion force of player!");
+                //print("call function explosion force of player!");
+                parrentWall.GetComponent<violetWallEffect>().boostPlayerHaste(player);
                 break;
             /*case GameManagerServer.Colour.Orange:
                 print("call function increaseDomage of player!");
