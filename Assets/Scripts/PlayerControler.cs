@@ -5,14 +5,18 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerMotor))]
 public class PlayerControler : MonoBehaviour
 {
-    [SerializeField] private float speed = 5f;
-    [SerializeField] private float sensitivity = 3.5f; // In the future this should be in the game settings
+    [SerializeField] public  float baseSpeed        = 5f;
+    [SerializeField] private float sprintSpeed      = 7.5f;
+    [SerializeField] private float speedMultiplier  = 1f;
+    [SerializeField] private float sensitivity      = 3.5f; // In the future this should be in the game settings
+    [SerializeField] private float jumpScanDist     = 1.5f;
 
     private bool isEnabled;
 
     private PlayerMotor motor;
     private bool jumpOnCooldown;
-    public readonly float JUMP_COOLDOWN = 1.0f;    // In Seconds
+    private bool grounded;
+    public readonly float JUMP_COOLDOWN = 0.1f;    // In Seconds
 
     //Animatior
     public Animator animator;
@@ -51,12 +55,10 @@ public class PlayerControler : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftShift) && zMov >= 0.01)
         {
             isSprinting = true;
-            speed = 10f;
         }
         else
         {
             isSprinting = false;
-            speed = 5f;
         }
         movHorizontal = transform.right * xMov;
         movVertical = transform.forward * (zMov);
@@ -64,7 +66,7 @@ public class PlayerControler : MonoBehaviour
 
 
         // Final movement vector
-        Vector3 velocity = (movHorizontal + movVertical).normalized * speed;
+        Vector3 velocity = (movHorizontal + movVertical).normalized * (isSprinting? sprintSpeed : baseSpeed) * speedMultiplier;
 
         // Apply movement
         motor.Move(velocity);
@@ -77,14 +79,19 @@ public class PlayerControler : MonoBehaviour
         motor.Rotate(rotation);
 
         // Calculate CAMERA rotation as a 3D vector FOR AIMING AROUND
-        float xRot = Input.GetAxisRaw("Mouse Y");
+        float xRot = Input.GetAxisRaw("Mouse Y"); 
         float cameraRotationX = xRot * sensitivity;
 
         // Apply CAMERA rotation
         motor.RotateCamera(cameraRotationX);
 
+        if (!jumpOnCooldown)
+        {
+            grounded = Physics.Raycast(transform.position, Vector3.down, jumpScanDist);
+        }
+
         // Listen for the space bar
-        if (Input.GetKeyDown(KeyCode.Space) && !jumpOnCooldown)
+        if (Input.GetKeyDown(KeyCode.Space) && grounded)
         {
             isJumping = true;
             motor.Jump();
@@ -101,7 +108,6 @@ public class PlayerControler : MonoBehaviour
         animator.SetFloat("zSpeed", zMov);
         animator.SetBool("isSprinting", isSprinting);
         animator.SetBool("isJumping", isJumping);
-
     }
 
     /// <summary>
@@ -115,5 +121,10 @@ public class PlayerControler : MonoBehaviour
     public void EnableMovement(bool enable)
     {
         isEnabled = enable;
+    }
+
+    public void SetSpeedMultiplier(float speed)
+    {
+        this.speedMultiplier = speed;
     }
 }
