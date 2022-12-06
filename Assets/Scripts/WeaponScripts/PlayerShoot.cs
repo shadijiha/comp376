@@ -109,8 +109,7 @@ public class PlayerShoot : NetworkBehaviour
         if (m_CurrentWeapon.readyToShoot            && 
             m_CurrentWeapon.shooting                && 
             !m_CurrentWeapon.reloading              && 
-            m_CurrentWeapon.currentLoadedAmmo > 0   &&
-            m_controler.getShootingBlock() == false)
+            m_CurrentWeapon.currentLoadedAmmo > 0)
         {
             Shoot();
         }
