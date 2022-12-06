@@ -62,14 +62,16 @@ public class WeaponManager : NetworkBehaviour
         Equip(mSuper);
     }
 
-    public void SwitchWeaponsFromLoadout()
+    public void SwitchWeaponsFromLoadout(PlayerWeapon primary, PlayerWeapon secondary)
     {
+        mPrimary = primary;
         Equip(mPrimary);
         mCurrent = mPrimary;
         mCameraRecoil.UpdateRecoilInfo(mCurrent.cameraRecoilInfo);
         mModelRecoil.UpdateRecoilInfo(mCurrent.modelRecoilInfo);
         mCurrent.model.SetActive(true);
 
+        mSecondary = secondary;
         Equip(mSecondary);
     }
 

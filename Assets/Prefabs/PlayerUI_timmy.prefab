@@ -701,7 +701,7 @@ RectTransform:
   - {fileID: 8822736477308072664}
   - {fileID: 8527687380986333211}
   m_Father: {fileID: 7701344722933330517}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -2858,7 +2858,7 @@ RectTransform:
   - {fileID: 340597709121340374}
   - {fileID: 1270650788997354417}
   m_Father: {fileID: 7701344722933330517}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4348,8 +4348,8 @@ RectTransform:
   - {fileID: 5214225363553741492}
   - {fileID: 4209187461805819023}
   - {fileID: 7101706726044874809}
-  - {fileID: 4871420803156858444}
   - {fileID: 5150885614565383002}
+  - {fileID: 4871420803156858444}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4430,6 +4430,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 742dff17442970a4fbb0c44c69191c54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponLoadout: {fileID: 5619474567192492291}
 --- !u!114 &3210515224375061823
 MonoBehaviour:
   m_ObjectHideFlags: 0

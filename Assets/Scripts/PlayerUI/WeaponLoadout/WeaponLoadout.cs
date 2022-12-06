@@ -75,7 +75,6 @@ public class WeaponLoadout : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.None;
         weaponManager = GetComponentInParent<PlayerUISetup>().weaponManager;
-        print(weaponManager);
     }
 
     public void SelectWeapon(WeaponButton weaponButton)
@@ -84,16 +83,14 @@ public class WeaponLoadout : MonoBehaviour
         {
             selectedPrimaryWeapon.ResetSelection();
             selectedPrimaryWeapon = weaponButton;
-            weaponManager.mPrimary = selectedPrimaryWeapon.playerWeapon;
         }
         else if (weaponButton != selectedSecondaryWeapon && !weaponButton.isPrimaryWeapon)
         {
             selectedSecondaryWeapon.ResetSelection();
             selectedSecondaryWeapon = weaponButton;
-            weaponManager.mSecondary = selectedSecondaryWeapon.playerWeapon;
         }
 
-        weaponManager.SwitchWeaponsFromLoadout();
+        weaponManager.SwitchWeaponsFromLoadout(selectedPrimaryWeapon.playerWeapon, selectedSecondaryWeapon.playerWeapon);
     }
 
     public void ShowPreview(PlayerWeapon playerWeapon)
