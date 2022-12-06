@@ -55,6 +55,7 @@ public class Scattergun : PlayerWeapon
                                     };
 
         model                   = WeaponManager.msWeaponArr[(int)weaponType];
+        name                    = "Scattergun";
     }
 
 }

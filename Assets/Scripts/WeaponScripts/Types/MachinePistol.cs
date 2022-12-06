@@ -55,5 +55,7 @@ public class MachinePistol : PlayerWeapon
                                     };
 
         model                   = WeaponManager.msWeaponArr[(int)weaponType];
+        name                    = "Machine Pistol";
+
     }
 }

@@ -55,6 +55,7 @@ public class TacticalShotgun : PlayerWeapon
                                     };
 
         model                   = WeaponManager.msWeaponArr[(int)weaponType];
+        name                    = "Tactical Shotgun";
     }
 
 }

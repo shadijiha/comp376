@@ -75,6 +75,7 @@ public class ShotRifle : PlayerWeapon
                                     };
 
         model                   = WeaponManager.msWeaponArr[(int)weaponType];
+        name                    = "Shot Rifle";
     }
 
     public override void AltFireActivate(PlayerShoot playerShoot)
