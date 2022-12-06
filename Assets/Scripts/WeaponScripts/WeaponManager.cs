@@ -197,6 +197,7 @@ public class WeaponManager : NetworkBehaviour
         mCurrent.readyToShoot = true;
     }
 
+
     public void Respawn()
     {
         mPrimary.Reset();
@@ -251,4 +252,5 @@ public class WeaponManager : NetworkBehaviour
             mHasted = true;
         }
     }
+
 }
