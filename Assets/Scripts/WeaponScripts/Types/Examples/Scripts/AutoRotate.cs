@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
-namespace SuperSystems.UnityTools
-{
+using SuperSystems.UnityTools;
+
 
 public class AutoRotate : MonoBehaviour
 {
@@ -14,4 +14,3 @@ public class AutoRotate : MonoBehaviour
     }
 }
 
-}
