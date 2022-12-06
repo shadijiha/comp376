@@ -19,6 +19,7 @@ public class PreviewWeapon : MonoBehaviour
     {
         currentWeaponType = playerWeapon.weaponType;
         nameText.text = playerWeapon.name;
+        description.text = playerWeapon.description;
 
         if (weaponModels[(int)currentWeaponType] == null)
         {

@@ -72,6 +72,8 @@ public class WeaponLoadout : MonoBehaviour
 
         selectedPrimaryWeapon.SelectWeapon();
         selectedSecondaryWeapon.SelectWeapon();
+
+        ShowPreview(selectedPrimaryWeapon.playerWeapon);
     }
 
     // Update is called once per frame
