@@ -222,6 +222,7 @@ GameObject:
   - component: {fileID: 8463599760594411391}
   - component: {fileID: 6911477714383762399}
   - component: {fileID: 1092208653471882773}
+  - component: {fileID: 220632806700190894}
   m_Layer: 8
   m_Name: playerPostPros
   m_TagString: Player
@@ -896,6 +897,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &220632806700190894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1172113867161608157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d9dcda8ac84eba459bd6c7e49aa8a0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1674023247596139348
 GameObject:
   m_ObjectHideFlags: 0
@@ -1786,6 +1799,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8237352776924259881, guid: 339514156c2267841b6207946ccf4f4d,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6c43d44b5b098ab4eb82a94e8e1305eb, type: 2}
     - target: {fileID: 9149578973999110469, guid: 339514156c2267841b6207946ccf4f4d,
         type: 3}
       propertyPath: m_Layer
