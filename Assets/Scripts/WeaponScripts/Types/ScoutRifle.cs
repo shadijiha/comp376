@@ -25,6 +25,7 @@ public class ScoutRifle : PlayerWeapon
     public ScoutRifle()
     {
         weaponType              = WeaponType.ScoutRifle;
+        description             = "A rapid-firing sniper rifle with moderate damage and pinpoint accuracy when aiming down its mid-range scope. Spread remains controlled while moving. Has an extremely high critical hit modifier.";
         damage                  = 50;
         currentLoadedAmmo       = 8;
         magazineSize            = 8;
@@ -79,18 +80,25 @@ public class ScoutRifle : PlayerWeapon
 
     public override void AltFireActivate(PlayerShoot playerShoot)
     {
-        if (!altFire)
+        if (!switchingWeapon)
         {
-            playerShoot.weaponCam.fieldOfView = zoomFoV;
-            this.minSpread              = zoomMinSpread;
-            this.spreadRecovery         = zoomSpreadRecovery;
-            this.spreadIncrease         = zoomSpreadIncrease;
-            this.movementSpread         = zoomMovementSpread;
-            this.speedMultiplier        = zoomSpeedMult;
+            if (!altFire)
+            {
+                playerShoot.weaponCam.fieldOfView   = zoomFoV;
+                this.minSpread                      = zoomMinSpread;
+                this.spreadRecovery                 = zoomSpreadRecovery;
+                this.spreadIncrease                 = zoomSpreadIncrease;
+                this.movementSpread                 = zoomMovementSpread;
+                this.speedMultiplier                = zoomSpeedMult;
 
-            scope.color                 = visible;
+                scope.color                         = visible;
 
-            altFire                     = true;
+                altFire                             = true;
+            }
+        }
+        else
+        {
+            AltFireDeactivate(playerShoot);
         }
     }
 

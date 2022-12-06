@@ -104,9 +104,4 @@ public class PlayerMotor : MonoBehaviour
 
         additionalRotation = Vector3.zero;
     }
-
-    public float getRotation()
-    {
-        return this.currentCameraRotationX;
-    }
 }

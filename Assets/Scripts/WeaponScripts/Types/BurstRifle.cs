@@ -8,6 +8,7 @@ public class BurstRifle : PlayerWeapon
     public BurstRifle()
     {
         weaponType              = WeaponType.BurstRifle;
+        description             = "A low-recoil, precision, burst-fire rifle with a three round bursts. Spread increases moderately when moving. Has a very high critical hit modifier.";
         damage                  = 15;
         currentLoadedAmmo       = 18;
         magazineSize            = 18;
