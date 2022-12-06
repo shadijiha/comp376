@@ -12,8 +12,8 @@ public class MiddleManWallEffect : MonoBehaviour
     void Start()
     {
 
-        //parrentWall = this.transform.parent.gameObject;
-        parrentWall = this.gameObject;
+        parrentWall = this.transform.parent.gameObject;
+        //parrentWall = this.gameObject;
         parentColour = gameObject.GetComponentInParent<LevelObstacle>().GetColour();
     }
 
