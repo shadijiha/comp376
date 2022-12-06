@@ -5,11 +5,10 @@ using UnityEngine;
 [System.Serializable]
 public class MarksmanPistol : PlayerWeapon
 {
-    public static new string description = "A semi-automatic, stable, extremely accuracy sidearm. Spread remains controlled when moving. Has a very high critical modifier.";
- 
     public MarksmanPistol()
     {
         weaponType              = WeaponType.MarksmanPistol;
+        description             = "A semi-automatic, stable, extremely accuracy sidearm. Spread remains controlled when moving. Has a very high critical modifier.";
         damage                  = 18;
         currentLoadedAmmo       = 12;
         magazineSize            = 12;

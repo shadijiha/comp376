@@ -5,12 +5,10 @@ using UnityEngine;
 [System.Serializable]
 public class AutoRifle : PlayerWeapon
 {
-    public static new string description = "A low-recoil, precision, fully-automatic rifle with a moderate rate of fire. Spread increases dramatically when moving. Has a very high critical hit modifier.";
-
     public AutoRifle()
     {
         weaponType              = WeaponType.AutoRifle;
-
+        description             = "A low-recoil, precision, fully-automatic rifle with a moderate rate of fire. Spread increases dramatically when moving. Has a very high critical hit modifier.";
         damage                  = 12;
         currentLoadedAmmo       = 30;
         magazineSize            = 30;

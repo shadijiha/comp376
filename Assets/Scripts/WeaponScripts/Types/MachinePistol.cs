@@ -5,11 +5,10 @@ using UnityEngine;
 [System.Serializable]
 public class MachinePistol : PlayerWeapon
 {
-    public static new string description = "A high-recoil, short-range machine pistol capable of extremely fast fully automatic fire. Spread remains controlled when moving. Has a very low critical modifier.";
- 
     public MachinePistol()
     {
         weaponType              = WeaponType.MachinePistol;
+        description             = "A high-recoil, short-range machine pistol capable of extremely fast fully automatic fire. Spread remains controlled when moving. Has a very low critical modifier.";
         damage                  = 5;
         currentLoadedAmmo       = 30;
         magazineSize            = 30;

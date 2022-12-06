@@ -4,12 +4,11 @@ using UnityEngine;
 
 [System.Serializable]
 public class BurstPistol : PlayerWeapon
-{
-    public static new string description = "A stable, high accuracy sidearm which fires in 3 round bursts. Spread remains controlled when moving. Has a moderate critical modifier.";
-    
+{ 
     public BurstPistol()
     {
         weaponType              = WeaponType.BurstPistol;
+        description             = "A stable, high accuracy sidearm which fires in 3 round bursts. Spread remains controlled when moving. Has a moderate critical modifier.";
         damage                  = 12;
         currentLoadedAmmo       = 15;
         magazineSize            = 15;

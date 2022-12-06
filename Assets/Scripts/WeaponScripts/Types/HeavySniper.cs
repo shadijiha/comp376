@@ -5,8 +5,6 @@ using UnityEngine;
 [System.Serializable]
 public class HeavySniper : PlayerWeapon
 {
-    public static new string description = "A slow firing sniper rifle with high damage and pinpoint accuracy when aiming down its long-range scope. Spread increases dramatically when moving. Has an extremely high critical hit modifier.";
-
     public  float   normalFoV               = 90f;
     public  float   normalMinSpread         = 0.05f;
     public  float   normalSpreadRecovery    = 0.005f;
@@ -27,6 +25,7 @@ public class HeavySniper : PlayerWeapon
     public HeavySniper()
     {
         weaponType              = WeaponType.HeavySniper;
+        description             = "A slow firing sniper rifle with high damage and pinpoint accuracy when aiming down its long-range scope. Spread increases dramatically when moving. Has an extremely high critical hit modifier.";
         damage                  = 80;
         currentLoadedAmmo       = 4;
         magazineSize            = 4;

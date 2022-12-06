@@ -9,6 +9,7 @@ TagManager:
   - helthpack
   - landmine
   - laserCollider
+  - PlayerHead
   layers:
   - Default
   - TransparentFX

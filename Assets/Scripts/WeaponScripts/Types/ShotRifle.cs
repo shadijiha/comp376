@@ -5,9 +5,6 @@ using UnityEngine;
 [System.Serializable]
 public class ShotRifle : PlayerWeapon
 {
-    public static new string description = "A moderate fire-rate sniper rifle with high damage spread across 8 projectiles in a tight cluster. Possesses a short-ranged scope. Spread remains controlled while moving. Has an extremely high critical hit modifier.";
-
-
     public  float   normalFoV               = 90f;
     public  float   normalMinSpread         = 0.05f;
     public  float   normalSpreadRecovery    = 0.005f;
@@ -28,6 +25,7 @@ public class ShotRifle : PlayerWeapon
     public ShotRifle()
     {
         weaponType              = WeaponType.ShotRifle;
+        description             = "A moderate fire-rate sniper rifle with high damage spread across 8 projectiles in a tight cluster. Possesses a short-ranged scope. Spread remains controlled while moving. Has an extremely high critical hit modifier.";
         damage                  = 8;
         currentLoadedAmmo       = 7;
         magazineSize            = 7;

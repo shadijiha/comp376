@@ -5,11 +5,10 @@ using UnityEngine;
 [System.Serializable]
 public class HeavySMG : PlayerWeapon
 {
-    public static new string description = "A moderate-recoil, precision, fully-automatic smg with a rapid rate of fire. Spread remains controlled while moving. Has a moderate critical hit modifier.";
-
     public HeavySMG()
     {
         weaponType              = WeaponType.HeavySMG;
+        description             = "A moderate-recoil, precision, fully-automatic smg with a rapid rate of fire. Spread remains controlled while moving. Has a moderate critical hit modifier.";
         damage                  = 12;
         currentLoadedAmmo       = 25;
         magazineSize            = 25;

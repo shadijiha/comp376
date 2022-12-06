@@ -6,9 +6,10 @@ using UnityEngine.UI;
 [System.Serializable]
 public class PlayerWeapon
 {
-    public static string description                    = "Invalid Description";
+
 
     public  WeaponType          weaponType              = WeaponType.Invalid;
+    public  string              description             = "Invalid Description";
     public  int                 damage;
     public  int                 currentLoadedAmmo;
     public  int                 magazineSize;
@@ -66,7 +67,7 @@ public class PlayerWeapon
             if (Physics.Raycast(playerShoot.cam.transform.position, shotDirection, out hit, maxRange, playerShoot.mask))
             {
                 // We hit Something
-                if (hit.collider.tag == PlayerShoot.PLAYER_TAG)
+                if (hit.collider.CompareTag(PlayerShoot.PLAYER_TAG) || hit.collider.CompareTag(PlayerShoot.PLAYER_HEAD_TAG))
                 {
                     int finalDamage = damage;
                     if (hit.distance > falloffStart)
@@ -83,6 +84,16 @@ public class PlayerWeapon
                         {
                             finalDamage = falloffDamage;
                         }
+                    }
+
+                    if (hit.collider.CompareTag(PlayerShoot.PLAYER_HEAD_TAG))
+                    {
+                        finalDamage = Mathf.RoundToInt(damage * critMultiplier);
+                        playerShoot.m_hitCrosshair.Crit();
+                    }
+                    else
+                    {
+                        playerShoot.m_hitCrosshair.Hit();
                     }
                     
                     playerShoot.CmdPlayerShot(hit.collider.name, playerShoot.name, finalDamage);

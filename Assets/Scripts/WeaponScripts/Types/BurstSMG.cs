@@ -5,11 +5,10 @@ using UnityEngine;
 [System.Serializable]
 public class BurstSMG : PlayerWeapon
 {
-    public static new string description = "A heavy-recoil rapid-firing SMG with which fires in tight 5 round bursts. Supports continuous fire, allowing easily chained, rapid bursts. Spread remains controlled when moving. Has a low critical modifier.";
-
     public BurstSMG()
     {
         weaponType              = WeaponType.BurstSMG;
+        description             = "A heavy-recoil rapid-firing SMG with which fires in tight 5 round bursts. Supports continuous fire, allowing easily chained, rapid bursts. Spread remains controlled when moving. Has a low critical modifier.";
         damage                  = 8;
         currentLoadedAmmo       = 40;
         magazineSize            = 40;
@@ -47,7 +46,7 @@ public class BurstSMG : PlayerWeapon
         cameraRecoilInfo        = new CameraRecoilInfo()
                                     {
                                         rotationSpeed       = 10f,
-                                        returnSpeed         = 15f,
+                                        returnSpeed         = 10f,
                                         recoilRotation      = new Vector3(4f,       2f,         0f)
                                     };
 

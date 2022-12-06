@@ -5,11 +5,10 @@ using UnityEngine;
 [System.Serializable]
 public class Scattergun : PlayerWeapon
 {
-    public static new string description = "A slow firing shotgun devastatingly high damage and an enormous spread. Spread does not change when moving. Has a low critical hit modifier.";
-
     public Scattergun()
     {
         weaponType              = WeaponType.Scattergun;
+        description             = "A slow firing shotgun devastatingly high damage and an enormous spread. Spread does not change when moving. Has a low critical hit modifier.";
         damage                  = 4;
         currentLoadedAmmo       = 2;
         magazineSize            = 2;

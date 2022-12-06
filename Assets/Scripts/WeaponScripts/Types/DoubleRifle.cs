@@ -5,11 +5,10 @@ using UnityEngine;
 [System.Serializable]
 public class DoubleRifle : PlayerWeapon
 {
-    public static new string description = "A rifle which fires two projectiles in a tight spread in a twice in a burst. Spread increases moderately when moving. Has a high critical hit modifier.";
-
     public DoubleRifle()
     {
         weaponType              = WeaponType.DoubleRifle;
+        description             = "A rifle which fires two projectiles in a tight spread in a twice in a burst. Spread increases moderately when moving. Has a high critical hit modifier.";
         damage                  = 18;
         currentLoadedAmmo       = 16;
         magazineSize            = 16;

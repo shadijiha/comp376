@@ -5,8 +5,6 @@ using UnityEngine;
 [System.Serializable]
 public class ScoutRifle : PlayerWeapon
 {
-    public static new string description = "A rapid-firing sniper rifle with moderate damage and pinpoint accuracy when aiming down its mid-range scope. Spread remains controlled while moving. Has an extremely high critical hit modifier.";
-
     public  float   normalFoV               = 90f;
     public  float   normalMinSpread         = 0.02f;
     public  float   normalSpreadRecovery    = 0.0025f;
@@ -27,6 +25,7 @@ public class ScoutRifle : PlayerWeapon
     public ScoutRifle()
     {
         weaponType              = WeaponType.ScoutRifle;
+        description             = "A rapid-firing sniper rifle with moderate damage and pinpoint accuracy when aiming down its mid-range scope. Spread remains controlled while moving. Has an extremely high critical hit modifier.";
         damage                  = 50;
         currentLoadedAmmo       = 8;
         magazineSize            = 8;
