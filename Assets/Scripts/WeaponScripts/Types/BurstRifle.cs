@@ -64,6 +64,7 @@ public class BurstRifle : PlayerWeapon
                                     };
 
         model                   = WeaponManager.msWeaponArr[(int)weaponType];
+        name                    = "Burst Rifle";
     }
 
     // Burst Shooting Behavior override

@@ -63,6 +63,7 @@ public class BurstSMG : PlayerWeapon
                                     };
 
         model                   = WeaponManager.msWeaponArr[(int)weaponType];
+        name                    = "Burst SMG";
     }
 
     // Burst Shooting Behavior override

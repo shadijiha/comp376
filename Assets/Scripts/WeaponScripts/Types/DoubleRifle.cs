@@ -64,6 +64,7 @@ public class DoubleRifle : PlayerWeapon
                                     };
 
         model                   = WeaponManager.msWeaponArr[(int)weaponType];
+        name                    = "Double Rifle";
     }
 
     // Burst Shooting Behavior override

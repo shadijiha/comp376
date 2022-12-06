@@ -43,6 +43,7 @@ public class PlayerWeapon
     public  BurstInfo           burstInfo;
     public  GameObject          model;
     public  Image               scope;
+    public  string              name;
    
     // Default Shooting Behavior
     virtual public (string, float) Shoot(PlayerShoot playerShoot)
