@@ -10,6 +10,11 @@ public class PlayerControler : MonoBehaviour
     [SerializeField] private float speedMultiplier  = 1f;
     [SerializeField] private float sensitivity      = 3.5f; // In the future this should be in the game settings
     [SerializeField] private float jumpScanDist     = 1.5f;
+    
+    public GameObject weaponRotation;
+
+
+    private bool shootingBlock;
 
     private bool isEnabled;
 
@@ -33,6 +38,7 @@ public class PlayerControler : MonoBehaviour
     void Start()
     {
         motor = GetComponent<PlayerMotor>();
+        shootingBlock = false;
     }
 
     // Update is called once per frame
@@ -55,10 +61,12 @@ public class PlayerControler : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftShift) && zMov >= 0.01)
         {
             isSprinting = true;
+            shootingBlock = true;
         }
         else
         {
             isSprinting = false;
+            shootingBlock = false;
         }
         movHorizontal = transform.right * xMov;
         movVertical = transform.forward * (zMov);
@@ -84,6 +92,10 @@ public class PlayerControler : MonoBehaviour
 
         // Apply CAMERA rotation
         motor.RotateCamera(cameraRotationX);
+        //Weapon rotation
+        Vector3 rotationW = new Vector3(0, 0, -motor.getRotation());
+        weaponRotation.transform.localRotation = Quaternion.Euler(rotationW);
+
 
         if (!jumpOnCooldown)
         {
@@ -126,5 +138,10 @@ public class PlayerControler : MonoBehaviour
     public void SetSpeedMultiplier(float speed)
     {
         this.speedMultiplier = speed;
+    }
+
+    public bool getShootingBlock()
+    {
+        return this.shootingBlock;
     }
 }
