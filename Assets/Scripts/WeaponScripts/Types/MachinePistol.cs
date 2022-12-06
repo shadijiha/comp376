@@ -5,6 +5,8 @@ using UnityEngine;
 [System.Serializable]
 public class MachinePistol : PlayerWeapon
 {
+    public static new string description = "A high-recoil, short-range machine pistol capable of extremely fast fully automatic fire. Spread remains controlled when moving. Has a very low critical modifier.";
+ 
     public MachinePistol()
     {
         weaponType              = WeaponType.MachinePistol;
@@ -14,7 +16,7 @@ public class MachinePistol : PlayerWeapon
         currentSpareAmmo        = -1;
         maxAmmo                 = -1;
         shotCount               = 1;
-        critMultiplier          = 1.25f;
+        critMultiplier          = 1.1f;
         falloffStart            = 10f;
         falloffMax              = 25f;
         falloffDamage           = 3;
@@ -25,7 +27,7 @@ public class MachinePistol : PlayerWeapon
         maxSpread               = 0.2f;
         spreadIncrease          = 0.005f;
         spreadRecovery          = 0.005f;
-        movementSpread          = 0.25f;
+        movementSpread          = 0.5f;
         reloadTime              = 0.8f;
         drawTime                = 0.4f;
         stowTime                = 0.5f;

@@ -5,6 +5,8 @@ using UnityEngine;
 [System.Serializable]
 public class HeavySniper : PlayerWeapon
 {
+    public static new string description = "A slow firing sniper rifle with high damage and pinpoint accuracy when aiming down its long-range scope. Spread increases dramatically when moving. Has an extremely high critical hit modifier.";
+
     public  float   normalFoV               = 90f;
     public  float   normalMinSpread         = 0.05f;
     public  float   normalSpreadRecovery    = 0.005f;
@@ -31,7 +33,7 @@ public class HeavySniper : PlayerWeapon
         currentSpareAmmo        = 32;
         maxAmmo                 = 32;
         shotCount               = 1;
-        critMultiplier          = 2.0f;
+        critMultiplier          = 3.0f;
         falloffStart            = 200f;
         falloffMax              = 200f;
         falloffDamage           = 80;
@@ -79,18 +81,25 @@ public class HeavySniper : PlayerWeapon
 
     public override void AltFireActivate(PlayerShoot playerShoot)
     {
-        if (!altFire)
+        if (!switchingWeapon)
         {
-            playerShoot.weaponCam.fieldOfView = zoomFoV;
-            this.minSpread              = zoomMinSpread;
-            this.spreadRecovery         = zoomSpreadRecovery;
-            this.spreadIncrease         = zoomSpreadIncrease;
-            this.movementSpread         = zoomMovementSpread;
-            this.speedMultiplier        = zoomSpeedMult;
+            if (!altFire)
+            {
+                playerShoot.weaponCam.fieldOfView   = zoomFoV;
+                this.minSpread                      = zoomMinSpread;
+                this.spreadRecovery                 = zoomSpreadRecovery;
+                this.spreadIncrease                 = zoomSpreadIncrease;
+                this.movementSpread                 = zoomMovementSpread;
+                this.speedMultiplier                = zoomSpeedMult;
 
-            scope.color                 = visible;
+                scope.color                         = visible;
 
-            altFire                     = true;
+                altFire                             = true;
+            }
+        }
+        else
+        {
+            AltFireDeactivate(playerShoot);
         }
     }
 

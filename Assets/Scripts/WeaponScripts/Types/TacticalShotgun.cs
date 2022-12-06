@@ -5,6 +5,8 @@ using UnityEngine;
 [System.Serializable]
 public class TacticalShotgun : PlayerWeapon
 {
+    public static new string description = "A moderate fire-rate shotgun with moderate damage and moderate spread. Spread does not change when moving. Has an moderate critical hit modifier.";
+
     public TacticalShotgun()
     {
         weaponType              = WeaponType.TacticalShotgun;

@@ -5,9 +5,12 @@ using UnityEngine;
 [System.Serializable]
 public class AutoRifle : PlayerWeapon
 {
+    public static new string description = "A low-recoil, precision, fully-automatic rifle with a moderate rate of fire. Spread increases dramatically when moving. Has a very high critical hit modifier.";
+
     public AutoRifle()
     {
         weaponType              = WeaponType.AutoRifle;
+
         damage                  = 12;
         currentLoadedAmmo       = 30;
         magazineSize            = 30;
@@ -25,7 +28,7 @@ public class AutoRifle : PlayerWeapon
         maxSpread               = 0.075f;
         spreadIncrease          = 0.003f;
         spreadRecovery          = 0.004f;
-        movementSpread          = 2.0f;
+        movementSpread          = 1.5f;
         reloadTime              = 1.75f;
         drawTime                = 0.8f;
         stowTime                = 0.9f;
@@ -37,7 +40,7 @@ public class AutoRifle : PlayerWeapon
         cameraRecoilInfo        = new CameraRecoilInfo()
                                     {
                                         returnSpeed = 20f,
-                                        rotationSpeed = 15f,
+                                        rotationSpeed = 10f,
                                         recoilRotation = new Vector3(4f, 1.5f, 1.5f)
                                     };
 

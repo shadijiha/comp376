@@ -5,6 +5,8 @@ using UnityEngine;
 [System.Serializable]
 public class LightSMG : PlayerWeapon
 {
+    public static new string description = "A high-recoil, short-range, fully-automatic smg with an extremely rapid rate of fire. Spread remains controlled while moving. Has a low critical hit modifier.";
+
     public LightSMG()
     {
         weaponType              = WeaponType.LightSMG;

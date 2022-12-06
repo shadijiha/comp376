@@ -5,6 +5,8 @@ using UnityEngine;
 [System.Serializable]
 public class HeavySMG : PlayerWeapon
 {
+    public static new string description = "A moderate-recoil, precision, fully-automatic smg with a rapid rate of fire. Spread remains controlled while moving. Has a moderate critical hit modifier.";
+
     public HeavySMG()
     {
         weaponType              = WeaponType.HeavySMG;
@@ -20,12 +22,12 @@ public class HeavySMG : PlayerWeapon
         falloffDamage           = 8;
         maxRange                = 200f;
         fireRate                = 10.0f;
-        currentSpread           = 0.025f;
-        minSpread               = 0.025f;
+        currentSpread           = 0.03f;
+        minSpread               = 0.03f;
         maxSpread               = 0.15f;
         spreadIncrease          = 0.002f;
         spreadRecovery          = 0.005f;
-        movementSpread          = 0.2f;
+        movementSpread          = 0.5f;
         reloadTime              = 1.0f;
         drawTime                = 0.4f;
         stowTime                = 0.5f;
@@ -36,9 +38,9 @@ public class HeavySMG : PlayerWeapon
 
         cameraRecoilInfo        = new CameraRecoilInfo()
                                     {
-                                        rotationSpeed       = 5f,
-                                        returnSpeed         = 20f,
-                                        recoilRotation      = new Vector3(5f,       2f,         2f)
+                                        rotationSpeed       = 10f,
+                                        returnSpeed         = 15f,
+                                        recoilRotation      = new Vector3(8f,       3f,         3f)
                                     };
 
         modelRecoilInfo         = new ModelRecoilInfo()

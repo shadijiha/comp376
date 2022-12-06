@@ -6,6 +6,8 @@ using UnityEngine.UI;
 [System.Serializable]
 public class PlayerWeapon
 {
+    public static string description                    = "Invalid Description";
+
     public  WeaponType          weaponType              = WeaponType.Invalid;
     public  int                 damage;
     public  int                 currentLoadedAmmo;
@@ -37,6 +39,7 @@ public class PlayerWeapon
     public  bool                altFire                 = false;
     public  bool                hasted                  = false;
     public  bool                amplified               = false;
+    public  bool                switchingWeapon         = false;
 
     public  CameraRecoilInfo    cameraRecoilInfo;
     public  ModelRecoilInfo     modelRecoilInfo;

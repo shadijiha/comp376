@@ -5,6 +5,8 @@ using UnityEngine;
 [System.Serializable]
 public class BurstSMG : PlayerWeapon
 {
+    public static new string description = "A heavy-recoil rapid-firing SMG with which fires in tight 5 round bursts. Supports continuous fire, allowing easily chained, rapid bursts. Spread remains controlled when moving. Has a low critical modifier.";
+
     public BurstSMG()
     {
         weaponType              = WeaponType.BurstSMG;
@@ -14,7 +16,7 @@ public class BurstSMG : PlayerWeapon
         currentSpareAmmo        = 200;
         maxAmmo                 = 200;
         shotCount               = 1;
-        critMultiplier          = 1.5f;
+        critMultiplier          = 1.25f;
         falloffStart            = 20f;
         falloffMax              = 40f;
         falloffDamage           = 6;

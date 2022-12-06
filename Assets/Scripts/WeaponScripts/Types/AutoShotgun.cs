@@ -5,6 +5,8 @@ using UnityEngine;
 [System.Serializable]
 public class AutoShotgun : PlayerWeapon
 {
+    public static new string description = "A rapid-firing, fully-automatic shotgun with lower damage per shot and moderate spread. Spread remains controlled while moving. Has a low critical hit modifier.";
+
     public AutoShotgun()
     {
         weaponType              = WeaponType.AutoShotgun;

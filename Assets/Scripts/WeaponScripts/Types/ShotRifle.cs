@@ -5,6 +5,9 @@ using UnityEngine;
 [System.Serializable]
 public class ShotRifle : PlayerWeapon
 {
+    public static new string description = "A moderate fire-rate sniper rifle with high damage spread across 8 projectiles in a tight cluster. Possesses a short-ranged scope. Spread remains controlled while moving. Has an extremely high critical hit modifier.";
+
+
     public  float   normalFoV               = 90f;
     public  float   normalMinSpread         = 0.05f;
     public  float   normalSpreadRecovery    = 0.005f;
@@ -79,18 +82,25 @@ public class ShotRifle : PlayerWeapon
 
     public override void AltFireActivate(PlayerShoot playerShoot)
     {
-        if (!altFire)
+        if (!switchingWeapon)
         {
-            playerShoot.weaponCam.fieldOfView = zoomFoV;
-            this.minSpread              = zoomMinSpread;
-            this.spreadRecovery         = zoomSpreadRecovery;
-            this.spreadIncrease         = zoomSpreadIncrease;
-            this.movementSpread         = zoomMovementSpread;
-            this.speedMultiplier        = zoomSpeedMult;
+            if (!altFire)
+            {
+                playerShoot.weaponCam.fieldOfView   = zoomFoV;
+                this.minSpread                      = zoomMinSpread;
+                this.spreadRecovery                 = zoomSpreadRecovery;
+                this.spreadIncrease                 = zoomSpreadIncrease;
+                this.movementSpread                 = zoomMovementSpread;
+                this.speedMultiplier                = zoomSpeedMult;
 
-            scope.color                 = visible;
+                scope.color                         = visible;
 
-            altFire                     = true;
+                altFire                             = true;
+            }
+        }
+        else
+        {
+            AltFireDeactivate(playerShoot);
         }
     }
 
