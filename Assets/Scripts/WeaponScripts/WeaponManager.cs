@@ -66,13 +66,12 @@ public class WeaponManager : NetworkBehaviour
     {
         mPrimary = primary;
         Equip(mPrimary);
-        mCurrent = mPrimary;
-        mCameraRecoil.UpdateRecoilInfo(mCurrent.cameraRecoilInfo);
-        mModelRecoil.UpdateRecoilInfo(mCurrent.modelRecoilInfo);
-        mCurrent.model.SetActive(true);
-
         mSecondary = secondary;
         Equip(mSecondary);
+
+        mNextWeapon = mPrimary;
+        mCurrent.reloading = false;
+        Invoke(nameof(Stow), mCurrent.stowTime);
     }
 
     // Update is called once per frame
@@ -154,7 +153,7 @@ public class WeaponManager : NetworkBehaviour
         return mWeaponArr[(int)mCurrent.weaponType].GetComponent<ModelRecoil>();
     }
 
-    public void Equip(PlayerWeapon weapon)
+    private void Equip(PlayerWeapon weapon)
     {
         //weaponHolder.position, weaponHolder.rotation
         weapon.model = (GameObject)Instantiate(

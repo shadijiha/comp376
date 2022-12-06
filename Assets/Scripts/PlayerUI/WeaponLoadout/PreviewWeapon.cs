@@ -15,16 +15,6 @@ public class PreviewWeapon : MonoBehaviour
 
     public WeaponType currentWeaponType;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-    }
-
     public void UpdateGunPreview(PlayerWeapon playerWeapon)
     {
         currentWeaponType = playerWeapon.weaponType;

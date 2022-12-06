@@ -20,7 +20,7 @@ public class PlayerUISetup : MonoBehaviour
 
     void Update()
     {
-        if (!waitUntilPlayerRespawn && localPlayer != null && localPlayer.IsDead()) 
+        if (!waitUntilPlayerRespawn && localPlayer.IsDead()) 
         {
             waitUntilPlayerRespawn = true;
         }
@@ -29,5 +29,14 @@ public class PlayerUISetup : MonoBehaviour
             weaponLoadout.gameObject.SetActive(true);
             waitUntilPlayerRespawn = false;
         }
+    }
+
+    public void FreezePlayer(bool enabled)
+    {
+        Cursor.lockState = enabled ? CursorLockMode.Locked : CursorLockMode.None;
+
+        localPlayer.GetComponent<PlayerMotor>().enabled = enabled;
+        localPlayer.GetComponent<PlayerControler>().enabled = enabled;
+        localPlayer.GetComponent<PlayerShoot>().enabled = enabled;
     }
 }

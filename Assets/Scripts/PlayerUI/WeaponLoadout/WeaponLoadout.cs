@@ -40,11 +40,14 @@ public class WeaponLoadout : MonoBehaviour
     private WeaponButton selectedPrimaryWeapon;
     private WeaponButton selectedSecondaryWeapon;
 
+    private PlayerUISetup playerUISetup;
     private WeaponManager weaponManager;
 
     // Start is called before the first frame update
     void Start()
     {
+        playerUISetup = GetComponentInParent<PlayerUISetup>();
+
         foreach (var playerWeapon in primaryWeapons)
         {
             var button = Instantiate(weaponButtonPrefab, primaryWeaponList.transform);
@@ -63,6 +66,7 @@ public class WeaponLoadout : MonoBehaviour
             weaponButton.weaponLoadout = this;
             secondaryWeaponButtons.Add(button);
         }
+
         selectedPrimaryWeapon = primaryWeaponButtons[0].GetComponent<WeaponButton>();
         selectedSecondaryWeapon = secondaryWeaponButtons[0].GetComponent<WeaponButton>();
 
@@ -73,8 +77,9 @@ public class WeaponLoadout : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Cursor.lockState = CursorLockMode.None;
         weaponManager = GetComponentInParent<PlayerUISetup>().weaponManager;
+        playerUISetup.FreezePlayer(false);
+        Cursor.lockState = CursorLockMode.None;
     }
 
     public void SelectWeapon(WeaponButton weaponButton)
@@ -90,17 +95,20 @@ public class WeaponLoadout : MonoBehaviour
             selectedSecondaryWeapon = weaponButton;
         }
 
-        weaponManager.SwitchWeaponsFromLoadout(selectedPrimaryWeapon.playerWeapon, selectedSecondaryWeapon.playerWeapon);
+        if (weaponManager != null)
+        {
+            weaponManager.SwitchWeaponsFromLoadout(selectedPrimaryWeapon.playerWeapon, selectedSecondaryWeapon.playerWeapon);
+        }
     }
 
     public void ShowPreview(PlayerWeapon playerWeapon)
     {
         previewWeapon.UpdateGunPreview(playerWeapon);
-
     }
 
     public void PlayGame()
     {
+        playerUISetup.FreezePlayer(true);
         gameObject.SetActive(false);
     }
 }
