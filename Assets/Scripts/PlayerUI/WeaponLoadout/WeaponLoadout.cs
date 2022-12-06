@@ -62,12 +62,11 @@ public class WeaponLoadout : MonoBehaviour
             weaponButton.weaponLoadout = this;
             secondaryWeaponButtons.Add(button);
         }
-
-        primaryWeaponButtons[0].GetComponent<WeaponButton>().SelectWeapon();
-        secondaryWeaponButtons[0].GetComponent<WeaponButton>().SelectWeapon();
-
         selectedPrimaryWeapon = primaryWeaponButtons[0].GetComponent<WeaponButton>();
         selectedSecondaryWeapon = secondaryWeaponButtons[0].GetComponent<WeaponButton>();
+
+        selectedPrimaryWeapon.SelectWeapon();
+        selectedSecondaryWeapon.SelectWeapon();
     }
 
     // Update is called once per frame
@@ -75,20 +74,18 @@ public class WeaponLoadout : MonoBehaviour
     {
         
     }
-    
+
     public void SelectWeapon(WeaponButton weaponButton)
     {
-        if (weaponButton.isPrimaryWeapon)
+        if (weaponButton != selectedPrimaryWeapon && weaponButton.isPrimaryWeapon)
         {
             selectedPrimaryWeapon.ResetSelection();
             selectedPrimaryWeapon = weaponButton;
-            selectedPrimaryWeapon.SelectWeapon();
         }
-        else
+        else if (weaponButton != selectedSecondaryWeapon && !weaponButton.isPrimaryWeapon)
         {
             selectedSecondaryWeapon.ResetSelection();
             selectedSecondaryWeapon = weaponButton;
-            selectedSecondaryWeapon.SelectWeapon();
         }
     }
 

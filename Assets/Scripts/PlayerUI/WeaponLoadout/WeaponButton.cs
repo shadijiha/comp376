@@ -50,7 +50,7 @@ public class WeaponButton : MonoBehaviour
     public void ResetSelection()
     {
         isSelected = false;
-        print("da");
+
         nameText.color = textColorWhenUnselected;
         image.color = imageColorWhenUnselected;
     }
