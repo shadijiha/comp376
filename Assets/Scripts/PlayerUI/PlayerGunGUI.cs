@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPText = TMPro.TMP_Text;
 
 public class PlayerGunGUI : MonoBehaviour
 {
@@ -10,17 +9,11 @@ public class PlayerGunGUI : MonoBehaviour
     [SerializeField] private List<Sprite> weaponIconsSprites;
 
     private WeaponManager weaponManager;
-    private Dictionary<string, Sprite> weaponSprites;
 
     // Start is called before the first frame update
     void Start()
     {
         weaponManager = GetComponentInParent<PlayerUISetup>().weaponManager;
-
-        // Dictionary for easy access
-        weaponSprites = new Dictionary<string, Sprite>();
-        foreach (var weapon in weaponIconsSprites)
-            weaponSprites.Add(weapon.name, weapon);
     }
 
     // Update is called once per frame
@@ -29,11 +22,11 @@ public class PlayerGunGUI : MonoBehaviour
         PlayerWeapon currentWeapon = weaponManager.GetCurrentWeapon();
         try
         {
-            gunIcon.sprite = weaponSprites[currentWeapon.GetType().Name];
+            gunIcon.sprite = weaponIconsSprites[(int)currentWeapon.weaponType];
         }
         catch
         {
-            Debug.Log($"Sprite Not Found for {currentWeapon.GetType().Name}");
+            Debug.Log($"Sprite Not Found for {currentWeapon.weaponType}");
         }
     }
 }

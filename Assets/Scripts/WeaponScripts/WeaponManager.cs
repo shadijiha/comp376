@@ -64,14 +64,18 @@ public class WeaponManager : NetworkBehaviour
 
     public void SwitchWeaponsFromLoadout(PlayerWeapon primary, PlayerWeapon secondary)
     {
+        UnequipPrimary();
+        UnequipSecondary();
+
         mPrimary = primary;
-        Equip(mPrimary);
         mSecondary = secondary;
-        Equip(mSecondary);
 
         mNextWeapon = mPrimary;
-        mCurrent.reloading = false;
-        Invoke(nameof(Stow), mCurrent.stowTime);
+
+        Equip(mPrimary);
+        Equip(mSecondary);
+
+        Draw();
     }
 
     // Update is called once per frame
