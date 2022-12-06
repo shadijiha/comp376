@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using static PlayerWeapon;
 using TMProText = TMPro.TextMeshProUGUI;
 
@@ -8,11 +9,11 @@ public class PreviewWeapon : MonoBehaviour
 {
     [SerializeField] private TMProText nameText;
     [SerializeField] private TMProText description;
-    [SerializeField] private GameObject gunModelParent;
-
+    [SerializeField] private Image image;
+    [SerializeField] private Sprite[] weaponSprites = new Sprite[18];
     private GameObject[] weaponModels = new GameObject[18];
+
     public WeaponType currentWeaponType;
-    private WeaponType previousWeaponType;
 
     // Start is called before the first frame update
     void Start()
@@ -31,17 +32,8 @@ public class PreviewWeapon : MonoBehaviour
 
         if (weaponModels[(int)currentWeaponType] == null)
         {
-            weaponModels[(int)currentWeaponType] = Instantiate(WeaponManager.msWeaponArr[(int)currentWeaponType], gunModelParent.transform);
-            weaponModels[(int)currentWeaponType].transform.localScale = new Vector3(1000, 1000, 1000);
-            weaponModels[(int)currentWeaponType].transform.rotation = Quaternion.Euler(-90, 90, 0);
+            image.sprite = weaponSprites[(int)currentWeaponType];
         }
-
-        weaponModels[(int)currentWeaponType].SetActive(true);
-
-        if (weaponModels[(int)previousWeaponType] != null)
-            weaponModels[(int)previousWeaponType].SetActive(false);
-
-        previousWeaponType = currentWeaponType;
     }
 
 }
