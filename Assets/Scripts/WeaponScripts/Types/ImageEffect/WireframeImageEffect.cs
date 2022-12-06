@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using SuperSystems.ImageEffects;
 
-namespace SuperSystems.ImageEffects
-{
 
 [ExecuteInEditMode]
 public class WireframeImageEffect : MonoBehaviour
@@ -104,4 +103,3 @@ public class WireframeImageEffect : MonoBehaviour
     }
 }
 
-}
