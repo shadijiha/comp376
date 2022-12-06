@@ -45,8 +45,6 @@ public class WeaponLoadout : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Cursor.lockState = CursorLockMode.None;
-
         foreach (var playerWeapon in primaryWeapons)
         {
             var button = Instantiate(weaponButtonPrefab, primaryWeaponList.transform);
@@ -70,14 +68,14 @@ public class WeaponLoadout : MonoBehaviour
 
         selectedPrimaryWeapon.SelectWeapon();
         selectedSecondaryWeapon.SelectWeapon();
-
-        weaponManager = GetComponentInParent<PlayerUISetup>().weaponManager;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        Cursor.lockState = CursorLockMode.None;
+        weaponManager = GetComponentInParent<PlayerUISetup>().weaponManager;
+        print(weaponManager);
     }
 
     public void SelectWeapon(WeaponButton weaponButton)
@@ -87,7 +85,6 @@ public class WeaponLoadout : MonoBehaviour
             selectedPrimaryWeapon.ResetSelection();
             selectedPrimaryWeapon = weaponButton;
             weaponManager.mPrimary = selectedPrimaryWeapon.playerWeapon;
-            weaponManager.Equip(weaponManager.mPrimary);
         }
         else if (weaponButton != selectedSecondaryWeapon && !weaponButton.isPrimaryWeapon)
         {
@@ -95,6 +92,8 @@ public class WeaponLoadout : MonoBehaviour
             selectedSecondaryWeapon = weaponButton;
             weaponManager.mSecondary = selectedSecondaryWeapon.playerWeapon;
         }
+
+        weaponManager.SwitchWeaponsFromLoadout();
     }
 
     public void ShowPreview(PlayerWeapon playerWeapon)

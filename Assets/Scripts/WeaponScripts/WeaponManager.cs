@@ -62,6 +62,17 @@ public class WeaponManager : NetworkBehaviour
         Equip(mSuper);
     }
 
+    public void SwitchWeaponsFromLoadout()
+    {
+        Equip(mPrimary);
+        mCurrent = mPrimary;
+        mCameraRecoil.UpdateRecoilInfo(mCurrent.cameraRecoilInfo);
+        mModelRecoil.UpdateRecoilInfo(mCurrent.modelRecoilInfo);
+        mCurrent.model.SetActive(true);
+
+        Equip(mSecondary);
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -147,10 +158,10 @@ public class WeaponManager : NetworkBehaviour
         weapon.model = (GameObject)Instantiate(
             msWeaponArr[(int)weapon.weaponType]);
         weapon.model.transform.SetParent(weaponHolder);
-        Vector3 holdPosition = weapon.model.GetComponentInChildren<HoldPt>().gameObject.transform.position;
+        //Vector3 holdPosition = weapon.model.GetComponentInChildren<HoldPt>().gameObject.transform.position;
         //weapon.model.GetComponentInChildren<HoldPt>().gameObject.transform.position = weaponHolder.transform.position;
-        weapon.model.transform.position = weaponHolder.transform.position - holdPosition;
-        //weapon.model.transform.position = weaponHolder.transform.position;
+        //weapon.model.transform.position = weaponHolder.transform.position - holdPosition;
+        weapon.model.transform.position = weaponHolder.transform.position;
         //weapon.model.GetComponentInChildren<HoldPoint>().gameObject.transform.position
 
         mCurrentGraphics = weapon.model.GetComponentInChildren<WeaponGraphics>();

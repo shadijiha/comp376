@@ -12,5 +12,6 @@ public class PlayerUISetup : MonoBehaviour
     {
         localPlayer = GameManager.GetLocalPlayer();
         weaponManager = localPlayer.GetComponent<WeaponManager>();
+        print(weaponManager);
     }
 }
