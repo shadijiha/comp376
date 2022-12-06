@@ -141,7 +141,7 @@ public class WeaponManager : NetworkBehaviour
         return mWeaponArr[(int)mCurrent.weaponType].GetComponent<ModelRecoil>();
     }
 
-    private void Equip(PlayerWeapon weapon)
+    public void Equip(PlayerWeapon weapon)
     {
         //weaponHolder.position, weaponHolder.rotation
         weapon.model = (GameObject)Instantiate(

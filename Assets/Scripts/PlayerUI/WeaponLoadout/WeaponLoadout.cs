@@ -5,9 +5,6 @@ using static PlayerWeapon;
 
 public class WeaponLoadout : MonoBehaviour
 {
-    [SerializeField] private List<WeaponType> primaryWeaponTypes;
-    [SerializeField] private List<WeaponType> secondaryWeaponTypes;
-
     [SerializeField] private GameObject weaponButtonPrefab;
     [SerializeField] private GameObject primaryWeaponList;
     [SerializeField] private GameObject secondaryWeaponList;
@@ -43,9 +40,13 @@ public class WeaponLoadout : MonoBehaviour
     private WeaponButton selectedPrimaryWeapon;
     private WeaponButton selectedSecondaryWeapon;
 
+    private WeaponManager weaponManager;
+
     // Start is called before the first frame update
     void Start()
     {
+        Cursor.lockState = CursorLockMode.None;
+
         foreach (var playerWeapon in primaryWeapons)
         {
             var button = Instantiate(weaponButtonPrefab, primaryWeaponList.transform);
@@ -69,6 +70,8 @@ public class WeaponLoadout : MonoBehaviour
 
         selectedPrimaryWeapon.SelectWeapon();
         selectedSecondaryWeapon.SelectWeapon();
+
+        weaponManager = GetComponentInParent<PlayerUISetup>().weaponManager;
     }
 
     // Update is called once per frame
@@ -83,11 +86,14 @@ public class WeaponLoadout : MonoBehaviour
         {
             selectedPrimaryWeapon.ResetSelection();
             selectedPrimaryWeapon = weaponButton;
+            weaponManager.mPrimary = selectedPrimaryWeapon.playerWeapon;
+            weaponManager.Equip(weaponManager.mPrimary);
         }
         else if (weaponButton != selectedSecondaryWeapon && !weaponButton.isPrimaryWeapon)
         {
             selectedSecondaryWeapon.ResetSelection();
             selectedSecondaryWeapon = weaponButton;
+            weaponManager.mSecondary = selectedSecondaryWeapon.playerWeapon;
         }
     }
 
@@ -97,8 +103,8 @@ public class WeaponLoadout : MonoBehaviour
 
     }
 
-    void OnEnable()
+    public void PlayGame()
     {
-        // Get 
+        gameObject.SetActive(false);
     }
 }
