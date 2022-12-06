@@ -52,7 +52,7 @@ public class EscapeMenuGUI : MonoBehaviour
         manager.migrationManager.hostMigration = true;
 
         // Check if the current player is host
-        if (manager.isNetworkActive) {            
+        /*if (manager.isNetworkActive) {            
             manager.migrationManager.FindNewHost(out var newHostInfo, out var isNewHost);
             manager.migrationManager.newHostAddress = newHostInfo.address;
 
@@ -69,7 +69,7 @@ public class EscapeMenuGUI : MonoBehaviour
                 // Reconnect the client to the new host
                 client.ReconnectToNewHost(newHostInfo.address, newHostInfo.port);
             }
-        }
+        }*/
 
         var match = manager.matchInfo;
         manager.matchMaker.DropConnection(match.networkId, match.nodeId, HostGame.RequestDomain, manager.OnDropConnection);
