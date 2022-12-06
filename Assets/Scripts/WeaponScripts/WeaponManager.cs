@@ -143,13 +143,5 @@ public class WeaponManager : NetworkBehaviour
     }
 
 
-    public void AmplifyDamage()
-    {
-        Debug.Log("call Amplify Damage");
-    }
-
-    public void Haste()
-    {
-        Debug.Log("call Hast");
-    }
+  
 }
