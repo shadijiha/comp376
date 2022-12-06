@@ -7,6 +7,19 @@ public class AmmoPack : NetworkBehaviour
 {
     [SerializeField] private int ammoRestorePercent = 50;
 
+
+    float currentAngle = 0;
+    void Update()
+    {
+        transform.rotation = Quaternion.Euler(new Vector3(
+                                    270,
+                                    0,
+                                    currentAngle));
+
+        currentAngle += 30 * Time.deltaTime;
+        currentAngle = currentAngle % 360;
+    }
+
     private IEnumerator Respawn()
     {
         yield return new WaitForSeconds(GameManager.instance.MATCH_SETTINGS.LandMineRespawnTime);
