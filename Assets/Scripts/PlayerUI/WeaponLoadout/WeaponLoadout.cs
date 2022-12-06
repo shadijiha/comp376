@@ -12,6 +12,8 @@ public class WeaponLoadout : MonoBehaviour
     [SerializeField] private GameObject primaryWeaponList;
     [SerializeField] private GameObject secondaryWeaponList;
 
+    [SerializeField] private PreviewWeapon previewWeapon;
+
     private List<PlayerWeapon> primaryWeapons = new List<PlayerWeapon>()
     {
         new LightSMG(),
@@ -87,6 +89,12 @@ public class WeaponLoadout : MonoBehaviour
             selectedSecondaryWeapon.ResetSelection();
             selectedSecondaryWeapon = weaponButton;
         }
+    }
+
+    public void ShowPreview(PlayerWeapon playerWeapon)
+    {
+        previewWeapon.UpdateGunPreview(playerWeapon);
+
     }
 
     void OnEnable()

@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMProText = TMPro.TextMeshProUGUI;
 
-public class WeaponButton : MonoBehaviour
+public class WeaponButton : MonoBehaviour, IPointerEnterHandler
 {
     [SerializeField] private bool isSelected;
     [SerializeField] private Image image;
@@ -53,5 +54,10 @@ public class WeaponButton : MonoBehaviour
 
         nameText.color = textColorWhenUnselected;
         image.color = imageColorWhenUnselected;
+    }
+
+    void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
+    {
+        weaponLoadout.ShowPreview(playerWeapon);
     }
 }
