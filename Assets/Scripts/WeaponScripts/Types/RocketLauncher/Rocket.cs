@@ -48,7 +48,6 @@ public class Rocket : NetworkBehaviour
 
             transform.position += (m_direction * m_velocity * Time.deltaTime);
         }
-        
     }
 
     private void OnTriggerEnter(Collider collision)
@@ -63,7 +62,7 @@ public class Rocket : NetworkBehaviour
                 player.RpcTakeDamage(m_contactDamage, m_owner);
             }
 
-            CmdExplode();
+            Explode();
                 
             int             hits            = Physics.OverlapSphereNonAlloc(transform.position, m_MaxRadius, m_hits, m_targetMask);
             List<Player>    playersToHit    = new List<Player>();
@@ -82,20 +81,21 @@ public class Rocket : NetworkBehaviour
 
                         if (!playersToHit.Contains(plr))
                         {
-                            Debug.Log($"Hitting {plr.name} for {damage}.");
+                            //Debug.Log($"Hitting {plr.name} for {damage}.");
                             playersToHit.Add(plr);
                             playerDmg.Add(damage);
                         }
-                        else
-                        {
-                            Debug.Log($"Already hitting {plr.name} for {damage}, skipping.");
-                        }
+                        //else
+                        //{
+                        //    Debug.Log($"Already hitting {plr.name} for {damage}, skipping.");
+                        //}
                     }
                 }
             }
 
             for (int dmgIndex = 0; dmgIndex < playersToHit.Count; ++dmgIndex)
             {
+                //Debug.Log($"Applying {playerDmg[dmgIndex]} damage to {playersToHit[dmgIndex].name}");
                 playersToHit[dmgIndex].RpcTakeDamage(playerDmg[dmgIndex], m_owner);
             }
 
@@ -111,13 +111,8 @@ public class Rocket : NetworkBehaviour
         transform.parent = null;
     }
 
-    [Command]
-    public void CmdExplode() {
-        RpcExplode();
-    }
-
-    [ClientRpc]
-    public void RpcExplode() {
+    public void Explode() 
+    {
         Destroy(Instantiate(m_explosion, transform.position, transform.rotation).gameObject, 1.0f);
     }
 }
