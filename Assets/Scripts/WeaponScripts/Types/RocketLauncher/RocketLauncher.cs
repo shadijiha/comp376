@@ -94,10 +94,4 @@ public class RocketLauncher : PlayerWeapon
         // Must return the method to invoke, as invoke isn't possible without being a unity behavior.
         return (nameof(playerShoot.ReadyToShoot), 1.0f / fireRate);
     }
-
-    public override void Reset()
-    {
-
-        //Destroy(th);
-    }
 }
