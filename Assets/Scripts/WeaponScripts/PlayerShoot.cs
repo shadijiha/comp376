@@ -199,12 +199,12 @@ public class PlayerShoot : NetworkBehaviour
         }
         else
         {
-            m_CurrentWeapon.reloading = true;
+            //m_CurrentWeapon.reloading = true;
 
             Vector3 originalPosition = m_CurrentWeapon.model.transform.localPosition;
             StartCoroutine(ReloadAnim());
             //To prevent the weapon getting permanently displaced in case of timing/calculation error
-            m_CurrentWeapon.model.transform.localPosition = originalPosition;
+            //m_CurrentWeapon.model.transform.localPosition = originalPosition;
 
             Invoke("ReloadFinished",0f);
             //Invoke("ReloadFinished", (m_CurrentWeapon.hasted ? m_CurrentWeapon.reloadTime * 0.5f : m_CurrentWeapon.reloadTime));
@@ -223,7 +223,7 @@ public class PlayerShoot : NetworkBehaviour
         Vector3 holdPosition = m_CurrentWeapon.model.GetComponentInChildren<HoldPt>().gameObject.transform.localPosition;
         Vector3 moveDirection = m_CurrentWeapon.model.transform.localPosition - holdPosition;
         moveDirection.Normalize();
-        float moveBy =  0.00001f;
+        float moveBy =  0.01f;
 
         //rotation
         Quaternion originalOrientation = m_CurrentWeapon.model.transform.localRotation;
@@ -254,6 +254,8 @@ public class PlayerShoot : NetworkBehaviour
             firstStageTimer += Time.deltaTime;
             yield return null;
         }
+        //To prevent the weapon getting permanently displaced in case of timing/calculation error
+        m_CurrentWeapon.model.transform.localPosition = originalPosition;
         m_CurrentWeapon.model.transform.localRotation = originalOrientation;
     }
 
