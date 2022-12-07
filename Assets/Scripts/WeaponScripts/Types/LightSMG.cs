@@ -56,6 +56,7 @@ public class LightSMG : PlayerWeapon
                                     };
 
         model                   = WeaponManager.msWeaponArr[(int)weaponType];
+        name                    = "Light SMG";
     }
 
 }

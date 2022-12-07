@@ -1,15 +1,9 @@
 fileFormatVersion: 2
-<<<<<<< HEAD:Assets/Prefabs/map_Object/cube_wall_test_doublecollider.prefab.meta
-guid: 8169f1e3427a4354da60db64557fa180
-PrefabImporter:
-  externalObjects: {}
-=======
 guid: e7d2f71438e47a24599982d5fba86b00
 folderAsset: yes
 timeCreated: 1510336260
 licenseType: Pro
 DefaultImporter:
->>>>>>> 7071ddaaccbf006db633a8ac987297d9479e1c30:Assets/Wireframe/Examples.meta
   userData: 
   assetBundleName: 
   assetBundleVariant: 

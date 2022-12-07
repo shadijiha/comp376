@@ -56,5 +56,6 @@ public class MarksmanPistol : PlayerWeapon
                                     };
 
         model                   = WeaponManager.msWeaponArr[(int)weaponType];
+        name                    = "Marksman Pistol";
     }
 }

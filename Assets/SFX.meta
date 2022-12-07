@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:Assets/SFX.meta
 guid: 3fdcd4b0d21b2b14b87f077f6ae72995
-========
-guid: cb954eda33936f34fa4e219506fe087d
->>>>>>>> main:Assets/Particles.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

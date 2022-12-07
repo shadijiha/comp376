@@ -65,5 +65,6 @@ public class AutoRifle : PlayerWeapon
                                     };
 
         model                   = WeaponManager.msWeaponArr[(int)weaponType];
+        name                    = "Auto Rifle";
     }
 }

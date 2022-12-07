@@ -62,6 +62,22 @@ public class WeaponManager : NetworkBehaviour
         Equip(mSuper);
     }
 
+    public void SwitchWeaponsFromLoadout(PlayerWeapon primary, PlayerWeapon secondary)
+    {
+        UnequipPrimary();
+        UnequipSecondary();
+
+        mPrimary = primary;
+        mSecondary = secondary;
+
+        mNextWeapon = mPrimary;
+
+        Equip(mPrimary);
+        Equip(mSecondary);
+
+        Draw();
+    }
+
     // Update is called once per frame
     void Update()
     {

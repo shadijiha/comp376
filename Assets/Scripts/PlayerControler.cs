@@ -38,16 +38,6 @@ public class PlayerControler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Stop any player movement if isEnabled is false;
-        // Mainly used when game is pause.
-        if (!isEnabled)
-        {
-            motor.Move(Vector3.zero);
-            motor.Rotate(Vector3.zero);
-            motor.RotateCamera(0);
-            return;
-        }
-
         // Calculate the movement velocity as a 3D vector
         xMov = Input.GetAxisRaw("Horizontal");
         zMov = Input.GetAxisRaw("Vertical");

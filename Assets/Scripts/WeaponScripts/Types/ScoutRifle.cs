@@ -76,6 +76,7 @@ public class ScoutRifle : PlayerWeapon
                                     };
 
         model                   = WeaponManager.msWeaponArr[(int)weaponType];
+        name                    = "Scout Rifle";
     }
 
     public override void AltFireActivate(PlayerShoot playerShoot)
