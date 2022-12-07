@@ -11,18 +11,21 @@ public class PlayerMotor : MonoBehaviour
     private Vector3 velocity            = Vector3.zero;
     private Vector3 rotation            = Vector3.zero;
     private Vector3 additionalRotation  = Vector3.zero;
+    private Vector3 previousPosition;
+    public  float   currentVelocity;
 
     private float cameraRotationX = 0f;
     private float currentCameraRotationX = 0.0f;
 
     [SerializeField] private float cameraRotationLimit = 85f;
 
-    private Rigidbody rb;
+    public Rigidbody rb;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        previousPosition = transform.position;
     }
 
     // Run every physics iteration
@@ -30,6 +33,9 @@ public class PlayerMotor : MonoBehaviour
     {
         PerformMovement();
         PerformRotation();
+
+        currentVelocity = Vector3.Distance(transform.position, previousPosition);
+        previousPosition = transform.position;
     }
 
     /// <summary>

@@ -28,6 +28,7 @@ public class LevelObstacle : MonoBehaviour
         if (currentColour == objectColour)
         {
             colliderComponent.enabled = false;
+            
 
             var oldColour = material.color;
             material.SetColor("_Color", new Color(oldColour.r, oldColour.g, oldColour.b, 0.5f));
@@ -35,9 +36,18 @@ public class LevelObstacle : MonoBehaviour
         else
         {
             colliderComponent.enabled = true;
-
+            
             var oldColour = material.color;
             material.SetColor("_Color", new Color(oldColour.r, oldColour.g, oldColour.b, originalAlpha));
         }
+
+         
     }
+
+    public GameManagerServer.Colour GetColour()
+    {
+        return objectColour;
+    }
+
+   
 }

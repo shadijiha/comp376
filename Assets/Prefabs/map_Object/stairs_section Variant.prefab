@@ -96,6 +96,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 11
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3eabfe26e68766343b41e0dff40a56e6,
+        type: 3}
+      propertyPath: m_TagString
+      value: laserCollider
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3eabfe26e68766343b41e0dff40a56e6, type: 3}
 --- !u!1 &6382200830633322691 stripped

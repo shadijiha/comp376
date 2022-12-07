@@ -27,6 +27,13 @@ public class PlayerGunGUI : MonoBehaviour
     void Update()
     {
         PlayerWeapon currentWeapon = weaponManager.GetCurrentWeapon();
-        gunIcon.sprite = weaponSprites[currentWeapon.GetType().Name];
+        try
+        {
+            gunIcon.sprite = weaponSprites[currentWeapon.GetType().Name];
+        }
+        catch
+        {
+            Debug.Log($"Sprite Not Found for {currentWeapon.GetType().Name}");
+        }
     }
 }
