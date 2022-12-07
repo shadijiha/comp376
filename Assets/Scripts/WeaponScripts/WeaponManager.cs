@@ -169,8 +169,8 @@ public class WeaponManager : NetworkBehaviour
         weapon.model = (GameObject)Instantiate(
             msWeaponArr[(int)weapon.weaponType]);
         weapon.model.transform.SetParent(weaponHolder);
-        Vector3 holdPosition = weapon.model.GetComponentInChildren<HoldPt>().gameObject.transform.position;
-        weapon.model.transform.position = weaponHolder.transform.position - holdPosition;
+        //Vector3 holdPosition = weapon.model.GetComponentInChildren<HoldPt>().gameObject.transform.position;
+        //weapon.model.transform.position = weaponHolder.transform.position - holdPosition;
         mCurrentGraphics = weapon.model.GetComponentInChildren<WeaponGraphics>();
         if (mCurrentGraphics == null)
         {

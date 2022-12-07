@@ -44,8 +44,7 @@ public class JoinGame : MonoBehaviour
         
 
         foreach (MatchInfoSnapshot match in responseData) {
-            var roomListItem = Instantiate(matchListElementPrefab);
-            roomListItem.transform.SetParent(roomListScrollView);
+            var roomListItem = Instantiate(matchListElementPrefab, roomListScrollView.transform);
 
             var display = roomListItem.GetComponent<RoomListElementDisplay>();
             if (display != null)
