@@ -34,6 +34,7 @@ public class PlayerShoot : NetworkBehaviour
     //public GameObject laserShotTarget;
     public GameObject weaponRotation;
 
+
     Ray ray;
 
     // Start is called before the first frame update
@@ -57,12 +58,14 @@ public class PlayerShoot : NetworkBehaviour
         m_CurrentWeapon.currentSpareAmmo    = m_CurrentWeapon.maxAmmo;
         m_CurrentWeapon.readyToShoot        = true;
 
+
         //mask &= LayerMask.NameToLayer("RemotePlayerLayer");
     }
 
     // Update is called once per frame
     void Update() 
     {
+
         if (crosshair == null)
         {
             crosshair               = GameObject.FindObjectOfType<PlayerSetup>().playerUIInstance.GetComponentInChildren<DynamicCrosshair>().GetComponent<RectTransform>();
@@ -197,13 +200,61 @@ public class PlayerShoot : NetworkBehaviour
         else
         {
             m_CurrentWeapon.reloading = true;
-            Invoke("ReloadFinished", (m_CurrentWeapon.hasted ? m_CurrentWeapon.reloadTime * 0.5f : m_CurrentWeapon.reloadTime));
 
-            Vector3 rotationBy = new Vector3(0, 0, 0);
-            Vector3 moveBy = new Vector3(0, 0, 0.25f);
-            m_CurrentWeapon.model.transform.position = m_CurrentWeapon.model.transform.position - moveBy;
-            //weaponRotation.transform.localRotation = Quaternion.Euler(rotationW);
+            Vector3 originalPosition = m_CurrentWeapon.model.transform.localPosition;
+            StartCoroutine(ReloadAnim());
+            //To prevent the weapon getting permanently displaced in case of timing/calculation error
+            m_CurrentWeapon.model.transform.localPosition = originalPosition;
+
+            Invoke("ReloadFinished",0f);
+            //Invoke("ReloadFinished", (m_CurrentWeapon.hasted ? m_CurrentWeapon.reloadTime * 0.5f : m_CurrentWeapon.reloadTime));
+
         }
+    }
+
+    /// <summary>
+    /// Animates the reload of the weapon.
+    /// </summary>
+    [Client]
+    public IEnumerator ReloadAnim()
+    {
+        //translation
+        Vector3 originalPosition = m_CurrentWeapon.model.transform.localPosition;
+        Vector3 holdPosition = m_CurrentWeapon.model.GetComponentInChildren<HoldPt>().gameObject.transform.localPosition;
+        Vector3 moveDirection = m_CurrentWeapon.model.transform.localPosition - holdPosition;
+        moveDirection.Normalize();
+        float moveBy =  0.00001f;
+
+        //rotation
+        Quaternion originalOrientation = m_CurrentWeapon.model.transform.localRotation;
+        Vector3 currentOrientation = m_CurrentWeapon.model.transform.localRotation.eulerAngles;
+        Vector3 rotationBy = new Vector3(0.25f, 0, 0);
+
+        float firstStageTimer = 0;
+        float secondStageTimer = 0;
+        while (firstStageTimer <= m_CurrentWeapon.reloadTime)
+        {
+            if (firstStageTimer <= m_CurrentWeapon.reloadTime / 2f)
+            {
+
+                currentOrientation = currentOrientation + rotationBy * (firstStageTimer + 1f);
+            
+                m_CurrentWeapon.model.transform.localPosition = m_CurrentWeapon.model.transform.localPosition - moveDirection*moveBy * firstStageTimer;
+                m_CurrentWeapon.model.transform.localRotation = Quaternion.Euler(currentOrientation);
+
+
+            }
+            else
+            {
+                currentOrientation = currentOrientation - rotationBy * (secondStageTimer + 1f);
+                m_CurrentWeapon.model.transform.localPosition = m_CurrentWeapon.model.transform.localPosition + moveDirection*moveBy * secondStageTimer;
+                m_CurrentWeapon.model.transform.localRotation = Quaternion.Euler(currentOrientation);
+                secondStageTimer += Time.deltaTime;
+            }
+            firstStageTimer += Time.deltaTime;
+            yield return null;
+        }
+        m_CurrentWeapon.model.transform.localRotation = originalOrientation;
     }
 
     /// <summary>
@@ -218,7 +269,6 @@ public class PlayerShoot : NetworkBehaviour
         }
         else
         {
-
 
             if (m_CurrentWeapon.currentSpareAmmo        >=  m_CurrentWeapon.magazineSize - m_CurrentWeapon.currentLoadedAmmo)
             {
