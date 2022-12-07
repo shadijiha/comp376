@@ -18,8 +18,9 @@ public class violetWallEffect : MonoBehaviour
 
     public void boostPlayerHaste(GameObject player)
     {
-
-        player.GetComponent<WeaponManager>().Haste();
-
+        if (player.TryGetComponent<WeaponManager>(out WeaponManager manager))
+        {
+            manager.Haste();
+        }
     }
 }

@@ -122,14 +122,14 @@ public class WeaponManager : NetworkBehaviour
                 mHasted = false;
 
                 mPrimary.hasted             = false;
-                mPrimary.speedMultiplier    = 1.5f; 
+                mPrimary.speedMultiplier    = 1.0f; 
                 mSecondary.hasted           = false;
-                mSecondary.speedMultiplier  = 1.5f;
+                mSecondary.speedMultiplier  = 1.0f;
 
                 if (mSuper != null)
                 {
                     mSuper.hasted           = false;
-                    mSuper.speedMultiplier  = 1.5f;
+                    mSuper.speedMultiplier  = 1.0f;
                 }
             }
         }
@@ -242,10 +242,12 @@ public class WeaponManager : NetworkBehaviour
         {
             mPrimary.amplified      = true;
             mSecondary.amplified    = true;
+
             if (mSuper != null)
             {
                 mSuper.amplified    = true;
             }
+
             mAmplified = true;
         }
     }

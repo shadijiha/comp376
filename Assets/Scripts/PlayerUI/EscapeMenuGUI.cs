@@ -31,8 +31,9 @@ public class EscapeMenuGUI : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape)) 
             menuEnabled = !menuEnabled;
 
-        //Cursor.lockState = menuEnabled ? CursorLockMode.None : CursorLockMode.Locked;
-        Cursor.lockState = CursorLockMode.None;
+        Cursor.lockState    = menuEnabled ? CursorLockMode.None : CursorLockMode.Locked;
+        Cursor.visible      = menuEnabled;
+
 
         playerController.EnableMovement(!menuEnabled);
         playerShoot.enabled = !menuEnabled;
