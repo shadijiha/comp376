@@ -32,6 +32,8 @@ public class PlayerShoot : NetworkBehaviour
 
     public GameObject laserShot;
     //public GameObject laserShotTarget;
+    public GameObject weaponRotation;
+
     Ray ray;
 
     // Start is called before the first frame update
@@ -196,6 +198,11 @@ public class PlayerShoot : NetworkBehaviour
         {
             m_CurrentWeapon.reloading = true;
             Invoke("ReloadFinished", (m_CurrentWeapon.hasted ? m_CurrentWeapon.reloadTime * 0.5f : m_CurrentWeapon.reloadTime));
+
+            Vector3 rotationBy = new Vector3(0, 0, 0);
+            Vector3 moveBy = new Vector3(0, 0, 0.25f);
+            m_CurrentWeapon.model.transform.position = m_CurrentWeapon.model.transform.position - moveBy;
+            //weaponRotation.transform.localRotation = Quaternion.Euler(rotationW);
         }
     }
 
@@ -211,6 +218,8 @@ public class PlayerShoot : NetworkBehaviour
         }
         else
         {
+
+
             if (m_CurrentWeapon.currentSpareAmmo        >=  m_CurrentWeapon.magazineSize - m_CurrentWeapon.currentLoadedAmmo)
             {
                 m_CurrentWeapon.currentSpareAmmo        -=  m_CurrentWeapon.magazineSize - m_CurrentWeapon.currentLoadedAmmo;
@@ -220,7 +229,7 @@ public class PlayerShoot : NetworkBehaviour
             {
                 // If there is not enough spare ammo to fully refill the magazine, partially reload it instead.
                 m_CurrentWeapon.currentLoadedAmmo       +=  m_CurrentWeapon.currentSpareAmmo;
-                m_CurrentWeapon.currentSpareAmmo        =   0;
+                m_CurrentWeapon.currentSpareAmmo        =   0; 
             }
             else
             {
