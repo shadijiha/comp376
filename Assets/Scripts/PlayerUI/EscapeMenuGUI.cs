@@ -38,8 +38,8 @@ public class EscapeMenuGUI : MonoBehaviour
             escapeMenuPanel.SetActive(menuEnabled);
         }
 
-        Cursor.lockState    = menuEnabled ? CursorLockMode.None : CursorLockMode.Locked;
-        Cursor.visible      = menuEnabled;
+        //Cursor.lockState    = menuEnabled ? CursorLockMode.None : CursorLockMode.Locked;
+        //Cursor.visible      = menuEnabled;
     }
 
     public void Resume()
