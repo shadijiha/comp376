@@ -18,8 +18,9 @@ public class redWallEffect : MonoBehaviour
 
     public void boostPlayerDomage(GameObject player)
     {
-
-        player.GetComponent<WeaponManager>().AmplifyDamage();
-
+        if (player.TryGetComponent<WeaponManager>(out WeaponManager manager))
+        {
+            manager.AmplifyDamage();
+        }
     }
 }

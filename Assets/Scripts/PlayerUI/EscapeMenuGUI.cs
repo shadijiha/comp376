@@ -40,11 +40,17 @@ public class EscapeMenuGUI : MonoBehaviour
         }
     }
 
+
+        Cursor.lockState    = menuEnabled ? CursorLockMode.None : CursorLockMode.Locked;
+        Cursor.visible      = menuEnabled;
+
+
     public void Resume()
     {
         CloseMenu();
         playerUISetup.FreezePlayer(true);
     }
+
 
     public void Loadout()
     {

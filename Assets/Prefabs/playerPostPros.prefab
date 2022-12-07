@@ -221,6 +221,7 @@ GameObject:
   - component: {fileID: 8463599760594411391}
   - component: {fileID: 6911477714383762399}
   - component: {fileID: 1092208653471882773}
+  - component: {fileID: 4098052942104713684}
   m_Layer: 8
   m_Name: playerPostPros
   m_TagString: Player
@@ -511,6 +512,7 @@ MonoBehaviour:
   cameraRecoil: {fileID: 8935510258853908927}
   modelRecoil: {fileID: 4063427409264756806}
   weaponSound: {fileID: 0}
+  m_hitCrosshair: {fileID: 0}
   m_fMovement: 0
   laserShot: {fileID: 136330, guid: 9a0c3383523899643a8d0661cfaca4e4, type: 3}
 --- !u!114 &1172113867161608122
@@ -543,6 +545,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mPrimary:
     weaponType: 0
+    description: Invalid Description
     damage: 0
     currentLoadedAmmo: 0
     magazineSize: 0
@@ -572,6 +575,7 @@ MonoBehaviour:
     altFire: 0
     hasted: 0
     amplified: 0
+    switchingWeapon: 0
     cameraRecoilInfo:
       rotationSpeed: 0
       returnSpeed: 0
@@ -595,6 +599,7 @@ MonoBehaviour:
     name: 
   mSecondary:
     weaponType: 0
+    description: Invalid Description
     damage: 0
     currentLoadedAmmo: 0
     magazineSize: 0
@@ -624,6 +629,7 @@ MonoBehaviour:
     altFire: 0
     hasted: 0
     amplified: 0
+    switchingWeapon: 0
     cameraRecoilInfo:
       rotationSpeed: 0
       returnSpeed: 0
@@ -647,6 +653,7 @@ MonoBehaviour:
     name: 
   mSuper:
     weaponType: 0
+    description: Invalid Description
     damage: 0
     currentLoadedAmmo: 0
     magazineSize: 0
@@ -676,6 +683,7 @@ MonoBehaviour:
     altFire: 0
     hasted: 0
     amplified: 0
+    switchingWeapon: 0
     cameraRecoilInfo:
       rotationSpeed: 0
       returnSpeed: 0
@@ -896,6 +904,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &4098052942104713684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1172113867161608157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d9dcda8ac84eba459bd6c7e49aa8a0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1674023247596139348
 GameObject:
   m_ObjectHideFlags: 0
