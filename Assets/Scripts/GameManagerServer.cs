@@ -92,7 +92,8 @@ public class GameManagerServer : NetworkBehaviour
         Red,
         //Black,
         Blue,
-        Violet
+        Violet,
+        Gold
     }
 
 }
