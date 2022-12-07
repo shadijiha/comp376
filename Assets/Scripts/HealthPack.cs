@@ -41,6 +41,7 @@ public class HealthPack : NetworkBehaviour
     {
         if (collision.gameObject.tag.Contains(PlayerShoot.PLAYER_TAG))
         {
+            Debug.Log("Collision!!!!");
             var playerScript = collision.gameObject.GetComponent<Player>();
 
             if (playerScript.GetHealth() < playerScript.GetMaxHealth())

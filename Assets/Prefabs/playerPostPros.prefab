@@ -221,7 +221,7 @@ GameObject:
   - component: {fileID: 8463599760594411391}
   - component: {fileID: 6911477714383762399}
   - component: {fileID: 1092208653471882773}
-  - component: {fileID: 4098052942104713684}
+  - component: {fileID: 6616048736433630000}
   m_Layer: 8
   m_Name: playerPostPros
   m_TagString: Player
@@ -904,7 +904,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &4098052942104713684
+--- !u!114 &6616048736433630000
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

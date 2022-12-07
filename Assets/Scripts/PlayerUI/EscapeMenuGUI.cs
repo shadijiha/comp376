@@ -24,6 +24,8 @@ public class EscapeMenuGUI : MonoBehaviour
         escapeMenuPanel.SetActive(menuEnabled);
         playerUISetup = GetComponentInParent<PlayerUISetup>();
         weaponLoadout = weaponLoadoutObj.GetComponent<WeaponLoadout>();
+
+        manager = NetworkManager.singleton;
     }
 
     // Update is called once per frame
@@ -65,9 +67,6 @@ public class EscapeMenuGUI : MonoBehaviour
     public void Quit()
     {
         Cursor.lockState = CursorLockMode.None;
-
-        // This function is suppose to migrate the host in case the host has disconnected
-        manager.migrationManager.hostMigration = true;
 
         // Check if the current player is host
         /*if (manager.isNetworkActive) {            

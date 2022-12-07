@@ -15,12 +15,7 @@ public class PlayerWallCoolDown : MonoBehaviour
     {
         teleportCooldown = 7;
         healHoverTimeCooldown = 7;
-
-
-
     }
-
-  
 
     public bool handleGreenWallCoolDown()
     {
@@ -54,8 +49,6 @@ public class PlayerWallCoolDown : MonoBehaviour
         {
              return false;
         }
-
-
     }
  
     IEnumerator startTeleportCoolDown()
