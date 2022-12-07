@@ -8,6 +8,7 @@ public class TacticalShotgun : PlayerWeapon
     public TacticalShotgun()
     {
         weaponType              = WeaponType.TacticalShotgun;
+        description             = "A moderate fire-rate shotgun with moderate damage and moderate spread. Spread does not change when moving. Has an moderate critical hit modifier.";
         damage                  = 5;
         currentLoadedAmmo       = 6;
         magazineSize            = 6;
@@ -55,6 +56,7 @@ public class TacticalShotgun : PlayerWeapon
                                     };
 
         model                   = WeaponManager.msWeaponArr[(int)weaponType];
+        name                    = "Tactical Shotgun";
     }
 
 }

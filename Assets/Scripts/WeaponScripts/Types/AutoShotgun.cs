@@ -8,6 +8,7 @@ public class AutoShotgun : PlayerWeapon
     public AutoShotgun()
     {
         weaponType              = WeaponType.AutoShotgun;
+        description             = "A rapid-firing, fully-automatic shotgun with lower damage per shot and moderate spread. Spread remains controlled while moving. Has a low critical hit modifier.";
         damage                  = 5;
         currentLoadedAmmo       = 10;
         magazineSize            = 10;
@@ -55,6 +56,7 @@ public class AutoShotgun : PlayerWeapon
                                     };
 
         model                   = WeaponManager.msWeaponArr[(int)weaponType];
+        name                    = "Auto Shotgun";
     }
 
 }

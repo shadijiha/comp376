@@ -8,13 +8,14 @@ public class BurstSMG : PlayerWeapon
     public BurstSMG()
     {
         weaponType              = WeaponType.BurstSMG;
+        description             = "A heavy-recoil rapid-firing SMG with which fires in tight 5 round bursts. Supports continuous fire, allowing easily chained, rapid bursts. Spread remains controlled when moving. Has a low critical modifier.";
         damage                  = 8;
         currentLoadedAmmo       = 40;
         magazineSize            = 40;
         currentSpareAmmo        = 200;
         maxAmmo                 = 200;
         shotCount               = 1;
-        critMultiplier          = 1.5f;
+        critMultiplier          = 1.25f;
         falloffStart            = 20f;
         falloffMax              = 40f;
         falloffDamage           = 6;
@@ -45,7 +46,7 @@ public class BurstSMG : PlayerWeapon
         cameraRecoilInfo        = new CameraRecoilInfo()
                                     {
                                         rotationSpeed       = 10f,
-                                        returnSpeed         = 15f,
+                                        returnSpeed         = 10f,
                                         recoilRotation      = new Vector3(4f,       2f,         0f)
                                     };
 
@@ -63,6 +64,7 @@ public class BurstSMG : PlayerWeapon
                                     };
 
         model                   = WeaponManager.msWeaponArr[(int)weaponType];
+        name                    = "Burst SMG";
     }
 
     // Burst Shooting Behavior override

@@ -4,10 +4,11 @@ using UnityEngine;
 
 [System.Serializable]
 public class BurstPistol : PlayerWeapon
-{
+{ 
     public BurstPistol()
     {
         weaponType              = WeaponType.BurstPistol;
+        description             = "A stable, high accuracy sidearm which fires in 3 round bursts. Spread remains controlled when moving. Has a moderate critical modifier.";
         damage                  = 12;
         currentLoadedAmmo       = 15;
         magazineSize            = 15;
@@ -63,6 +64,7 @@ public class BurstPistol : PlayerWeapon
                                     };
 
         model                   = WeaponManager.msWeaponArr[(int)weaponType];
+        name                    = "Burst Pistol";
     }
 
     // Burst Shooting Behavior override

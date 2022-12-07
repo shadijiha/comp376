@@ -20,13 +20,16 @@ public class greenWallEffect : MonoBehaviour
         
     }
 
-    public void healPlayerHoverTime(GameObject player) {
-
-        if (player.GetComponent<playerWallCoolDown>().handleGreenWallCoolDown())
+    public void healPlayerHoverTime(GameObject player) 
+    {
+        if (player.TryGetComponent<PlayerWallCoolDown>(out PlayerWallCoolDown wallCoolDown) && wallCoolDown.handleGreenWallCoolDown())
         {
             StartCoroutine(healPlayer(player.GetComponent<Player>()));
         }
-    
+        else
+        {
+            Debug.Log("Heal Else");
+        }
     }
 
     IEnumerator healPlayer( Player playerScritRef)

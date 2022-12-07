@@ -8,6 +8,7 @@ public class MarksmanPistol : PlayerWeapon
     public MarksmanPistol()
     {
         weaponType              = WeaponType.MarksmanPistol;
+        description             = "A semi-automatic, stable, extremely accuracy sidearm. Spread remains controlled when moving. Has a very high critical modifier.";
         damage                  = 18;
         currentLoadedAmmo       = 12;
         magazineSize            = 12;
@@ -55,5 +56,6 @@ public class MarksmanPistol : PlayerWeapon
                                     };
 
         model                   = WeaponManager.msWeaponArr[(int)weaponType];
+        name                    = "Marksman Pistol";
     }
 }

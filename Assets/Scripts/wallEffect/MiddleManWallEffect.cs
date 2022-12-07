@@ -12,8 +12,8 @@ public class MiddleManWallEffect : MonoBehaviour
     void Start()
     {
 
-        //parrentWall = this.transform.parent.gameObject;
-        parrentWall = this.gameObject;
+        parrentWall = this.transform.parent.gameObject;
+        //parrentWall = this.gameObject;
         parentColour = gameObject.GetComponentInParent<LevelObstacle>().GetColour();
     }
 
@@ -30,11 +30,17 @@ public class MiddleManWallEffect : MonoBehaviour
         {
             case GameManagerServer.Colour.Blue:
                 //print("Call function Teleport of TBA");
-                parrentWall.GetComponent<teleportScript>().teleportPlayer(player);
+                if (parrentWall.TryGetComponent<teleportScript>(out teleportScript tpScript))
+                {
+                    tpScript.teleportPlayer(player);
+                }
                 break;
             case GameManagerServer.Colour.Red:
                 //print("Call function boost shoting speed of player");
-                parrentWall.GetComponent<redWallEffect>().boostPlayerDomage(player);
+                if (parrentWall.TryGetComponent<redWallEffect>(out redWallEffect rdWall))
+                {
+                    rdWall.boostPlayerDomage(player);
+                }
                 break;
             case GameManagerServer.Colour.Yellow:
                 //print(" Call function healOverTime of player");

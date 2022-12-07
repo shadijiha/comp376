@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class PlayerUISetup : MonoBehaviour
 {
@@ -12,5 +13,16 @@ public class PlayerUISetup : MonoBehaviour
     {
         localPlayer = GameManager.GetLocalPlayer();
         weaponManager = localPlayer.GetComponent<WeaponManager>();
+    }
+
+    public void FreezePlayer(bool enabled)
+    {
+        Cursor.lockState = enabled ? CursorLockMode.Locked : CursorLockMode.None;
+
+        print("FreezePlayer: " + localPlayer.name);
+
+        localPlayer.GetComponent<PlayerMotor>().enabled = enabled;
+        localPlayer.GetComponent<PlayerControler>().enabled = enabled;
+        localPlayer.GetComponent<PlayerShoot>().enabled = enabled;
     }
 }

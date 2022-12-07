@@ -6,7 +6,10 @@ using UnityEngine.UI;
 [System.Serializable]
 public class PlayerWeapon
 {
+
+
     public  WeaponType          weaponType              = WeaponType.Invalid;
+    public  string              description             = "Invalid Description";
     public  int                 damage;
     public  int                 currentLoadedAmmo;
     public  int                 magazineSize;
@@ -37,12 +40,14 @@ public class PlayerWeapon
     public  bool                altFire                 = false;
     public  bool                hasted                  = false;
     public  bool                amplified               = false;
+    public  bool                switchingWeapon         = false;
 
     public  CameraRecoilInfo    cameraRecoilInfo;
     public  ModelRecoilInfo     modelRecoilInfo;
     public  BurstInfo           burstInfo;
     public  GameObject          model;
     public  Image               scope;
+    public  string              name;
    
     // Default Shooting Behavior
     virtual public (string, float) Shoot(PlayerShoot playerShoot)
@@ -63,7 +68,7 @@ public class PlayerWeapon
             if (Physics.Raycast(playerShoot.cam.transform.position, shotDirection, out hit, maxRange, playerShoot.mask))
             {
                 // We hit Something
-                if (hit.collider.tag == PlayerShoot.PLAYER_TAG)
+                if (hit.collider.CompareTag(PlayerShoot.PLAYER_TAG) || hit.collider.CompareTag(PlayerShoot.PLAYER_HEAD_TAG))
                 {
                     int finalDamage = damage;
                     if (hit.distance > falloffStart)
@@ -80,6 +85,16 @@ public class PlayerWeapon
                         {
                             finalDamage = falloffDamage;
                         }
+                    }
+
+                    if (hit.collider.CompareTag(PlayerShoot.PLAYER_HEAD_TAG))
+                    {
+                        finalDamage = Mathf.RoundToInt(damage * critMultiplier);
+                        playerShoot.m_hitCrosshair.Crit();
+                    }
+                    else
+                    {
+                        playerShoot.m_hitCrosshair.Hit();
                     }
                     
                     playerShoot.CmdPlayerShot(hit.collider.name, playerShoot.name, finalDamage);

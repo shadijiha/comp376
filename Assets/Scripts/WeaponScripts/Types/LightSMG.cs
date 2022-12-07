@@ -8,6 +8,7 @@ public class LightSMG : PlayerWeapon
     public LightSMG()
     {
         weaponType              = WeaponType.LightSMG;
+        description             = "A high-recoil, short-range, fully-automatic smg with an extremely rapid rate of fire. Spread remains controlled while moving. Has a low critical hit modifier.";
         damage                  = 8;
         currentLoadedAmmo       = 30;
         magazineSize            = 30;
@@ -55,6 +56,7 @@ public class LightSMG : PlayerWeapon
                                     };
 
         model                   = WeaponManager.msWeaponArr[(int)weaponType];
+        name                    = "Light SMG";
     }
 
 }

@@ -37,7 +37,7 @@ public class WeaponManager : NetworkBehaviour
         }
 
         // Equip Each weapon.
-        mPrimary = new ShotRifle
+        mPrimary = new BurstSMG
         {
             readyToShoot = true
         };
@@ -49,7 +49,7 @@ public class WeaponManager : NetworkBehaviour
         mCurrent.model.SetActive(true);
 
         // Create Sidearm
-        mSecondary = new BurstPistol
+        mSecondary = new MachinePistol
         {
             readyToShoot = false
         };
@@ -62,26 +62,48 @@ public class WeaponManager : NetworkBehaviour
         Equip(mSuper);
     }
 
+    public void SwitchWeaponsFromLoadout(PlayerWeapon primary, PlayerWeapon secondary)
+    {
+        UnequipPrimary();
+        UnequipSecondary();
+
+        mPrimary = primary;
+        mSecondary = secondary;
+
+        mNextWeapon = mPrimary;
+
+        Equip(mPrimary);
+        Equip(mSecondary);
+
+        Draw();
+    }
+
     // Update is called once per frame
     void Update()
     {
         // Weapon Switching
         if (Input.GetButtonDown("Primary") && !mCurrent.altFire && mPrimary != mCurrent && mPrimary != null)
         { 
-            mNextWeapon = mPrimary;
-            mCurrent.reloading = false;
+            mNextWeapon                 = mPrimary;
+            mNextWeapon.switchingWeapon = true;
+            mCurrent.reloading          = false;
+            mCurrent.switchingWeapon    = true;
             Invoke(nameof(Stow), mCurrent.stowTime);
         }
         if (Input.GetButtonDown("Secondary") && !mCurrent.altFire && mSecondary != mCurrent && mSecondary != null)
         {
-            mNextWeapon = mSecondary;
-            mCurrent.reloading = false;
+            mNextWeapon                 = mSecondary;
+            mNextWeapon.switchingWeapon = true;
+            mCurrent.reloading          = false;
+            mCurrent.switchingWeapon    = true;
             Invoke(nameof(Stow), mCurrent.stowTime);
         }
         if (Input.GetButtonDown("Super") && !mCurrent.altFire && mSuper != mCurrent && mSuper != null)
         {
-            mNextWeapon = mSuper;
-            mCurrent.reloading = false;
+            mNextWeapon                 = mSuper;
+            mNextWeapon.switchingWeapon = true;
+            mCurrent.reloading          = false;
+            mCurrent.switchingWeapon    = true;
             Invoke(nameof(Stow), mCurrent.stowTime);
         }
 
@@ -116,14 +138,14 @@ public class WeaponManager : NetworkBehaviour
                 mHasted = false;
 
                 mPrimary.hasted             = false;
-                mPrimary.speedMultiplier    = 1.5f; 
+                mPrimary.speedMultiplier    = 1.0f; 
                 mSecondary.hasted           = false;
-                mSecondary.speedMultiplier  = 1.5f;
+                mSecondary.speedMultiplier  = 1.0f;
 
                 if (mSuper != null)
                 {
                     mSuper.hasted           = false;
-                    mSuper.speedMultiplier  = 1.5f;
+                    mSuper.speedMultiplier  = 1.0f;
                 }
             }
         }
@@ -141,7 +163,7 @@ public class WeaponManager : NetworkBehaviour
         return mWeaponArr[(int)mCurrent.weaponType].GetComponent<ModelRecoil>();
     }
 
-    private void Equip(PlayerWeapon weapon)
+    public void Equip(PlayerWeapon weapon)
     {
         //weaponHolder.position, weaponHolder.rotation
         weapon.model = (GameObject)Instantiate(
@@ -149,8 +171,6 @@ public class WeaponManager : NetworkBehaviour
         weapon.model.transform.SetParent(weaponHolder);
         Vector3 holdPosition = weapon.model.GetComponentInChildren<HoldPt>().gameObject.transform.position;
         weapon.model.transform.position = weaponHolder.transform.position - holdPosition;
-     
-
         mCurrentGraphics = weapon.model.GetComponentInChildren<WeaponGraphics>();
         if (mCurrentGraphics == null)
         {
@@ -163,6 +183,19 @@ public class WeaponManager : NetworkBehaviour
 
         // Hide model initially.
          weapon.model.SetActive(false);
+    }
+
+    /// <summary>Call before equipping a overwriting mPrimary with a new weapon.</summary>
+    public void UnequipPrimary()
+    {
+        Destroy(mPrimary.model);
+    }
+
+    
+    /// <summary>Call before equipping a overwriting mSecondary with a new weapon.</summary>
+    public void UnequipSecondary()
+    {
+        Destroy(mSecondary.model);
     }
 
     private void Stow()
@@ -196,7 +229,8 @@ public class WeaponManager : NetworkBehaviour
 
     private void ReadyToShoot()
     {
-        mCurrent.readyToShoot = true;
+        mCurrent.switchingWeapon    = false;
+        mCurrent.readyToShoot       = true;
     }
 
 
@@ -224,10 +258,12 @@ public class WeaponManager : NetworkBehaviour
         {
             mPrimary.amplified      = true;
             mSecondary.amplified    = true;
+
             if (mSuper != null)
             {
                 mSuper.amplified    = true;
             }
+
             mAmplified = true;
         }
     }

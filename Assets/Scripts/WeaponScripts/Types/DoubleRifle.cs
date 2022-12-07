@@ -8,6 +8,7 @@ public class DoubleRifle : PlayerWeapon
     public DoubleRifle()
     {
         weaponType              = WeaponType.DoubleRifle;
+        description             = "A rifle which fires two projectiles in a tight spread in a twice in a burst. Spread increases moderately when moving. Has a high critical hit modifier.";
         damage                  = 18;
         currentLoadedAmmo       = 16;
         magazineSize            = 16;
@@ -64,6 +65,7 @@ public class DoubleRifle : PlayerWeapon
                                     };
 
         model                   = WeaponManager.msWeaponArr[(int)weaponType];
+        name                    = "Double Rifle";
     }
 
     // Burst Shooting Behavior override

@@ -11,13 +11,12 @@ using UnityEngine.Networking;
 [RequireComponent(typeof(WeaponManager))]
 public class PlayerShoot : NetworkBehaviour
 {
-    public const string PLAYER_TAG = "Player";
-
+    public const string PLAYER_TAG              = "Player";
+    public const string PLAYER_HEAD_TAG         = "PlayerHead";
 
                         private PlayerWeapon    m_CurrentWeapon;
                         private PlayerControler m_controler;
                         private PlayerMotor     m_motor;
-                        private Vector3         m_previousPosition;
                         public  WeaponManager   m_WeaponManager;
     [SerializeField]    public  RectTransform   crosshair;
     [SerializeField]    public  Camera          cam;
@@ -26,9 +25,9 @@ public class PlayerShoot : NetworkBehaviour
     [SerializeField]    public  CameraRecoil    cameraRecoil;
     [SerializeField]    public  ModelRecoil     modelRecoil;
     [SerializeField]    public  AudioSource     weaponSound;
+    [SerializeField]    public  HitCrosshair    m_hitCrosshair;
                         public  float           m_fMovement;
-
-    private bool    m_bMoving; 
+                        private GameObject      playerUIInstance;
 
     public GameObject laserShot;
     //public GameObject laserShotTarget;
@@ -58,6 +57,7 @@ public class PlayerShoot : NetworkBehaviour
         m_CurrentWeapon.readyToShoot        = true;
 
         //mask &= LayerMask.NameToLayer("RemotePlayerLayer");
+        playerUIInstance = GetComponent<PlayerSetup>().playerUIInstance;
     }
 
     // Update is called once per frame
@@ -65,12 +65,17 @@ public class PlayerShoot : NetworkBehaviour
     {
         if (crosshair == null)
         {
-            crosshair               = GameObject.FindObjectOfType<PlayerSetup>().playerUIInstance.GetComponentInChildren<DynamicCrosshair>().GetComponent<RectTransform>();
+            crosshair               = playerUIInstance.GetComponentInChildren<DynamicCrosshair>().GetComponent<RectTransform>();
+        }
+
+        if (m_hitCrosshair == null)
+        {
+            m_hitCrosshair          = playerUIInstance.GetComponentInChildren<HitCrosshair>();
         }
 
         if (m_CurrentWeapon.scope == null)
         {
-            m_CurrentWeapon.scope   = GameObject.FindObjectOfType<PlayerSetup>().playerUIInstance.GetComponentInChildren<ScopeOverlay>().GetComponent<Image>();
+            m_CurrentWeapon.scope   = playerUIInstance.GetComponentInChildren<ScopeOverlay>().GetComponent<Image>();
         }
 
         m_CurrentWeapon = m_WeaponManager.GetCurrentWeapon();
@@ -111,8 +116,7 @@ public class PlayerShoot : NetworkBehaviour
         if (m_CurrentWeapon.readyToShoot            && 
             m_CurrentWeapon.shooting                && 
             !m_CurrentWeapon.reloading              && 
-            m_CurrentWeapon.currentLoadedAmmo > 0   &&
-            m_controler.getShootingBlock() == false)
+            m_CurrentWeapon.currentLoadedAmmo > 0)
         {
             Shoot();
         }
