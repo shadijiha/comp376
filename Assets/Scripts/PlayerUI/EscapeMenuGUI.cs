@@ -24,7 +24,6 @@ public class EscapeMenuGUI : MonoBehaviour
         escapeMenuPanel.SetActive(menuEnabled);
         playerUISetup = GetComponentInParent<PlayerUISetup>();
         weaponLoadout = weaponLoadoutObj.GetComponent<WeaponLoadout>();
-        print("EL: " + weaponLoadout);
     }
 
     // Update is called once per frame
@@ -38,12 +37,10 @@ public class EscapeMenuGUI : MonoBehaviour
             playerUISetup.FreezePlayer(!menuEnabled);
             escapeMenuPanel.SetActive(menuEnabled);
         }
-    }
-
 
         Cursor.lockState    = menuEnabled ? CursorLockMode.None : CursorLockMode.Locked;
         Cursor.visible      = menuEnabled;
-
+    }
 
     public void Resume()
     {
