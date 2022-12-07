@@ -391,7 +391,7 @@ MonoBehaviour:
   - {fileID: 1172113867161608151}
   - {fileID: 1172113867161608098}
   - {fileID: 7976873734904968976}
-  playerUIPrefab: {fileID: 7701344722933330505, guid: a0f2fe11526768c40bd2a1cbeb2b9e91,
+  playerUIPrefab: {fileID: 7701344722933330505, guid: 46a00b03dd7e391489240011ec1d6e8a,
     type: 3}
   playerUIInstance: {fileID: 0}
 --- !u!153 &1172113867161608100
@@ -592,6 +592,7 @@ MonoBehaviour:
       burstSpread: 0
     model: {fileID: 0}
     scope: {fileID: 0}
+    name: 
   mSecondary:
     weaponType: 0
     damage: 0
@@ -643,6 +644,7 @@ MonoBehaviour:
       burstSpread: 0
     model: {fileID: 0}
     scope: {fileID: 0}
+    name: 
   mSuper:
     weaponType: 0
     damage: 0
@@ -694,6 +696,7 @@ MonoBehaviour:
       burstSpread: 0
     model: {fileID: 0}
     scope: {fileID: 0}
+    name: 
   weaponHolder: {fileID: 7854826190126884547}
   mWeaponArr:
   - {fileID: 7471805642146190835, guid: 7e22e245148ac6f4a86cbcf9efcdf99b, type: 3}

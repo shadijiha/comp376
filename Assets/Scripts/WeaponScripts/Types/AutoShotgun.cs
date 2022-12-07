@@ -56,6 +56,7 @@ public class AutoShotgun : PlayerWeapon
                                     };
 
         model                   = WeaponManager.msWeaponArr[(int)weaponType];
+        name                    = "Auto Shotgun";
     }
 
 }

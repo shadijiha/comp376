@@ -56,6 +56,7 @@ public class HeavySMG : PlayerWeapon
                                     };
 
         model                   = WeaponManager.msWeaponArr[(int)weaponType];
+        name                    = "Heavy SMG";
     }
 
 }

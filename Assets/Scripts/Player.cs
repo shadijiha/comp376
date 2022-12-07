@@ -48,6 +48,9 @@ public class Player : NetworkBehaviour
     private IEnumerator Respawn() {
         yield return new WaitForSeconds(GameManager.instance.MATCH_SETTINGS.PlayerRespawnTime);
 
+        WeaponManager weaponManager = GetComponent<WeaponManager>();
+        weaponManager.Respawn();
+
         SetDefaults();
         Transform spawnPoint = NetworkManager.singleton.GetStartPosition();
         transform.position = spawnPoint.position;

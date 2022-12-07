@@ -76,6 +76,7 @@ public class HeavySniper : PlayerWeapon
                                     };
 
         model                   = WeaponManager.msWeaponArr[(int)weaponType];
+        name                    = "Heavy Sniper";
     }
 
     public override void AltFireActivate(PlayerShoot playerShoot)
