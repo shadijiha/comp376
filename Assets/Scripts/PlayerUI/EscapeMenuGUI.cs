@@ -2,12 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.UI;
+
 public class EscapeMenuGUI : MonoBehaviour
 {
     [SerializeField] private GameObject escapeMenuPanel;
+    [SerializeField] private GameObject weaponLoadoutButton;
+
+    [SerializeField] private GameObject weaponLoadoutObj;
 
     private bool menuEnabled;
     private PlayerUISetup playerUISetup;
+    private WeaponLoadout weaponLoadout;
 
     private NetworkManager manager;
 
@@ -17,6 +23,8 @@ public class EscapeMenuGUI : MonoBehaviour
         menuEnabled = false;
         escapeMenuPanel.SetActive(menuEnabled);
         playerUISetup = GetComponentInParent<PlayerUISetup>();
+        weaponLoadout = weaponLoadoutObj.GetComponent<WeaponLoadout>();
+        print("EL: " + weaponLoadout);
     }
 
     // Update is called once per frame
@@ -24,6 +32,8 @@ public class EscapeMenuGUI : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            weaponLoadoutButton.GetComponent<Button>().enabled = !weaponLoadout.firstTime;
+
             menuEnabled = !menuEnabled;
             playerUISetup.FreezePlayer(!menuEnabled);
             escapeMenuPanel.SetActive(menuEnabled);
@@ -32,9 +42,21 @@ public class EscapeMenuGUI : MonoBehaviour
 
     public void Resume()
     {
+        CloseMenu();
+        playerUISetup.FreezePlayer(true);
+    }
+
+    public void Loadout()
+    {
+        CloseMenu();
+        playerUISetup.FreezePlayer(false);
+        weaponLoadoutObj.SetActive(true);
+    }
+
+    public void CloseMenu()
+    {
         menuEnabled = false;
         escapeMenuPanel.SetActive(menuEnabled);
-        playerUISetup.FreezePlayer(true);
     }
 
     public void Quit()

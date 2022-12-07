@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Reflection;
 using UnityEngine;
-using static PlayerWeapon;
 
 public class WeaponLoadout : MonoBehaviour
 {
@@ -10,6 +10,9 @@ public class WeaponLoadout : MonoBehaviour
     [SerializeField] private GameObject secondaryWeaponList;
 
     [SerializeField] private PreviewWeapon previewWeapon;
+
+    [HideInInspector]
+    public bool firstTime = true;
 
     private List<PlayerWeapon> primaryWeapons = new List<PlayerWeapon>()
     {
@@ -70,16 +73,20 @@ public class WeaponLoadout : MonoBehaviour
         selectedPrimaryWeapon = primaryWeaponButtons[0].GetComponent<WeaponButton>();
         selectedSecondaryWeapon = secondaryWeaponButtons[0].GetComponent<WeaponButton>();
 
-        selectedPrimaryWeapon.SelectWeapon();
-        selectedSecondaryWeapon.SelectWeapon();
-
-        ShowPreview(selectedPrimaryWeapon.playerWeapon);
+        //selectedPrimaryWeapon.SelectWeapon();
+        //selectedSecondaryWeapon.SelectWeapon();
     }
 
     // Update is called once per frame
     void Update()
     {
-        weaponManager = GetComponentInParent<PlayerUISetup>().weaponManager;
+        if (weaponManager == null)
+        {
+            weaponManager = GetComponentInParent<PlayerUISetup>().weaponManager;
+            weaponManager.SwitchWeaponsFromLoadout(selectedPrimaryWeapon.playerWeapon, selectedSecondaryWeapon.playerWeapon);
+            ShowPreview(selectedPrimaryWeapon.playerWeapon);
+        }
+
         playerUISetup.FreezePlayer(false);
         Cursor.lockState = CursorLockMode.None;
     }
@@ -110,6 +117,7 @@ public class WeaponLoadout : MonoBehaviour
 
     public void PlayGame()
     {
+        firstTime = false;
         playerUISetup.FreezePlayer(true);
         gameObject.SetActive(false);
     }
