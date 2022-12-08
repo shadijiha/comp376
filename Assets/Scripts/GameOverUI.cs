@@ -38,7 +38,7 @@ public class GameOverUI : NetworkBehaviour
             foreach (var p in sortedPlayerStats)
             {
                 var player = Instantiate(playerTemplatePrefab, playerList.transform);
-                player.GetComponent<PlayerTemplate>().SetText(p.player.name, p.kills, p.death, maxKills == p.kills);
+                player.GetComponent<PlayerTemplate>().SetText(p.name, p.kills, p.death, maxKills == p.kills);
             }
 
             gameOverObj.SetActive(true);
