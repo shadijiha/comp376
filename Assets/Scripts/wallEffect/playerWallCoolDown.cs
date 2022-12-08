@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerWallCoolDown : MonoBehaviour
+public class playerWallCoolDown : MonoBehaviour
 {
     // Start is called before the first frame update
     private bool canTeleport = true;

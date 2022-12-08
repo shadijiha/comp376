@@ -13,6 +13,7 @@ public class PlayerMotor : MonoBehaviour
     private Vector3 additionalRotation  = Vector3.zero;
     private Vector3 previousPosition;
     public  float   currentVelocity;
+    public  float   currentHorizontalVelocity;
 
     private float cameraRotationX = 0f;
     private float currentCameraRotationX = 0.0f;
@@ -35,6 +36,9 @@ public class PlayerMotor : MonoBehaviour
         PerformRotation();
 
         currentVelocity = Vector3.Distance(transform.position, previousPosition);
+        Vector3 currentHorizontalPos = new Vector3(transform.position.x, 0, transform.position.z);
+        Vector3 previousHorizontalPos = new Vector3(previousPosition.x, 0, previousPosition.z);
+        currentHorizontalVelocity = Vector3.Distance(currentHorizontalPos, previousHorizontalPos);
         previousPosition = transform.position;
     }
 
