@@ -265,8 +265,11 @@ public class WeaponManager : NetworkBehaviour
     {
         mPrimary.Reset();
         mSecondary.Reset();
-        Destroy(mSuper.model);
-        mSuper                                                      = null;
+        if (mSuper != null)
+        {
+            Destroy(mSuper.model);
+            mSuper = null;
+        }
         mSecondary.model.SetActive(false);
         mCurrent                                                    = mPrimary;
         mCurrent.model.SetActive(true);
