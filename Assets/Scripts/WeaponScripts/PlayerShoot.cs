@@ -48,6 +48,8 @@ public class PlayerShoot : NetworkBehaviour
         m_controler     = GetComponent<PlayerControler>();
         m_motor         = GetComponent<PlayerMotor>();
 
+        m_audioSource   = transform.Find("LowPoly_Character").GetComponent<AudioSource>();
+
         m_CurrentWeapon = m_WeaponManager.GetCurrentWeapon();
 
         // Load the weapon so the player doesn't need to reload before first using it.
@@ -62,6 +64,9 @@ public class PlayerShoot : NetworkBehaviour
     // Update is called once per frame
     void Update() 
     {
+        if (playerUIInstance == null)
+            return;
+
         if (crosshair == null)
         {
             crosshair               = playerUIInstance.GetComponentInChildren<DynamicCrosshair>().GetComponent<RectTransform>();
