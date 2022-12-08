@@ -11,6 +11,7 @@ TagManager:
   - laserCollider
   - PlayerHead
   - SoundPos
+  - Soundtrack
   layers:
   - Default
   - TransparentFX
