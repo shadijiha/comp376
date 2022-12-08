@@ -11,6 +11,9 @@ public class PlayerControler : MonoBehaviour
     [SerializeField] private float sensitivity      = 3.5f; // In the future this should be in the game settings
     [SerializeField] private float jumpScanDist     = 1.5f;
 
+    public GameObject weaponRotation;
+
+
     private bool isEnabled;
 
     private PlayerMotor motor;
@@ -76,6 +79,9 @@ public class PlayerControler : MonoBehaviour
 
         // Apply CAMERA rotation
         motor.RotateCamera(cameraRotationX);
+        //Weapon rotation
+        Vector3 rotationW = new Vector3(0, 0, -motor.getRotation());
+        weaponRotation.transform.localRotation = Quaternion.Euler(rotationW);
 
         if (!jumpOnCooldown)
         {
