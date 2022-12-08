@@ -6,6 +6,13 @@ public class HealthPack : NetworkBehaviour
 {
     [SerializeField] private uint healing = 20;
 
+    private AudioSource audioSrc;
+
+    private void Start()
+    {
+        audioSrc = GetComponent<AudioSource>();
+    }
+
     float currentAngle = 0;
     void Update() {
         transform.rotation = Quaternion.Euler(new Vector3(
@@ -45,6 +52,7 @@ public class HealthPack : NetworkBehaviour
 
             if (playerScript.GetHealth() < playerScript.GetMaxHealth())
             {
+                audioSrc.PlayOneShot(audioSrc.clip);
                 playerScript.HealBy(healing);
 
                 Disable();
