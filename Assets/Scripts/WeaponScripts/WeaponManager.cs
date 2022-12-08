@@ -27,6 +27,9 @@ public class WeaponManager : NetworkBehaviour
                         private         float           AMPLIFY_DURATION    = 5f;
                         private         float           HASTE_DURATION      = 5f;
 
+
+
+
     private void Start()
     {
         m_audioSource = transform.Find("LowPoly_Character").GetComponent<AudioSource>();
@@ -77,8 +80,7 @@ public class WeaponManager : NetworkBehaviour
 
         Equip(mPrimary);
         Equip(mSecondary);
-
-        Draw();
+        Draw2();
     }
 
     // Update is called once per frame
@@ -180,14 +182,14 @@ public class WeaponManager : NetworkBehaviour
 
     public void Equip(PlayerWeapon weapon)
     {
-        //weaponHolder.position, weaponHolder.rotation
-        weapon.model = (GameObject)Instantiate(
-            msWeaponArr[(int)weapon.weaponType]);
+        weapon.model = (GameObject)Instantiate(msWeaponArr[(int)weapon.weaponType]);
         weapon.model.transform.SetParent(weaponHolder);
         Vector3 holdPosition = weapon.model.GetComponentInChildren<HoldPt>().gameObject.transform.position;
         weapon.model.transform.position = weaponHolder.transform.position - holdPosition;
         Vector3 rotation = this.transform.rotation.eulerAngles + weapon.model.transform.rotation.eulerAngles;
         weapon.model.transform.rotation = Quaternion.Euler(rotation);
+
+
 
         mCurrentGraphics = weapon.model.GetComponentInChildren<WeaponGraphics>();
         if (mCurrentGraphics == null)
@@ -223,11 +225,34 @@ public class WeaponManager : NetworkBehaviour
     private void Stow()
     {
         mCurrent.readyToShoot = false;
-        Invoke(nameof(Draw), this.mCurrent.stowTime);
-
         // Todo: Animate Stowing here
         //
+        Quaternion originalOrientationStow = this.mCurrent.model.transform.localRotation;
+        StartCoroutine(StowWeaponAnim());
+        this.mCurrent.model.transform.localRotation = originalOrientationStow;
         //
+        Invoke(nameof(Draw), this.mCurrent.stowTime);
+    }
+
+    public IEnumerator StowWeaponAnim()
+    {
+        //rotation
+        Quaternion originalOrientationStow = this.mCurrent.model.transform.localRotation;
+        Vector3 currentOrientation = this.mCurrent.model.transform.localRotation.eulerAngles;
+        Vector3 rotationBy = new Vector3(5f, 0, 0);
+        float stowTimer = 0;
+        while (stowTimer <= this.mCurrent.stowTime)
+        {
+            currentOrientation = currentOrientation + rotationBy * (stowTimer + 1f);
+            this.mCurrent.model.transform.localRotation = Quaternion.Euler(currentOrientation);
+            stowTimer += Time.deltaTime;
+            if (stowTimer >= this.mCurrent.stowTime - 0.01f)
+            {
+                this.mCurrent.model.transform.localRotation = originalOrientationStow;
+            }
+            yield return null;
+        }
+        this.mCurrent.model.transform.localRotation = originalOrientationStow;
     }
 
     private void Draw() 
@@ -241,12 +266,55 @@ public class WeaponManager : NetworkBehaviour
         mCameraRecoil.UpdateRecoilInfo(mCurrent.cameraRecoilInfo);
         mModelRecoil.UpdateRecoilInfo(mCurrent.modelRecoilInfo);
 
+
+
         // Todo: Trigger drawing animation here.
         //
+        Quaternion originalOrientationDraw = this.mCurrent.model.transform.localRotation;
+        StartCoroutine(DrawWeaponAnim());
+        this.mCurrent.model.transform.localRotation = originalOrientationDraw;
         //
+
 
         // Allow player to shoot after the drawing completes (alternatively can invoke via an animation event).
         Invoke(nameof(ReadyToShoot), mCurrent.drawTime);
+    }
+
+    private void Draw2()
+    {
+        // Hide the model
+        mCurrent.model.SetActive(false);
+
+        // Switch active weapon
+        mCurrent = mNextWeapon;
+        mCurrent.model.SetActive(true);
+        mCameraRecoil.UpdateRecoilInfo(mCurrent.cameraRecoilInfo);
+        mModelRecoil.UpdateRecoilInfo(mCurrent.modelRecoilInfo);
+
+
+
+        // Allow player to shoot after the drawing completes (alternatively can invoke via an animation event).
+        Invoke(nameof(ReadyToShoot), mCurrent.drawTime);
+    }
+
+    public IEnumerator DrawWeaponAnim()
+    {
+        //rotation
+        Quaternion originalOrientationDraw = this.mCurrent.model.transform.localRotation;
+        Vector3 currentOrientation = this.mCurrent.model.transform.localRotation.eulerAngles;
+        Vector3 rotationBy = new Vector3(-5f, 0, 0);
+        float drawTimer = 0;
+        while (drawTimer <= this.mCurrent.drawTime)
+        {
+            currentOrientation = currentOrientation + rotationBy * (drawTimer + 1f);
+            this.mCurrent.model.transform.localRotation = Quaternion.Euler(currentOrientation);
+            drawTimer += Time.deltaTime;
+            if (drawTimer >= this.mCurrent.drawTime - 0.01f) {
+                this.mCurrent.model.transform.localRotation = originalOrientationDraw;
+            }
+            yield return null;
+        }
+        this.mCurrent.model.transform.localRotation = originalOrientationDraw;
     }
 
     private void ReadyToShoot()
