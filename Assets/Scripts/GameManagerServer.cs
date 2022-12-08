@@ -10,7 +10,7 @@ public class GameManagerServer : NetworkBehaviour
 {
     private static GameManagerServer instance;
     public const double ChangeColourTimer = 15;   // 15 seconds
-    public const double MatchRoundTimer = 5;   // 3 minutes
+    public const double MatchRoundTimer =15;   // 3 minutes
 
     [SyncVar]
     private Colour currentRoundColor = Colour.Yellow;
@@ -20,6 +20,9 @@ public class GameManagerServer : NetworkBehaviour
 
     [SyncVar]
     private double matchRoundTimerDisplay = MatchRoundTimer; // in seconds
+
+    [SyncVar]
+    private bool isGameOver = false;
 
     private PlayerStatsList playersStats = new PlayerStatsList();
 
@@ -40,6 +43,11 @@ public class GameManagerServer : NetworkBehaviour
             }
             changeColourTimerDisplay -= Time.deltaTime;
             matchRoundTimerDisplay -= Time.deltaTime;
+
+            if (matchRoundTimerDisplay <= 0)
+            {
+                isGameOver = true;
+            }
         }
     }
 
@@ -87,7 +95,7 @@ public class GameManagerServer : NetworkBehaviour
 
     public static bool IsGameOver()
     {
-        return instance.matchRoundTimerDisplay <= 0.0;
+        return instance.isGameOver;
     }
 
     #endregion
