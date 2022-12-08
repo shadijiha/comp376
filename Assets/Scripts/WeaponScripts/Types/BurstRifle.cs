@@ -87,16 +87,15 @@ public class BurstRifle : PlayerWeapon
             if (Physics.Raycast(playerShoot.cam.transform.position, shotDirection, out hit, maxRange, playerShoot.mask))
             {
                 // We hit Something
-                if (hit.collider.CompareTag(PlayerShoot.PLAYER_TAG) || hit.collider.CompareTag(PlayerShoot.PLAYER_HEAD_TAG))
+                if (hit.collider.tag == PlayerShoot.PLAYER_TAG)
                 {
                     int finalDamage = damage;
-                    string plr;
                     if (hit.distance > falloffStart)
                     {
                         if (hit.distance < falloffMax)
                         {
                             // Damage linearly falls off between the minimum falloff distance and the maximum falloff.
-                            float falloffPercent = (hit.distance - falloffStart)/(falloffMax - falloffStart);
+                            float falloffPercent = (hit.distance - falloffStart) / (falloffMax - falloffStart);
                             finalDamage = Mathf.RoundToInt(
                                 (falloffPercent * falloffDamage) +
                                 ((1 - falloffPercent) * damage));
@@ -107,21 +106,9 @@ public class BurstRifle : PlayerWeapon
                         }
                     }
 
-                    if (hit.collider.CompareTag(PlayerShoot.PLAYER_HEAD_TAG))
-                    {
-                        finalDamage = Mathf.RoundToInt(damage * critMultiplier);
-                        playerShoot.m_hitCrosshair.Crit();
-                        plr = hit.collider.GetComponent<Head>().par.name;
-                    }
-                    else
-                    {
-                        playerShoot.m_hitCrosshair.Hit();
-                        plr = hit.collider.name;
-                    }
-                    
-                    
-                    playerShoot.CmdPlayerShot(plr, playerShoot.name, finalDamage);
+                    playerShoot.CmdPlayerShot(hit.collider.name, playerShoot.name, finalDamage);
                 }
+
                 // Play Hit effect on the server
                 playerShoot.CmdOnHit(hit.point, hit.normal);
                 playerShoot.CmdOnHitLaser(playerShoot.GetComponentInChildren<ParticleOrigin>().gameObject.transform.position, hit.point, 8f);

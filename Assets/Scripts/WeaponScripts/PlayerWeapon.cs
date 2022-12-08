@@ -71,7 +71,6 @@ public class PlayerWeapon
                 if (hit.collider.CompareTag(PlayerShoot.PLAYER_TAG) || hit.collider.CompareTag(PlayerShoot.PLAYER_HEAD_TAG))
                 {
                     int finalDamage = damage;
-                    string plr;
                     if (hit.distance > falloffStart)
                     {
                         if (hit.distance < falloffMax)
@@ -92,16 +91,13 @@ public class PlayerWeapon
                     {
                         finalDamage = Mathf.RoundToInt(damage * critMultiplier);
                         playerShoot.m_hitCrosshair.Crit();
-                        plr = hit.collider.GetComponent<Head>().par.name;
                     }
                     else
                     {
                         playerShoot.m_hitCrosshair.Hit();
-                        plr = hit.collider.name;
                     }
                     
-                    
-                    playerShoot.CmdPlayerShot(plr, playerShoot.name, finalDamage);
+                    playerShoot.CmdPlayerShot(hit.collider.name, playerShoot.name, finalDamage);
                 }
 
                 // Play Hit effect on the server
