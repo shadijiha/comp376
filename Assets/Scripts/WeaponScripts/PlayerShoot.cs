@@ -17,6 +17,7 @@ public class PlayerShoot : NetworkBehaviour
                         private PlayerWeapon    m_CurrentWeapon;
                         private PlayerControler m_controler;
                         private PlayerMotor     m_motor;
+    //[SerializeField]    private AudioSource     m_audioSource;
                         public  WeaponManager   m_WeaponManager;
     [SerializeField]    public  RectTransform   crosshair;
     [SerializeField]    public  Camera          cam;
@@ -301,7 +302,6 @@ public class PlayerShoot : NetworkBehaviour
     public void ShootLaser(Vector3 shotOriginPosition, Vector3 endPoint,  float laserShotSpeed)
     {
         GameObject shot = Instantiate(laserShot, shotOriginPosition, Quaternion.LookRotation(endPoint - shotOriginPosition));
-        //Quaternion.identity);
         shot.GetComponent<Rigidbody>().velocity = (endPoint- shotOriginPosition) * laserShotSpeed;
 
         GameObject.Destroy(shot, 2f);
@@ -316,6 +316,11 @@ public class PlayerShoot : NetworkBehaviour
         m_CurrentWeapon.readyToShoot    = false;
 
         (string, float) invokeDetails   = m_CurrentWeapon.Shoot(this);
+        //AudioClip shootSound = m_CurrentWeapon.model.GetComponent<AudioSource>().clip;
+        //m_audioSource.PlayOneShot(shootSound);
+
+        AudioSource shootSource = m_CurrentWeapon.model.GetComponent<AudioSource>();
+        shootSource.PlayOneShot(shootSource.clip);
 
         Invoke(invokeDetails.Item1, invokeDetails.Item2);
     }

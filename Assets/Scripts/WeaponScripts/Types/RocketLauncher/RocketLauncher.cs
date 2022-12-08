@@ -60,7 +60,7 @@ public class RocketLauncher : PlayerWeapon
 
     public override (string, float) Shoot(PlayerShoot playerShoot)
     {
-        Debug.Log("Rocket Shoot.");
+        //Debug.Log("Rocket Shoot.");
         if (manager == null)
         {
             manager = model.GetComponent<RocketManager>();

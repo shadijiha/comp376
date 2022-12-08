@@ -256,9 +256,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 47c92d798d04e404d96eaeee0dd49fd4, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.75
+  m_Volume: 0.8
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -447,6 +447,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 1172113867161608151}
   currentVelocity: 0
+  currentHorizontalVelocity: 0
   cameraRotationLimit: 85
   rb: {fileID: 0}
 --- !u!114 &1172113867161608125
@@ -470,6 +471,7 @@ MonoBehaviour:
   animator: {fileID: 185597601041941295}
   isSprinting: 0
   isJumping: 0
+  audioSrc: {fileID: 1092208653471882773}
   walkSound: {fileID: 8300000, guid: 0cc994530aa8a6c43b77d57454da2ed7, type: 3}
   sprintSound: {fileID: 8300000, guid: 2b302768eff491142a5e5dc0fa535e2a, type: 3}
 --- !u!114 &1172113867161608102
@@ -601,6 +603,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b2bf2c1d74eba542b479daebc7ee573, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_audioSource: {fileID: 0}
   m_WeaponManager: {fileID: 0}
   crosshair: {fileID: 0}
   cam: {fileID: 1172113867161608151}
