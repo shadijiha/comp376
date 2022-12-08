@@ -17,14 +17,6 @@ public class Player : NetworkBehaviour
     [SerializeField] private Behaviour[] disableOnDeath;
     private bool[] wasEnable;
 
-    [SerializeField] private AudioClip deathSound;
-    private AudioSource audioSrc;
-
-    private void Start()
-    {
-        audioSrc = GetComponent<AudioSource>();
-    }
-
     /// <summary>
     /// Call this when the Player setup is ready
     /// </summary>
@@ -38,8 +30,6 @@ public class Player : NetworkBehaviour
     }
 
     private void Die() {
-        audioSrc.Stop();
-        audioSrc.PlayOneShot(deathSound);
         isDead(true);
 
         // Disable components

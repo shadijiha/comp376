@@ -27,13 +27,8 @@ public class WeaponManager : NetworkBehaviour
                         private         float           AMPLIFY_DURATION    = 5f;
                         private         float           HASTE_DURATION      = 5f;
 
-    [SerializeField] private AudioClip swapSound;
-    private AudioSource m_audioSource;
-
     private void Start()
     {
-        m_audioSource = GameObject.FindGameObjectWithTag("SoundPos").GetComponent<AudioSource>();
-
         for (int i = 0; i < mWeaponArr.Length; ++i)
         {
             if (mWeaponArr[i] != null && msWeaponArr[i] == null)
@@ -241,8 +236,6 @@ public class WeaponManager : NetworkBehaviour
         mCameraRecoil.UpdateRecoilInfo(mCurrent.cameraRecoilInfo);
         mModelRecoil.UpdateRecoilInfo(mCurrent.modelRecoilInfo);
 
-        m_audioSource.Stop();
-        m_audioSource.PlayOneShot(swapSound);
         // Todo: Trigger drawing animation here.
         //
         //

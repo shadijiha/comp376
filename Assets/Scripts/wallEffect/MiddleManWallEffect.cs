@@ -54,8 +54,9 @@ public class MiddleManWallEffect : MonoBehaviour
                 //print("call function explosion force of player!");
                 parrentWall.GetComponent<violetWallEffect>().boostPlayerHaste(player);
                 break;
-            case GameManagerServer.Colour.Gold:
-                break;
+            /*case GameManagerServer.Colour.Orange:
+                print("call function increaseDomage of player!");
+                break;*/
 
             default:
                 print("Incorrect intelligence level.");
