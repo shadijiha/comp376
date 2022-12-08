@@ -10,7 +10,7 @@ public class GameManagerServer : NetworkBehaviour
 {
     private static GameManagerServer instance;
     public const double ChangeColourTimer = 15;   // 15 seconds
-    public const double MatchRoundTimer =15;   // 3 minutes
+    public const double MatchRoundTimer = 180;   // 3 minutes
 
     [SyncVar]
     private Colour currentRoundColor = Colour.Yellow;
