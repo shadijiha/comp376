@@ -7,27 +7,26 @@ using UnityEngine.Networking;
 
 public class GameOverUI : NetworkBehaviour
 {
-    [SerializeField] private Canvas gameOverCanvas;
+    [SerializeField] private GameObject gameOverObj;
     [SerializeField] private GameObject playerList;
     [SerializeField] private GameObject playerTemplatePrefab;
 
-    private bool isGameOver = false;
-    private NetworkManager manager;
+    private PlayerHeaderGUI playerHeaderGUI;
+    private PlayerUISetup playerUISetup;
 
     // Start is called before the first frame update
     void Start()
     {
-        gameOverCanvas = GetComponent<Canvas>();
-        gameOverCanvas.enabled = false;
-        manager = NetworkManager.singleton;
+        playerUISetup = GetComponent<PlayerUISetup>();
+        playerHeaderGUI = GetComponent<PlayerHeaderGUI>();
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (!isGameOver && GameManagerServer.IsGameOver())
+        if (GameManagerServer.IsGameOver())
         {
-            Time.timeScale = 0.0f;
+            playerUISetup.FreezePlayer(false);
             Cursor.lockState = CursorLockMode.None;
 
             var playerStats = GameManagerServer.GetPlayerStatsList();
@@ -41,17 +40,9 @@ public class GameOverUI : NetworkBehaviour
                 player.GetComponent<PlayerTemplate>().SetText(p.player.name, p.kills, p.death, maxKills == p.kills);
             }
 
-            gameOverCanvas.enabled = true;
-            isGameOver = true;
+            gameOverObj.SetActive(true);
+            playerHeaderGUI.enabled = false;
+            enabled = false;
         }
-    }
-
-    public void Quit()
-    {
-        Cursor.lockState = CursorLockMode.None;
-
-        var match = manager.matchInfo;
-        manager.matchMaker.DropConnection(match.networkId, match.nodeId, HostGame.RequestDomain, manager.OnDropConnection);
-        manager.StopHost();
     }
 }
