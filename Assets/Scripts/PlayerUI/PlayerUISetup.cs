@@ -19,8 +19,6 @@ public class PlayerUISetup : MonoBehaviour
     {
         Cursor.lockState = enabled ? CursorLockMode.Locked : CursorLockMode.None;
 
-        print("FreezePlayer: " + localPlayer.name);
-
         localPlayer.GetComponent<PlayerMotor>().enabled = enabled;
         localPlayer.GetComponent<PlayerControler>().enabled = enabled;
         localPlayer.GetComponent<PlayerShoot>().enabled = enabled;
