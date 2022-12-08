@@ -48,7 +48,7 @@ public class PlayerShoot : NetworkBehaviour
         m_WeaponManager = GetComponent<WeaponManager>();
         m_controler     = GetComponent<PlayerControler>();
         m_motor         = GetComponent<PlayerMotor>();
-        m_audioSource   = GameObject.FindGameObjectWithTag("SoundPos").GetComponent<AudioSource>();
+        m_audioSource   = FindComponentInChildWithTag<AudioSource>("SoundPos");
 
         m_CurrentWeapon = m_WeaponManager.GetCurrentWeapon();
 
@@ -59,6 +59,19 @@ public class PlayerShoot : NetworkBehaviour
 
         //mask &= LayerMask.NameToLayer("RemotePlayerLayer");
         playerUIInstance = GetComponent<PlayerSetup>().playerUIInstance;
+    }
+
+    private T FindComponentInChildWithTag<T>(string tag) where T : Component
+    {
+        Transform t = transform;
+        foreach (Transform tr in t)
+        {
+            if (tr.CompareTag(tag))
+            {
+                return tr.GetComponent<T>();
+            }
+        }
+        return null;
     }
 
     // Update is called once per frame
