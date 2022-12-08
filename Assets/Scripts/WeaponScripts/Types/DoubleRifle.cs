@@ -111,7 +111,7 @@ public class DoubleRifle : PlayerWeapon
                     {
                         finalDamage = Mathf.RoundToInt(damage * critMultiplier);
                         playerShoot.m_hitCrosshair.Crit();
-                        plr = hit.collider.GetComponentInParent<Player>().name;
+                        plr = hit.collider.GetComponent<Head>().par.name;
                     }
                     else
                     {
