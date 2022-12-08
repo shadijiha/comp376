@@ -17,7 +17,6 @@ public class PlayerShoot : NetworkBehaviour
                         private PlayerWeapon    m_CurrentWeapon;
                         private PlayerControler m_controler;
                         private PlayerMotor     m_motor;
-                        private AudioSource     m_audioSource;
                         public  WeaponManager   m_WeaponManager;
     [SerializeField]    public  RectTransform   crosshair;
     [SerializeField]    public  Camera          cam;
@@ -48,6 +47,7 @@ public class PlayerShoot : NetworkBehaviour
         m_WeaponManager = GetComponent<WeaponManager>();
         m_controler     = GetComponent<PlayerControler>();
         m_motor         = GetComponent<PlayerMotor>();
+
         m_audioSource   = transform.Find("LowPoly_Character").GetComponent<AudioSource>();
 
         m_CurrentWeapon = m_WeaponManager.GetCurrentWeapon();
@@ -64,6 +64,9 @@ public class PlayerShoot : NetworkBehaviour
     // Update is called once per frame
     void Update() 
     {
+        if (playerUIInstance == null)
+            return;
+
         if (crosshair == null)
         {
             crosshair               = playerUIInstance.GetComponentInChildren<DynamicCrosshair>().GetComponent<RectTransform>();
@@ -157,13 +160,20 @@ public class PlayerShoot : NetworkBehaviour
         RpcDoHitEffect(pos, normal);
     }
 
-    
-    //[Command]
+
+    [Command]
+
     public void CmdOnHitLaser(Vector3 rayOrigine, Vector3 endPoint, float laserShotSpeed)
+    {
+        RpcDoHitLaser(rayOrigine, endPoint, laserShotSpeed);
+    }
+
+    [ClientRpc]
+    public void RpcDoHitLaser(Vector3 rayOrigine, Vector3 endPoint, float laserShotSpeed)
     {
         ShootLaser(rayOrigine, endPoint, laserShotSpeed);
     }
-    
+
 
     /// <summary>
     /// Called on all clients when we need to do a
@@ -303,6 +313,7 @@ public class PlayerShoot : NetworkBehaviour
     public void ShootLaser(Vector3 shotOriginPosition, Vector3 endPoint,  float laserShotSpeed)
     {
         GameObject shot = Instantiate(laserShot, shotOriginPosition, Quaternion.LookRotation(endPoint - shotOriginPosition));
+        //Quaternion.identity);
         shot.GetComponent<Rigidbody>().velocity = (endPoint- shotOriginPosition) * laserShotSpeed;
 
         GameObject.Destroy(shot, 2f);
@@ -317,8 +328,6 @@ public class PlayerShoot : NetworkBehaviour
         m_CurrentWeapon.readyToShoot    = false;
 
         (string, float) invokeDetails   = m_CurrentWeapon.Shoot(this);
-        AudioClip shootSound = m_CurrentWeapon.model.GetComponent<AudioSource>().clip;
-        m_audioSource.PlayOneShot(shootSound);
 
         Invoke(invokeDetails.Item1, invokeDetails.Item2);
     }
@@ -337,7 +346,7 @@ public class PlayerShoot : NetworkBehaviour
     [Command]
     public void CmdPlayerShot(string hit_id, string src, int damage) {
         // Do the damage stuff
-        Debug.Log(hit_id + " has been shot");
+        Debug.Log(hit_id + " has been shot  ");
 
         // In the future shoud pass the source to grant assists
         Player p = GameManager.GetPlayer(hit_id);
