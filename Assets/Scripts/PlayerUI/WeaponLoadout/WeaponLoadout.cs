@@ -10,6 +10,7 @@ public class WeaponLoadout : MonoBehaviour
     [SerializeField] private GameObject secondaryWeaponList;
 
     [SerializeField] private PreviewWeapon previewWeapon;
+    [SerializeField] private GameObject playButton;
 
     [HideInInspector]
     public bool firstTime = true;
@@ -46,6 +47,9 @@ public class WeaponLoadout : MonoBehaviour
     private PlayerUISetup playerUISetup;
     private WeaponManager weaponManager;
 
+    private bool isPrimaryWeaponSelected = false;
+    private bool isSecondaryWeaponSelected = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -73,8 +77,7 @@ public class WeaponLoadout : MonoBehaviour
         selectedPrimaryWeapon = primaryWeaponButtons[0].GetComponent<WeaponButton>();
         selectedSecondaryWeapon = secondaryWeaponButtons[0].GetComponent<WeaponButton>();
 
-        //selectedPrimaryWeapon.SelectWeapon();
-        //selectedSecondaryWeapon.SelectWeapon();
+        playButton.SetActive(false);
     }
 
     // Update is called once per frame
@@ -93,21 +96,25 @@ public class WeaponLoadout : MonoBehaviour
 
     public void SelectWeapon(WeaponButton weaponButton)
     {
-        if (weaponButton != selectedPrimaryWeapon && weaponButton.isPrimaryWeapon)
+        if (weaponButton.isPrimaryWeapon && weaponButton != selectedPrimaryWeapon)
         {
             selectedPrimaryWeapon.ResetSelection();
             selectedPrimaryWeapon = weaponButton;
+            isPrimaryWeaponSelected = true;
         }
-        else if (weaponButton != selectedSecondaryWeapon && !weaponButton.isPrimaryWeapon)
+        else if (!weaponButton.isPrimaryWeapon && weaponButton != selectedSecondaryWeapon)
         {
             selectedSecondaryWeapon.ResetSelection();
             selectedSecondaryWeapon = weaponButton;
+            isSecondaryWeaponSelected = true;
         }
 
         if (weaponManager != null)
         {
             weaponManager.SwitchWeaponsFromLoadout(selectedPrimaryWeapon.playerWeapon, selectedSecondaryWeapon.playerWeapon);
         }
+
+        playButton.SetActive(isPrimaryWeaponSelected && isSecondaryWeaponSelected);
     }
 
     public void ShowPreview(PlayerWeapon playerWeapon)
