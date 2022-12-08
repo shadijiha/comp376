@@ -111,7 +111,7 @@ public class DoubleRifle : PlayerWeapon
 
                 // Play Hit effect on the server
                 playerShoot.CmdOnHit(hit.point, hit.normal);
-                playerShoot.CmdOnHitLaser(playerShoot.GetComponentInChildren<ParticleOrigin>().gameObject.transform.position, hit.point, 8f);
+                playerShoot.RpcOnHitLaser(playerShoot.GetComponentInChildren<ParticleOrigin>().gameObject.transform.position, hit.point, 8f);
             }
         }
 

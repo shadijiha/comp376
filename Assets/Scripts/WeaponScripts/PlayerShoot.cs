@@ -155,9 +155,10 @@ public class PlayerShoot : NetworkBehaviour
         RpcDoHitEffect(pos, normal);
     }
 
-    
+
     //[Command]
-    public void CmdOnHitLaser(Vector3 rayOrigine, Vector3 endPoint, float laserShotSpeed)
+    [ClientRpc]
+    public void RpcOnHitLaser(Vector3 rayOrigine, Vector3 endPoint, float laserShotSpeed)
     {
         ShootLaser(rayOrigine, endPoint, laserShotSpeed);
     }
