@@ -11,7 +11,7 @@ public class WeaponManager : NetworkBehaviour
                         public  static  GameObject[]    msWeaponArr         = new GameObject[18];
     [SerializeField]    public          PlayerWeapon    mPrimary;
     [SerializeField]    public          PlayerWeapon    mSecondary;
-    [SerializeField]    private         PlayerWeapon    mSuper;
+    [SerializeField]    public          PlayerWeapon    mSuper;
     [SerializeField]    private         Transform       weaponHolder;
     [SerializeField]    private         GameObject[]    mWeaponArr          = new GameObject[18];
     [SerializeField]    private         CameraRecoil    mCameraRecoil;
