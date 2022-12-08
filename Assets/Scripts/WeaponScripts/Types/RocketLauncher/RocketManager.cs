@@ -10,7 +10,7 @@ public class RocketManager : MonoBehaviour
 
     public void Shoot(string source, Vector3 dir)
     {
-        //Debug.Log("RocketManagerShoot");
+        Debug.Log("RocketManagerShoot");
         m_rocketObjects[4 - m_rocketsLeft].m_direction = dir;
         m_rocketObjects[4 - m_rocketsLeft].Launch(source);
     }

@@ -10,8 +10,6 @@ TagManager:
   - landmine
   - laserCollider
   - PlayerHead
-  - SoundPos
-  - Soundtrack
   layers:
   - Default
   - TransparentFX
