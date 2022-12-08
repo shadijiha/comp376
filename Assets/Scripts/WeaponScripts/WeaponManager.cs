@@ -16,7 +16,6 @@ public class WeaponManager : NetworkBehaviour
     [SerializeField]    private         GameObject[]    mWeaponArr          = new GameObject[18];
     [SerializeField]    private         CameraRecoil    mCameraRecoil;
     [SerializeField]    private         ModelRecoil     mModelRecoil;
-                        private         WallUIEffect    mWallUIEffect;
                         private         PlayerWeapon    mCurrent;
                         private         PlayerWeapon    mNextWeapon;
                         private         WeaponGraphics  mCurrentGraphics;
@@ -82,11 +81,6 @@ public class WeaponManager : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (mWallUIEffect == null)
-        {
-            mWallUIEffect = GetComponent<PlayerSetup>().playerUIInstance.GetComponentInChildren<WallUIEffect>();
-        }
-
         // Weapon Switching
         if (Input.GetButtonDown("Primary") && !mCurrent.altFire && mPrimary != mCurrent && mPrimary != null)
         { 
@@ -119,8 +113,6 @@ public class WeaponManager : NetworkBehaviour
 
             if (mAmplifyTime > AMPLIFY_DURATION)
             {
-                mWallUIEffect.AmpDeactivate();
-
                 mAmplifyTime = 0f;
 
                 mAmplified = false;
@@ -141,8 +133,6 @@ public class WeaponManager : NetworkBehaviour
 
             if (mHasteTime > HASTE_DURATION)
             {
-                mWallUIEffect.HasteDeactivate();
-
                 mHasteTime = 0f;
 
                 mHasted = false;
@@ -179,10 +169,7 @@ public class WeaponManager : NetworkBehaviour
         weapon.model = (GameObject)Instantiate(
             msWeaponArr[(int)weapon.weaponType]);
         weapon.model.transform.SetParent(weaponHolder);
-        Vector3 holdPosition = weapon.model.GetComponentInChildren<HoldPt>().gameObject.transform.position;
-        weapon.model.transform.position = weaponHolder.transform.position - holdPosition;
-        Vector3 rotation = this.transform.rotation.eulerAngles + weapon.model.transform.rotation.eulerAngles;
-        weapon.model.transform.rotation = Quaternion.Euler(rotation);
+        weapon.model.transform.position = weaponHolder.transform.position;
 
         mCurrentGraphics = weapon.model.GetComponentInChildren<WeaponGraphics>();
         if (mCurrentGraphics == null)
@@ -194,9 +181,6 @@ public class WeaponManager : NetworkBehaviour
         {
             Util.SetLayerRecursively(weapon.model, LayerMask.NameToLayer(WEAPON_LAYER));
         }
-
-        mCameraRecoil.UpdateRecoilInfo(weapon.cameraRecoilInfo);
-        mModelRecoil.UpdateRecoilInfo(weapon.modelRecoilInfo);
 
         // Hide model initially.
         weapon.model.SetActive(false);
@@ -273,7 +257,6 @@ public class WeaponManager : NetworkBehaviour
         }
         else
         {
-            mWallUIEffect.AmpActivate();
             mPrimary.amplified      = true;
             mSecondary.amplified    = true;
 
@@ -294,7 +277,6 @@ public class WeaponManager : NetworkBehaviour
         }
         else
         {
-            mWallUIEffect.HasteActivate();
             mPrimary.hasted             = true;
             mPrimary.speedMultiplier    = 1.5f;
             mSecondary.hasted           = true;

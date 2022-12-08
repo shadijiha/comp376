@@ -10,6 +10,19 @@ public class ModelRecoil : MonoBehaviour
 	[Header("Recoil Info")]
 	[SerializeField]
 	public	PlayerWeapon.ModelRecoilInfo	mRecoilInfo;
+
+	
+	//public	float		positionRecoilSpeed	= 8f;
+	//public	float		rotationRecoilSpeed	= 8f;
+	//public	float		positionReturnSpeed	= 18f;
+	//public	float		rotationReturnSpeed	= 38f;
+
+	//[Header("Amount Settings:")]
+	//public	Vector3		RecoilRotation		= new Vector3(10, 5, 7);
+	//public	Vector3		MinRecoilRotation	= new Vector3(5, 2.5f, 3.5f);
+	//public	Vector3		RecoilKick			= new Vector3(0.015f, 0f, -0.2f);
+	//public	Vector3		MinRecoilKick		= new Vector3(0.0075f, 0f, -0.1f);
+
 	public	Vector3		rotationRecoil;
 	public	Vector3		positionRecoil;
 	public	Vector3		rotation;
@@ -55,6 +68,8 @@ public class ModelRecoil : MonoBehaviour
 			recoilZ		-= mRecoilInfo.RecoilRotation.z;
         }
 
+		//Debug.Log($"Recoil:({recoilX}, {recoilY}, {recoilZ})");
+
 		rotationRecoil	+= new Vector3(recoilX, recoilY, recoilZ);
 
 		float kickZ		= Random.Range(mRecoilInfo.MinRecoilKick.z, mRecoilInfo.RecoilKick.z);
@@ -71,6 +86,7 @@ public class ModelRecoil : MonoBehaviour
 			kickX		-= mRecoilInfo.RecoilKick.x;
         }
 
+		//Debug.Log($"Kick:({kickX}, {kickY}, {kickZ})");
 		positionRecoil	+= new Vector3(kickX, kickY, kickZ);
 	}
 

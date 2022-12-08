@@ -26,31 +26,22 @@ public class greenWallEffect : MonoBehaviour
         {
             StartCoroutine(healPlayer(player.GetComponent<Player>()));
         }
+        else
+        {
+            Debug.Log("Heal Else");
+        }
     }
 
     IEnumerator healPlayer( Player playerScritRef)
     {
-        WallUIEffect overlay = playerScritRef.GetComponent<PlayerSetup>().playerUIInstance.GetComponentInChildren<WallUIEffect>();
-        if (overlay != null)
-        {
-            overlay.HealActivate();
-        }
-        else
-        {
-            Debug.Log("Failed to retrieve player HealOverlay.");
-        }
-
         uint healPerTick = (uint) healPerSecond;
         for (int healingTick = 0; healingTick <secondOfHealing; healingTick++)
         {
             yield return new WaitForSeconds(1);
             playerScritRef.HoverHealBy(healPerTick);
             Debug.Log("heal Tick : " + healingTick);
+
         }
        
-        if (overlay != null)
-        {
-            overlay.HealDeactivate();
-        }
     }
 }
