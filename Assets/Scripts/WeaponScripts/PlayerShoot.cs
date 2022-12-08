@@ -64,6 +64,9 @@ public class PlayerShoot : NetworkBehaviour
     // Update is called once per frame
     void Update() 
     {
+        if (playerUIInstance == null)
+            return;
+
         if (crosshair == null)
         {
             crosshair               = playerUIInstance.GetComponentInChildren<DynamicCrosshair>().GetComponent<RectTransform>();

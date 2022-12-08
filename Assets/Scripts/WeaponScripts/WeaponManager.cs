@@ -87,6 +87,9 @@ public class WeaponManager : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GetComponent<PlayerSetup>().playerUIInstance == null)
+            return;
+
         if (mWallUIEffect == null)
         {
             mWallUIEffect = GetComponent<PlayerSetup>().playerUIInstance.GetComponentInChildren<WallUIEffect>();
