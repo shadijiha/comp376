@@ -36,7 +36,7 @@ public class PlayerControler : MonoBehaviour
     // sound
     enum WalkingSoundState { WALK, SPRINT, NONE };
     WalkingSoundState currentWalkingSoundState = WalkingSoundState.NONE;
-    AudioSource audioSrc;
+    [SerializeField] private AudioSource audioSrc;
     [SerializeField] private AudioClip walkSound;
     [SerializeField] private AudioClip sprintSound;
 
@@ -125,7 +125,7 @@ public class PlayerControler : MonoBehaviour
         {
             currentWalkingSoundState = WalkingSoundState.SPRINT;
         }
-        else if (motor.currentHorizontalVelocity < 0.1)
+        else if (motor.currentHorizontalVelocity < 0.001 && motor.currentHorizontalVelocity > -0.001)
         {
             currentWalkingSoundState = WalkingSoundState.NONE;
         }
