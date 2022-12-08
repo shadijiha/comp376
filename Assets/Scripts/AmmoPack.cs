@@ -7,13 +7,6 @@ public class AmmoPack : NetworkBehaviour
 {
     [SerializeField] private int ammoRestorePercent = 50;
 
-    private AudioSource audioSrc;
-
-    private void Start()
-    {
-        audioSrc = GetComponent<AudioSource>();
-    }
-
 
     float currentAngle = 0;
     void Update()
@@ -58,7 +51,6 @@ public class AmmoPack : NetworkBehaviour
 
             if (primary.currentSpareAmmo < primary.maxAmmo)
             {
-                audioSrc.PlayOneShot(audioSrc.clip);
                 primary.currentSpareAmmo = (int)Mathf.Min(
                                         primary.currentSpareAmmo + primary.maxAmmo * ammoRestorePercent / 100.0f,
                                         primary.maxAmmo);

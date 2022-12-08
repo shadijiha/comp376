@@ -59,6 +59,6 @@ public class teleportScript : MonoBehaviour
 
     public void getPartnerPossTest()
     {
-        //Debug.Log(partnerPosition);
+        Debug.Log(partnerPosition);
     }
 }

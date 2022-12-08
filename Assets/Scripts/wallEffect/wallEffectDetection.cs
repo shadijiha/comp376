@@ -20,7 +20,7 @@ public class wallEffectDetection : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        //Debug.Log(other);
+        Debug.Log(other);
         GetComponent<MiddleManWallEffect>().callWallEffect(other.gameObject);
     }
 }

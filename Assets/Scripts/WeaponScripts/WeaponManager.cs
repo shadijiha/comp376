@@ -27,12 +27,8 @@ public class WeaponManager : NetworkBehaviour
                         private         float           AMPLIFY_DURATION    = 5f;
                         private         float           HASTE_DURATION      = 5f;
 
-    [SerializeField] private AudioClip swapSound;
-    private AudioSource m_audioSource;
-
     private void Start()
     {
-        //m_audioSource = GameObject.FindGameObjectWithTag("SoundPos").GetComponent<AudioSource>();
         m_audioSource = transform.Find("LowPoly_Character").GetComponent<AudioSource>();
 
         for (int i = 0; i < mWeaponArr.Length; ++i)
@@ -69,19 +65,6 @@ public class WeaponManager : NetworkBehaviour
         Equip(mSuper);
     }
 
-    private T FindComponentInChildWithTag<T>(string tag) where T : Component
-    {
-        Transform t = transform;
-        foreach (Transform tr in t)
-        {
-            if (tr.CompareTag(tag))
-            {
-                return tr.GetComponent<T>();
-            }
-        }
-        return null;
-    }
-
     public void SwitchWeaponsFromLoadout(PlayerWeapon primary, PlayerWeapon secondary)
     {
         UnequipPrimary();
@@ -101,6 +84,9 @@ public class WeaponManager : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GetComponent<PlayerSetup>().playerUIInstance == null)
+            return;
+
         if (mWallUIEffect == null)
         {
             mWallUIEffect = GetComponent<PlayerSetup>().playerUIInstance.GetComponentInChildren<WallUIEffect>();
@@ -255,8 +241,6 @@ public class WeaponManager : NetworkBehaviour
         mCameraRecoil.UpdateRecoilInfo(mCurrent.cameraRecoilInfo);
         mModelRecoil.UpdateRecoilInfo(mCurrent.modelRecoilInfo);
 
-        m_audioSource.Stop();
-        m_audioSource.PlayOneShot(swapSound);
         // Todo: Trigger drawing animation here.
         //
         //
@@ -276,8 +260,11 @@ public class WeaponManager : NetworkBehaviour
     {
         mPrimary.Reset();
         mSecondary.Reset();
-        Destroy(mSuper.model);
-        mSuper                                                      = null;
+        if (mSuper != null)
+        {
+            Destroy(mSuper.model);
+            mSuper = null;
+        }
         mSecondary.model.SetActive(false);
         mCurrent                                                    = mPrimary;
         mCurrent.model.SetActive(true);
