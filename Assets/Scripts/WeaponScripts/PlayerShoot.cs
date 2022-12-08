@@ -337,7 +337,7 @@ public class PlayerShoot : NetworkBehaviour
     [Command]
     public void CmdPlayerShot(string hit_id, string src, int damage) {
         // Do the damage stuff
-        Debug.Log(hit_id + " has been shot");
+        Debug.Log(hit_id + " has been shot  ");
 
         // In the future shoud pass the source to grant assists
         Player p = GameManager.GetPlayer(hit_id);
