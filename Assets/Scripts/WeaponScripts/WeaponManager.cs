@@ -177,12 +177,13 @@ public class WeaponManager : NetworkBehaviour
             throw new Exception("No weapon graphics component on " + weapon.weaponType);
         }
 
-        if (isLocalPlayer) {
+        if (isLocalPlayer)
+        {
             Util.SetLayerRecursively(weapon.model, LayerMask.NameToLayer(WEAPON_LAYER));
         }
 
         // Hide model initially.
-         weapon.model.SetActive(false);
+        weapon.model.SetActive(false);
     }
 
     /// <summary>Call before equipping a overwriting mPrimary with a new weapon.</summary>
