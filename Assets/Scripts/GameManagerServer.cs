@@ -26,8 +26,11 @@ public class GameManagerServer : NetworkBehaviour
 
     private PlayerStatsList playersStats = new PlayerStatsList();
 
+    private AudioSource audioSrc;
+
     void Start()
     {
+        audioSrc = GetComponent<AudioSource>();
         if (isServer)
         {
             currentRoundColor = RandomColour();
@@ -40,6 +43,7 @@ public class GameManagerServer : NetworkBehaviour
             {
                 changeColourTimerDisplay = ChangeColourTimer;
                 currentRoundColor = RandomColour();
+                audioSrc.PlayOneShot(audioSrc.clip);
             }
             changeColourTimerDisplay -= Time.deltaTime;
             matchRoundTimerDisplay -= Time.deltaTime;
@@ -104,6 +108,10 @@ public class GameManagerServer : NetworkBehaviour
     {
         Array values = Enum.GetValues(typeof(Colour));
         int index = Random.Range(0, values.Length);
+        while (currentRoundColor == (Colour)values.GetValue(index))
+        {
+            index = Random.Range(0, values.Length);
+        }
         return (Colour)values.GetValue(index);
     }
 
