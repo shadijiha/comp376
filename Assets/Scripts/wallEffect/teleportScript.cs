@@ -42,7 +42,7 @@ public class teleportScript : MonoBehaviour
         if (activeTeleporter )
         {
             //check if the player can teleport  start the timer if they can.
-            if (player.TryGetComponent<PlayerWallCoolDown>(out PlayerWallCoolDown wallCD) && wallCD.handleTeleportCoolDown())
+            if (player.TryGetComponent<playerWallCoolDown>(out playerWallCoolDown wallCD) && wallCD.handleTeleportCoolDown())
             {
                 player.transform.position = partnerPosition;
             }

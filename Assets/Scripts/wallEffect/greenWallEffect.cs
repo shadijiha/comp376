@@ -22,7 +22,7 @@ public class greenWallEffect : MonoBehaviour
 
     public void healPlayerHoverTime(GameObject player) 
     {
-        if (player.TryGetComponent<PlayerWallCoolDown>(out PlayerWallCoolDown wallCoolDown) && wallCoolDown.handleGreenWallCoolDown())
+        if (player.TryGetComponent<playerWallCoolDown>(out playerWallCoolDown wallCoolDown) && wallCoolDown.handleGreenWallCoolDown())
         {
             StartCoroutine(healPlayer(player.GetComponent<Player>()));
         }
