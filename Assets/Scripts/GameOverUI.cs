@@ -30,6 +30,7 @@ public class GameOverUI : NetworkBehaviour
             Cursor.lockState = CursorLockMode.None;
 
             var playerStats = GameManagerServer.GetPlayerStatsList();
+            print(playerStats);
             var sortedPlayerStats = playerStats.OrderByDescending(x => x.kills).ToList();
 
             int maxKills = sortedPlayerStats[0].kills;

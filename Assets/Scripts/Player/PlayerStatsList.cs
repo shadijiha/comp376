@@ -16,7 +16,8 @@ namespace Assets.Scripts
             {
                 player = p,
                 kills = 0,
-                death = 0
+                death = 0,
+                name = p.name
             };
 
             // Add new entry
@@ -39,7 +40,8 @@ namespace Assets.Scripts
                     {
                         player = p,
                         kills = stats.kills + 1,
-                        death = stats.death
+                        death = stats.death,
+                        name = p.name
                     };
 
                     // delete old entry
@@ -58,7 +60,8 @@ namespace Assets.Scripts
             {
                 player = p,
                 kills = 1,
-                death = 0
+                death = 0,
+                name = p.name
             });
         }
 
@@ -78,7 +81,8 @@ namespace Assets.Scripts
                     {
                         player = p,
                         kills = stats.kills,
-                        death = stats.death + 1
+                        death = stats.death + 1,
+                        name = p.name
                     };
 
                     // delete old entry
@@ -97,7 +101,8 @@ namespace Assets.Scripts
             {
                 player = p,
                 kills = 0,
-                death = 1
+                death = 1,
+                name = p.name
             });
         }
 
@@ -116,6 +121,7 @@ namespace Assets.Scripts
     public struct PlayerStats
     {
         public Player player;
+        public string name;
         public int kills;
         public int death;
 
