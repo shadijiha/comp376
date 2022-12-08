@@ -8,7 +8,7 @@ public class PlayerControler : MonoBehaviour
     [SerializeField] public  float baseSpeed        = 5f;
     [SerializeField] private float sprintSpeed      = 7.5f;
     [SerializeField] private float speedMultiplier  = 1f;
-    [SerializeField] private float sensitivity      = 3.5f; // In the future this should be in the game settings
+    [SerializeField] public float sensitivity       = 3.5f; // In the future this should be in the game settings
     [SerializeField] private float jumpScanDist     = 1.5f;
 
     public GameObject weaponRotation;
