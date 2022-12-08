@@ -528,9 +528,9 @@ Transform:
   - {fileID: 1671885636}
   - {fileID: 1662489354}
   - {fileID: 1908706392}
-  - {fileID: 288556643}
   - {fileID: 1961006554}
   - {fileID: 1966272469}
+  - {fileID: 288556643}
   m_Father: {fileID: 1012816061}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -11186,6 +11186,51 @@ MonoBehaviour:
   matchSize: 10
   isNetworkActive: 0
   matchMaker: {fileID: 0}
+--- !u!1 &721059023
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 721059024}
+  - component: {fileID: 721059025}
+  m_Layer: 0
+  m_Name: blueWallManger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &721059024
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 721059023}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1012816061}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &721059025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 721059023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1904fb7be22744340958bd3e4a088436, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  listBlueWall: []
+  tempPlayer: {fileID: 0}
 --- !u!1 &733087802
 GameObject:
   m_ObjectHideFlags: 0
@@ -15644,6 +15689,7 @@ Transform:
   - {fileID: 863362761}
   - {fileID: 2097711097}
   - {fileID: 28229244}
+  - {fileID: 721059024}
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -32415,6 +32461,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 295069754}
     m_Modifications:
+    - target: {fileID: 1682978058996009591, guid: bec17cbd6d1a9ac4b814d1154a018adf,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2562370716676577812, guid: bec17cbd6d1a9ac4b814d1154a018adf,
         type: 3}
       propertyPath: m_Name
