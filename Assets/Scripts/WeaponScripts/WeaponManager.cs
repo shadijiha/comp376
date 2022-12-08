@@ -11,7 +11,7 @@ public class WeaponManager : NetworkBehaviour
                         public  static  GameObject[]    msWeaponArr         = new GameObject[18];
     [SerializeField]    public          PlayerWeapon    mPrimary;
     [SerializeField]    public          PlayerWeapon    mSecondary;
-    [SerializeField]    private         PlayerWeapon    mSuper;
+    [SerializeField]    public          PlayerWeapon    mSuper;
     [SerializeField]    private         Transform       weaponHolder;
     [SerializeField]    private         GameObject[]    mWeaponArr          = new GameObject[18];
     [SerializeField]    private         CameraRecoil    mCameraRecoil;
@@ -177,12 +177,13 @@ public class WeaponManager : NetworkBehaviour
             throw new Exception("No weapon graphics component on " + weapon.weaponType);
         }
 
-        if (isLocalPlayer) {
+        if (isLocalPlayer)
+        {
             Util.SetLayerRecursively(weapon.model, LayerMask.NameToLayer(WEAPON_LAYER));
         }
 
         // Hide model initially.
-         weapon.model.SetActive(false);
+        weapon.model.SetActive(false);
     }
 
     /// <summary>Call before equipping a overwriting mPrimary with a new weapon.</summary>
