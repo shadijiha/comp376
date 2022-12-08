@@ -8,6 +8,8 @@ public class teleportScript : MonoBehaviour
     public teleportScript wallPartner;
     private Vector3 partnerPosition;
     private bool activeTeleporter = false;
+    [SerializeField] private AudioClip teleportSound;
+
     void Start()
     {
         
@@ -36,19 +38,18 @@ public class teleportScript : MonoBehaviour
         }
     }
 
-    public  void teleportPlayer(GameObject player)
+    public void teleportPlayer(GameObject player)
     {
         // check to make sure the wall have a partner
-        if (activeTeleporter )
+        if (activeTeleporter)
         {
             //check if the player can teleport  start the timer if they can.
             if (player.TryGetComponent<playerWallCoolDown>(out playerWallCoolDown wallCD) && wallCD.handleTeleportCoolDown())
             {
                 player.transform.position = partnerPosition;
+                player.GetComponent<AudioSource>().PlayOneShot(teleportSound);
             }
-            
         }
-
     }
 
     public bool getActiveTeleporter()

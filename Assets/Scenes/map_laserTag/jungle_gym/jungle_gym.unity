@@ -5694,6 +5694,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wallPartner: {fileID: 358749319}
+  teleportSound: {fileID: 8300000, guid: bef9f6c636f9f3c41916be1aa336db38, type: 3}
 --- !u!1001 &358749315
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5821,6 +5822,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wallPartner: {fileID: 351011231}
+  teleportSound: {fileID: 8300000, guid: bef9f6c636f9f3c41916be1aa336db38, type: 3}
 --- !u!1001 &360160139
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9243,6 +9245,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wallPartner: {fileID: 1717775471}
+  teleportSound: {fileID: 8300000, guid: bef9f6c636f9f3c41916be1aa336db38, type: 3}
 --- !u!1 &589093896
 GameObject:
   m_ObjectHideFlags: 0
@@ -10683,7 +10686,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 465881c506b6ea24f9ac476f487c4858, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.5
+  m_Volume: 0.45
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -13333,6 +13336,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wallPartner: {fileID: 1571948565}
+  teleportSound: {fileID: 8300000, guid: bef9f6c636f9f3c41916be1aa336db38, type: 3}
 --- !u!1001 &870516300
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21976,6 +21980,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wallPartner: {fileID: 866609032}
+  teleportSound: {fileID: 8300000, guid: bef9f6c636f9f3c41916be1aa336db38, type: 3}
 --- !u!1 &1573643189
 GameObject:
   m_ObjectHideFlags: 0
@@ -24172,6 +24177,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wallPartner: {fileID: 1881126317}
+  teleportSound: {fileID: 8300000, guid: bef9f6c636f9f3c41916be1aa336db38, type: 3}
 --- !u!1001 &1707703622
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24472,6 +24478,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wallPartner: {fileID: 583668427}
+  teleportSound: {fileID: 8300000, guid: bef9f6c636f9f3c41916be1aa336db38, type: 3}
 --- !u!1001 &1718023337
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28195,6 +28202,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wallPartner: {fileID: 1694314017}
+  teleportSound: {fileID: 8300000, guid: bef9f6c636f9f3c41916be1aa336db38, type: 3}
 --- !u!1001 &1887595691
 PrefabInstance:
   m_ObjectHideFlags: 0

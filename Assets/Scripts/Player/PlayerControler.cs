@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -32,10 +33,18 @@ public class PlayerControler : MonoBehaviour
     float xMov;
     float zMov;
 
+    // sound
+    enum WalkingSoundState { WALK, SPRINT, NONE };
+    WalkingSoundState currentWalkingSoundState = WalkingSoundState.NONE;
+    AudioSource audioSrc;
+    [SerializeField] private AudioClip walkSound;
+    [SerializeField] private AudioClip sprintSound;
+
     // Start is called before the first frame update
     void Start()
     {
         motor = GetComponent<PlayerMotor>();
+        audioSrc = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -56,7 +65,7 @@ public class PlayerControler : MonoBehaviour
         movHorizontal = transform.right * xMov;
         movVertical = transform.forward * (zMov);
 
-
+        HandleSound();
 
         // Final movement vector
         Vector3 velocity = (movHorizontal + movVertical).normalized * (isSprinting? sprintSpeed : baseSpeed) * speedMultiplier;
@@ -106,6 +115,60 @@ public class PlayerControler : MonoBehaviour
         animator.SetFloat("zSpeed", zMov);
         animator.SetBool("isSprinting", isSprinting);
         animator.SetBool("isJumping", isJumping);
+    }
+
+    private void HandleSound()
+    {
+        WalkingSoundState previous = currentWalkingSoundState;
+
+        if (isSprinting)
+        {
+            currentWalkingSoundState = WalkingSoundState.SPRINT;
+        }
+        else if (motor.currentHorizontalVelocity < 0.1)
+        {
+            currentWalkingSoundState = WalkingSoundState.NONE;
+        }
+        else
+        {
+            currentWalkingSoundState = WalkingSoundState.WALK;
+        }
+
+        if (currentWalkingSoundState == WalkingSoundState.NONE)
+        {
+            audioSrc.Stop();
+        } 
+        
+        else if (previous != currentWalkingSoundState)
+        {
+            audioSrc.Stop();
+
+            if (currentWalkingSoundState == WalkingSoundState.WALK)
+            {
+                audioSrc.PlayOneShot(walkSound);
+            }
+            
+            else if (currentWalkingSoundState == WalkingSoundState.SPRINT)
+            {
+                audioSrc.PlayOneShot(sprintSound);
+            }
+        }
+
+        else if (previous == currentWalkingSoundState)
+        {
+            if (!audioSrc.isPlaying)
+            {
+                if (currentWalkingSoundState == WalkingSoundState.WALK)
+                {
+                    audioSrc.PlayOneShot(walkSound);
+                }
+
+                else if (currentWalkingSoundState == WalkingSoundState.SPRINT)
+                {
+                    audioSrc.PlayOneShot(sprintSound);
+                }
+            }
+        }
     }
 
     /// <summary>
