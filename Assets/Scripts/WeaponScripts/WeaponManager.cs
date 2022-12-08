@@ -87,6 +87,9 @@ public class WeaponManager : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GetComponent<PlayerSetup>().playerUIInstance == null)
+            return;
+
         if (mWallUIEffect == null)
         {
             mWallUIEffect = GetComponent<PlayerSetup>().playerUIInstance.GetComponentInChildren<WallUIEffect>();
@@ -262,8 +265,11 @@ public class WeaponManager : NetworkBehaviour
     {
         mPrimary.Reset();
         mSecondary.Reset();
-        Destroy(mSuper.model);
-        mSuper                                                      = null;
+        if (mSuper != null)
+        {
+            Destroy(mSuper.model);
+            mSuper = null;
+        }
         mSecondary.model.SetActive(false);
         mCurrent                                                    = mPrimary;
         mCurrent.model.SetActive(true);
