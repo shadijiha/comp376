@@ -32,7 +32,6 @@ public class WeaponManager : NetworkBehaviour
 
     private void Start()
     {
-        //m_audioSource = GameObject.FindGameObjectWithTag("SoundPos").GetComponent<AudioSource>();
         m_audioSource = transform.Find("LowPoly_Character").GetComponent<AudioSource>();
 
         for (int i = 0; i < mWeaponArr.Length; ++i)
@@ -67,19 +66,6 @@ public class WeaponManager : NetworkBehaviour
             readyToShoot = false
         };
         Equip(mSuper);
-    }
-
-    private T FindComponentInChildWithTag<T>(string tag) where T : Component
-    {
-        Transform t = transform;
-        foreach (Transform tr in t)
-        {
-            if (tr.CompareTag(tag))
-            {
-                return tr.GetComponent<T>();
-            }
-        }
-        return null;
     }
 
     public void SwitchWeaponsFromLoadout(PlayerWeapon primary, PlayerWeapon secondary)

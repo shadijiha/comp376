@@ -61,20 +61,6 @@ public class PlayerShoot : NetworkBehaviour
         playerUIInstance = GetComponent<PlayerSetup>().playerUIInstance;
     }
 
-    /*
-    private T FindComponentInChildWithTag<T>(string tag) where T : Component
-    {
-        Transform t = transform;
-        foreach (Transform tr in t)
-        {
-            if (tr.CompareTag(tag))
-            {
-                return tr.GetComponent<T>();
-            }
-        }
-        return null;
-    }*/
-
     // Update is called once per frame
     void Update() 
     {
