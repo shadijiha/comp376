@@ -17,6 +17,7 @@ public class PlayerShoot : NetworkBehaviour
                         private PlayerWeapon    m_CurrentWeapon;
                         private PlayerControler m_controler;
                         private PlayerMotor     m_motor;
+                        private AudioSource     m_audioSource;
                         public  WeaponManager   m_WeaponManager;
     [SerializeField]    public  RectTransform   crosshair;
     [SerializeField]    public  Camera          cam;
@@ -328,6 +329,8 @@ public class PlayerShoot : NetworkBehaviour
         m_CurrentWeapon.readyToShoot    = false;
 
         (string, float) invokeDetails   = m_CurrentWeapon.Shoot(this);
+        AudioClip shootSound = m_CurrentWeapon.model.GetComponent<AudioSource>().clip;
+        m_audioSource.PlayOneShot(shootSound);
 
         Invoke(invokeDetails.Item1, invokeDetails.Item2);
     }

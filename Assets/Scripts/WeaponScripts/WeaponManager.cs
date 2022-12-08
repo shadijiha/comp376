@@ -26,6 +26,9 @@ public class WeaponManager : NetworkBehaviour
                         private         float           mHasteTime          = 0f;
                         private         float           AMPLIFY_DURATION    = 5f;
                         private         float           HASTE_DURATION      = 5f;
+    
+    [SerializeField] private AudioClip swapSound;
+    private AudioSource m_audioSource;
 
     private void Start()
     {
@@ -286,7 +289,8 @@ public class WeaponManager : NetworkBehaviour
         mCameraRecoil.UpdateRecoilInfo(mCurrent.cameraRecoilInfo);
         mModelRecoil.UpdateRecoilInfo(mCurrent.modelRecoilInfo);
 
-
+        m_audioSource.Stop();
+        m_audioSource.PlayOneShot(swapSound);
 
         // Allow player to shoot after the drawing completes (alternatively can invoke via an animation event).
         Invoke(nameof(ReadyToShoot), mCurrent.drawTime);
