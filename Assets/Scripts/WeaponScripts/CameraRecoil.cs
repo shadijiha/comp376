@@ -9,6 +9,11 @@ public class CameraRecoil : MonoBehaviour
     private Vector3     currentRotation;
     private Vector3     rotation;
 
+    private void Start()
+    {
+        rotation = transform.localRotation.eulerAngles;
+    }
+
     private void FixedUpdate()
     {
         currentRotation         = Vector3.Lerp(currentRotation, Vector3.zero, mRecoilInfo.returnSpeed * Time.fixedDeltaTime);
