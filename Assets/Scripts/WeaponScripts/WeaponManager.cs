@@ -32,6 +32,8 @@ public class WeaponManager : NetworkBehaviour
 
     private void Start()
     {
+        m_audioSource = transform.Find("LowPoly_Character").GetComponent<AudioSource>();
+
         for (int i = 0; i < mWeaponArr.Length; ++i)
         {
             if (mWeaponArr[i] != null && msWeaponArr[i] == null)

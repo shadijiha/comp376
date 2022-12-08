@@ -1511,7 +1511,7 @@ PrefabInstance:
     - target: {fileID: 2815447443303010463, guid: 339514156c2267841b6207946ccf4f4d,
         type: 3}
       propertyPath: m_Name
-      value: LowPoly_Character Variant
+      value: LowPoly_Character
       objectReference: {fileID: 0}
     - target: {fileID: 2815447443303010463, guid: 339514156c2267841b6207946ccf4f4d,
         type: 3}

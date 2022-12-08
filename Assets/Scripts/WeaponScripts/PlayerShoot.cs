@@ -47,6 +47,7 @@ public class PlayerShoot : NetworkBehaviour
         m_WeaponManager = GetComponent<WeaponManager>();
         m_controler     = GetComponent<PlayerControler>();
         m_motor         = GetComponent<PlayerMotor>();
+        m_audioSource   = transform.Find("LowPoly_Character").GetComponent<AudioSource>();
 
         m_CurrentWeapon = m_WeaponManager.GetCurrentWeapon();
 
