@@ -26,6 +26,9 @@ public class WeaponManager : NetworkBehaviour
                         private         float           mHasteTime          = 0f;
                         private         float           AMPLIFY_DURATION    = 5f;
                         private         float           HASTE_DURATION      = 5f;
+    
+    [SerializeField] private AudioClip swapSound;
+    private AudioSource m_audioSource;
 
     private void Start()
     {
@@ -222,6 +225,10 @@ public class WeaponManager : NetworkBehaviour
     private void Stow()
     {
         mCurrent.readyToShoot = false;
+
+        m_audioSource.Stop();
+        m_audioSource.PlayOneShot(swapSound);
+
         // Todo: Animate Stowing here
         //
         Quaternion originalOrientationStow = this.mCurrent.model.transform.localRotation;
@@ -285,8 +292,6 @@ public class WeaponManager : NetworkBehaviour
         mCurrent.model.SetActive(true);
         mCameraRecoil.UpdateRecoilInfo(mCurrent.cameraRecoilInfo);
         mModelRecoil.UpdateRecoilInfo(mCurrent.modelRecoilInfo);
-
-
 
         // Allow player to shoot after the drawing completes (alternatively can invoke via an animation event).
         Invoke(nameof(ReadyToShoot), mCurrent.drawTime);

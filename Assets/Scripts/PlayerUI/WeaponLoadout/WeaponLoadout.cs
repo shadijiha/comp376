@@ -74,9 +74,6 @@ public class WeaponLoadout : MonoBehaviour
             secondaryWeaponButtons.Add(button);
         }
 
-        selectedPrimaryWeapon = primaryWeaponButtons[0].GetComponent<WeaponButton>();
-        selectedSecondaryWeapon = secondaryWeaponButtons[0].GetComponent<WeaponButton>();
-
         playButton.SetActive(false);
     }
 
@@ -86,8 +83,6 @@ public class WeaponLoadout : MonoBehaviour
         if (weaponManager == null)
         {
             weaponManager = GetComponentInParent<PlayerUISetup>().weaponManager;
-            weaponManager.SwitchWeaponsFromLoadout(selectedPrimaryWeapon.playerWeapon, selectedSecondaryWeapon.playerWeapon);
-            ShowPreview(selectedPrimaryWeapon.playerWeapon);
         }
 
         playerUISetup.FreezePlayer(false);
@@ -98,18 +93,22 @@ public class WeaponLoadout : MonoBehaviour
     {
         if (weaponButton.isPrimaryWeapon && weaponButton != selectedPrimaryWeapon)
         {
-            selectedPrimaryWeapon.ResetSelection();
+            if (selectedPrimaryWeapon != null)
+                selectedPrimaryWeapon.ResetSelection();
+
             selectedPrimaryWeapon = weaponButton;
             isPrimaryWeaponSelected = true;
         }
         else if (!weaponButton.isPrimaryWeapon && weaponButton != selectedSecondaryWeapon)
         {
-            selectedSecondaryWeapon.ResetSelection();
+            if (selectedSecondaryWeapon != null)
+                selectedSecondaryWeapon.ResetSelection();
+
             selectedSecondaryWeapon = weaponButton;
             isSecondaryWeaponSelected = true;
         }
 
-        if (weaponManager != null)
+        if (weaponManager != null && selectedPrimaryWeapon != null && selectedSecondaryWeapon != null)
         {
             weaponManager.SwitchWeaponsFromLoadout(selectedPrimaryWeapon.playerWeapon, selectedSecondaryWeapon.playerWeapon);
         }
