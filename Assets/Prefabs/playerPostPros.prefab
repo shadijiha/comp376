@@ -633,6 +633,7 @@ MonoBehaviour:
   disableOnDeath:
   - {fileID: 1172113867161608125}
   - {fileID: 1172113867161608123}
+  deathSound: {fileID: 8300000, guid: 2dad1055b1c502141ae18819c58aefe0, type: 3}
 --- !u!114 &7275217721885231970
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -829,6 +830,7 @@ MonoBehaviour:
   - {fileID: 0}
   mCameraRecoil: {fileID: 8935510258853908927}
   mModelRecoil: {fileID: 4063427409264756806}
+  swapSound: {fileID: 8300000, guid: a488b8f4312b7ea45ad374b0a1ba0770, type: 3}
 --- !u!136 &-6136463975189771937
 CapsuleCollider:
   m_ObjectHideFlags: 0
