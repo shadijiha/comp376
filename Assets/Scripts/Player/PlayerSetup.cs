@@ -19,7 +19,7 @@ public class PlayerSetup : NetworkBehaviour
     void Start() {
         if (!isLocalPlayer) {
             DisableComponents();
-            AssignRemoteLayer();
+            AssignRemoteLayer(transform);
         }
         else {
             sceneCamera = Camera.main;
@@ -56,15 +56,28 @@ public class PlayerSetup : NetworkBehaviour
         }
     }
 
-    void AssignRemoteLayer() {
-        gameObject.layer = LayerMask.NameToLayer(remoteLayerName);
-
-        playerModel.layer = LayerMask.NameToLayer(remoteLayerName);
-        foreach (Transform child in playerModel.transform)
+    void AssignRemoteLayer(Transform root) {
+        root.gameObject.layer = LayerMask.NameToLayer(remoteLayerName);
+        foreach(Transform child in root)
         {
-            GameObject obj = child.gameObject;
-            obj.layer = LayerMask.NameToLayer(remoteLayerName);
+            AssignRemoteLayer(child);
         }
+            
+        //gameObject.layer = LayerMask.NameToLayer(remoteLayerName);
+
+        //playerModel.layer = LayerMask.NameToLayer(remoteLayerName);
+        //foreach (Transform child in playerModel.transform)
+        //{
+        //    GameObject obj = child.gameObject;
+        //    obj.layer = LayerMask.NameToLayer(remoteLayerName);
+        //}
+    }
+
+    //recursive calls
+    void MoveToLayer(Transform root, int layer) {
+        root.gameObject.layer = layer;
+        foreach(Transform child in root)
+            MoveToLayer(child, layer);
     }
 
     void OnDisable() {
