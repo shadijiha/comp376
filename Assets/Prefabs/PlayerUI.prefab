@@ -5515,7 +5515,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9455cd812ba6d742a922e7db0c92270, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameOverObj: {fileID: 8125249696916256647}
+  gameOverCanvas: {fileID: 0}
   playerList: {fileID: 2788227781029191253}
   playerTemplatePrefab: {fileID: 6653233017722336015, guid: 6ddcc98fed98c3e46a9fa8a06f97b2dd,
     type: 3}

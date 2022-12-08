@@ -3,46 +3,55 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class GameOverUI : MonoBehaviour
+public class GameOverUI : NetworkBehaviour
 {
-    [SerializeField] private GameObject gameOverObj;
+    [SerializeField] private Canvas gameOverCanvas;
     [SerializeField] private GameObject playerList;
     [SerializeField] private GameObject playerTemplatePrefab;
 
-    private PlayerHeaderGUI playerHeaderGUI;
-    private PlayerUISetup playerUISetup;
+    private bool isGameOver = false;
+    private NetworkManager manager;
 
     // Start is called before the first frame update
     void Start()
     {
-        playerUISetup = GetComponent<PlayerUISetup>();
-        playerHeaderGUI = GetComponent<PlayerHeaderGUI>();
+        gameOverCanvas = GetComponent<Canvas>();
+        gameOverCanvas.enabled = false;
+        manager = NetworkManager.singleton;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (GameManagerServer.IsGameOver())
+        if (!isGameOver && GameManagerServer.IsGameOver())
         {
-            playerUISetup.FreezePlayer(false);
+            Time.timeScale = 0.0f;
             Cursor.lockState = CursorLockMode.None;
 
             var playerStats = GameManagerServer.GetPlayerStatsList();
-            var sortedPlayerStats = playerStats.OrderByDescending(x => x.kills);
+            var sortedPlayerStats = playerStats.OrderByDescending(x => x.kills).ToList();
 
-            bool setWinner = true;
+            int maxKills = sortedPlayerStats[0].kills;
 
             foreach (var p in sortedPlayerStats)
             {
                 var player = Instantiate(playerTemplatePrefab, playerList.transform);
-                player.GetComponent<PlayerTemplate>().SetText(p.player.name, p.kills, p.death, setWinner);
-                setWinner = false;
+                player.GetComponent<PlayerTemplate>().SetText(p.player.name, p.kills, p.death, maxKills == p.kills);
             }
 
-            gameOverObj.SetActive(true);
-            playerHeaderGUI.enabled = false;
-            enabled = false;
+            gameOverCanvas.enabled = true;
+            isGameOver = true;
         }
+    }
+
+    public void Quit()
+    {
+        Cursor.lockState = CursorLockMode.None;
+
+        var match = manager.matchInfo;
+        manager.matchMaker.DropConnection(match.networkId, match.nodeId, HostGame.RequestDomain, manager.OnDropConnection);
+        manager.StopHost();
     }
 }
