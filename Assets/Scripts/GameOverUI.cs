@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Scripts;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +23,7 @@ public class GameOverUI : NetworkBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         if (GameManagerServer.IsGameOver())
         {
@@ -30,15 +31,21 @@ public class GameOverUI : NetworkBehaviour
             Cursor.lockState = CursorLockMode.None;
 
             var playerStats = GameManagerServer.GetPlayerStatsList();
-            print(playerStats);
             var sortedPlayerStats = playerStats.OrderByDescending(x => x.kills).ToList();
 
             int maxKills = sortedPlayerStats[0].kills;
+            var stats = new Dictionary<string, PlayerStats>();
 
             foreach (var p in sortedPlayerStats)
             {
-                var player = Instantiate(playerTemplatePrefab, playerList.transform);
-                player.GetComponent<PlayerTemplate>().SetText(p.name, p.kills, p.death, maxKills == p.kills);
+                // BUG: Somehow, there are duplicate PlayerStats in playerStats to players other than the host.
+                // HACK: A dictionary is used to keep track of player stats in order to skip the duplicates.
+                if (!stats.TryGetValue(p.name, out PlayerStats stat))
+                {
+                    var player = Instantiate(playerTemplatePrefab, playerList.transform);
+                    player.GetComponent<PlayerTemplate>().SetText(p.name, p.kills, p.death, maxKills == p.kills);
+                    stats[p.name] = stat;
+                }
             }
 
             gameOverObj.SetActive(true);
