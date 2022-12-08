@@ -50,8 +50,7 @@ public class HealthPack : NetworkBehaviour
         {
             var playerScript = collision.gameObject.GetComponent<Player>();
 
-            if (true)
-            //if (playerScript.GetHealth() < playerScript.GetMaxHealth())
+            if (playerScript.GetHealth() < playerScript.GetMaxHealth())
             {
                 audioSrc.PlayOneShot(audioSrc.clip);
                 playerScript.HealBy(healing);
