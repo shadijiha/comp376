@@ -7,6 +7,7 @@ using UnityEngine.Networking;
 [RequireComponent(typeof(Player))]
 public class PlayerSetup : NetworkBehaviour
 {
+    [SerializeField] private GameObject playerModel;
     [SerializeField] private Behaviour[] componentsToDisable;
     private string remoteLayerName = "RemotePlayerLayer";
     private Camera sceneCamera;
@@ -57,6 +58,13 @@ public class PlayerSetup : NetworkBehaviour
 
     void AssignRemoteLayer() {
         gameObject.layer = LayerMask.NameToLayer(remoteLayerName);
+
+        playerModel.layer = LayerMask.NameToLayer(remoteLayerName);
+        foreach (Transform child in playerModel.transform)
+        {
+            GameObject obj = child.gameObject;
+            obj.layer = LayerMask.NameToLayer(remoteLayerName);
+        }
     }
 
     void OnDisable() {

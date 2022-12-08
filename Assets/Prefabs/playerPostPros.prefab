@@ -386,6 +386,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c9ef076a7966f44bba11008454d896e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerModel: {fileID: 5736046349025577306}
   componentsToDisable:
   - {fileID: 1172113867161608124}
   - {fileID: 1172113867161608125}
@@ -1604,6 +1605,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 12
       objectReference: {fileID: 0}
+    - target: {fileID: 8237352776924259881, guid: 339514156c2267841b6207946ccf4f4d,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6c43d44b5b098ab4eb82a94e8e1305eb, type: 2}
     - target: {fileID: 9149578973999110469, guid: 339514156c2267841b6207946ccf4f4d,
         type: 3}
       propertyPath: m_Layer
@@ -1611,6 +1617,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 339514156c2267841b6207946ccf4f4d, type: 3}
+--- !u!1 &5736046349025577306 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2815447443303010463, guid: 339514156c2267841b6207946ccf4f4d,
+    type: 3}
+  m_PrefabInstance: {fileID: 7532548875828271557}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4958840802763133920 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3195772486476876325, guid: 339514156c2267841b6207946ccf4f4d,
