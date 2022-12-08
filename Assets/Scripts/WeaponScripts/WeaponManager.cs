@@ -27,13 +27,10 @@ public class WeaponManager : NetworkBehaviour
                         private         float           AMPLIFY_DURATION    = 5f;
                         private         float           HASTE_DURATION      = 5f;
 
-
-
-
     private void Start()
     {
         m_audioSource = transform.Find("LowPoly_Character").GetComponent<AudioSource>();
-
+        
         for (int i = 0; i < mWeaponArr.Length; ++i)
         {
             if (mWeaponArr[i] != null && msWeaponArr[i] == null)
@@ -265,8 +262,6 @@ public class WeaponManager : NetworkBehaviour
         mCurrent.model.SetActive(true);
         mCameraRecoil.UpdateRecoilInfo(mCurrent.cameraRecoilInfo);
         mModelRecoil.UpdateRecoilInfo(mCurrent.modelRecoilInfo);
-
-
 
         // Todo: Trigger drawing animation here.
         //

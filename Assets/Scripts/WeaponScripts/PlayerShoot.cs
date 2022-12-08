@@ -47,6 +47,7 @@ public class PlayerShoot : NetworkBehaviour
         m_WeaponManager = GetComponent<WeaponManager>();
         m_controler     = GetComponent<PlayerControler>();
         m_motor         = GetComponent<PlayerMotor>();
+
         m_audioSource   = transform.Find("LowPoly_Character").GetComponent<AudioSource>();
 
         m_CurrentWeapon = m_WeaponManager.GetCurrentWeapon();
@@ -338,7 +339,7 @@ public class PlayerShoot : NetworkBehaviour
     [Command]
     public void CmdPlayerShot(string hit_id, string src, int damage) {
         // Do the damage stuff
-        Debug.Log(hit_id + " has been shot");
+        Debug.Log(hit_id + " has been shot  ");
 
         // In the future shoud pass the source to grant assists
         Player p = GameManager.GetPlayer(hit_id);
