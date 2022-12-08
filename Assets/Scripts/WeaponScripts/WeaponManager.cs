@@ -32,7 +32,8 @@ public class WeaponManager : NetworkBehaviour
 
     private void Start()
     {
-        m_audioSource = FindComponentInChildWithTag<AudioSource>("SoundPos");
+        //m_audioSource = GameObject.FindGameObjectWithTag("SoundPos").GetComponent<AudioSource>();
+        m_audioSource = transform.Find("LowPoly_Character").GetComponent<AudioSource>();
 
         for (int i = 0; i < mWeaponArr.Length; ++i)
         {

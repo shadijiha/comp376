@@ -48,7 +48,7 @@ public class PlayerShoot : NetworkBehaviour
         m_WeaponManager = GetComponent<WeaponManager>();
         m_controler     = GetComponent<PlayerControler>();
         m_motor         = GetComponent<PlayerMotor>();
-        m_audioSource   = FindComponentInChildWithTag<AudioSource>("SoundPos");
+        m_audioSource   = transform.Find("LowPoly_Character").GetComponent<AudioSource>();
 
         m_CurrentWeapon = m_WeaponManager.GetCurrentWeapon();
 
@@ -61,6 +61,7 @@ public class PlayerShoot : NetworkBehaviour
         playerUIInstance = GetComponent<PlayerSetup>().playerUIInstance;
     }
 
+    /*
     private T FindComponentInChildWithTag<T>(string tag) where T : Component
     {
         Transform t = transform;
@@ -72,7 +73,7 @@ public class PlayerShoot : NetworkBehaviour
             }
         }
         return null;
-    }
+    }*/
 
     // Update is called once per frame
     void Update() 
