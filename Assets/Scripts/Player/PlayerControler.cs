@@ -125,7 +125,7 @@ public class PlayerControler : MonoBehaviour
         {
             currentWalkingSoundState = WalkingSoundState.SPRINT;
         }
-        else if (motor.currentHorizontalVelocity < 0.1)
+        else if (motor.currentHorizontalVelocity < 0.001 && motor.currentHorizontalVelocity > -0.001)
         {
             currentWalkingSoundState = WalkingSoundState.NONE;
         }
