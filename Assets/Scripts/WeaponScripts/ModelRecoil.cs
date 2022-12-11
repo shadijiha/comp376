@@ -6,16 +6,28 @@ public class ModelRecoil : MonoBehaviour
 	[Header("Reference Points")]
 	public	Transform						mBasePosition;
 	public	Transform						mRotationAnchor;
+	public	Transform						mCamera;
+	public	Transform						mPlayer;
 
 	[Header("Recoil Info")]
-	[SerializeField]
 	public	PlayerWeapon.ModelRecoilInfo	mRecoilInfo;
 	public	Vector3		rotationRecoil;
 	public	Vector3		positionRecoil;
 	public	Vector3		rotation;
 
-	private void FixedUpdate()
+    private void Update()
+    {
+        float	xRot = mCamera.rotation.eulerAngles.x;
+		float	yRot = mPlayer.rotation.eulerAngles.y;
+		mRotationAnchor.transform.rotation = Quaternion.Euler(rotation.x + xRot, + rotation.y + yRot, rotation.z);
+    }
+
+    private void FixedUpdate()
 	{
+		float	xRot = mCamera.rotation.eulerAngles.x;
+		float	yRot = mPlayer.rotation.eulerAngles.y;
+		mRotationAnchor.transform.rotation		= Quaternion.Euler(rotation.x + xRot, + rotation.y + yRot, rotation.z);
+
 		rotationRecoil							= Vector3.Lerp(
 														rotationRecoil, 
 														Vector3.zero, 
@@ -36,7 +48,7 @@ public class ModelRecoil : MonoBehaviour
 														rotationRecoil, 
 														mRecoilInfo.rotationRecoilSpeed * Time.fixedDeltaTime);
 
-		mRotationAnchor.transform.localRotation	= Quaternion.Euler(rotation);
+		mRotationAnchor.transform.rotation		= Quaternion.Euler(rotation.x + xRot, + rotation.y + yRot, rotation.z);
 	}
 
 	public void Shoot()

@@ -40,7 +40,7 @@ Camera:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1172113867161608134}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
@@ -1208,6 +1208,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mBasePosition: {fileID: 5109095586468539045}
   mRotationAnchor: {fileID: 174300355385010638}
+  mCamera: {fileID: 4071287382665742730}
+  mPlayer: {fileID: 1172113867161608149}
   mRecoilInfo:
     positionRecoilSpeed: 0
     rotationRecoilSpeed: 0
@@ -1261,7 +1263,7 @@ Camera:
   m_GameObject: {fileID: 7415393646411263799}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 3
+  m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2

@@ -4,23 +4,19 @@ using UnityEngine;
 
 public class wallEffectDetection : MonoBehaviour
 {
-
+    [SerializeField] private LevelObstacle obstacle;
    
     // Start is called before the first frame update
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        obstacle = GetComponentInParent<LevelObstacle>();
     }
 
     private void OnTriggerStay(Collider other)
     {
-        //Debug.Log(other);
-        GetComponent<MiddleManWallEffect>().callWallEffect(other.gameObject);
+        if (TryGetComponent<MiddleManWallEffect>(out MiddleManWallEffect wallEffect) && !obstacle.visible) 
+        { 
+            wallEffect.callWallEffect(other.gameObject);
+        }
     }
 }

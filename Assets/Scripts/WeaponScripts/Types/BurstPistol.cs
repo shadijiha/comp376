@@ -121,10 +121,14 @@ public class BurstPistol : PlayerWeapon
                     
                     playerShoot.CmdPlayerShot(plr, playerShoot.name, finalDamage);
                 }
-
+                
                 // Play Hit effect on the server
-                playerShoot.CmdOnHit(hit.point, hit.normal);
-                playerShoot.CmdOnHitLaser(playerShoot.GetComponentInChildren<ParticleOrigin>().gameObject.transform.position, hit.point, 8f);
+                if (!hit.collider.CompareTag("Ceiling"))
+                {
+                    playerShoot.CmdOnHit(hit.point, hit.normal);
+                }
+
+                playerShoot.CmdOnHitLaser(playerShoot.GetComponentInChildren<ParticleOrigin>().gameObject.transform.position, hit.point, 50f);
             }
         }
 

@@ -197,7 +197,7 @@ public class PlayerShoot : NetworkBehaviour
     [ClientRpc]
     public void RpcDoHitEffect(Vector3 pos, Vector3 normal) {
         GameObject temp = (GameObject)Instantiate(m_WeaponManager.GetCurrentWeaponGraphics().hitEffectPrefab, pos, Quaternion.LookRotation(normal));
-        Destroy(temp, 2.0f);
+        Destroy(temp, 2.5f);
     }
 
     /// <summary>
@@ -314,8 +314,7 @@ public class PlayerShoot : NetworkBehaviour
     public void ShootLaser(Vector3 shotOriginPosition, Vector3 endPoint,  float laserShotSpeed)
     {
         GameObject shot = Instantiate(laserShot, shotOriginPosition, Quaternion.LookRotation(endPoint - shotOriginPosition));
-        //Quaternion.identity);
-        shot.GetComponent<Rigidbody>().velocity = (endPoint- shotOriginPosition) * laserShotSpeed;
+        shot.GetComponent<Rigidbody>().velocity = (endPoint - shotOriginPosition).normalized * laserShotSpeed;
 
         GameObject.Destroy(shot, 2f);
     }

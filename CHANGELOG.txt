@@ -1,0 +1,11 @@
+Changelog:
+
+Changes from Donovan:
+
+Fixed Skybox visual glitches
+Fixed Players spawning with rocket launcher when they should not have been
+Fixed Players weapon model recoil rotation occurring in the wrong direction
+Normalized the vector the visual projectiles are launched with so that projectile speed does not vary based on distance between weapon and hit
+Fixed walls special effects being triggered when the walls were not the active gameplay wall
+Fixed Ammo packs sinking into the ground as game progresses
+Adjusted wall heal volume to be quieter
