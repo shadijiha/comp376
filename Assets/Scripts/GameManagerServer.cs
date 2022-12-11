@@ -10,10 +10,10 @@ public class GameManagerServer : NetworkBehaviour
 {
     private static GameManagerServer instance;
     public const double ChangeColourTimer = 15;   // 15 seconds
-    public const double MatchRoundTimer = 180;   // 3 minutes
+    public const double MatchRoundTimer = 300;   // 5 minutes
 
     [SyncVar]
-    private Colour currentRoundColor = Colour.Yellow;
+    private Colour currentRoundColor = Colour.Green;
     
     [SyncVar]
     private double changeColourTimerDisplay = ChangeColourTimer; // in seconds
@@ -117,11 +117,8 @@ public class GameManagerServer : NetworkBehaviour
 
     public enum Colour
     {
-        //Green = 0,
-        Yellow = 0,
-        //Orange,
+        Green = 0,
         Red,
-        //Black,
         Blue,
         Violet,
         Gold

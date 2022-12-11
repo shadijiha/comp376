@@ -120,10 +120,10 @@ public class Player : NetworkBehaviour
         currentHealth = (int)vAmount;
     }
 
-    // Allow green wall to heal hover the max player health.  And stop at twice the player maxHealth
+    // Allow green wall to heal hover the max player health.  And stop at 1.5x the player maxHealth
     public void HoverHealBy(uint amount)
     {
-        var vAmount = Math.Min(amount + currentHealth, maxHealth * 2);
+        var vAmount = Math.Min(amount + currentHealth, maxHealth * 1.5);
         vAmount = Math.Max(vAmount, 0);
         currentHealth = (int)vAmount;
     }

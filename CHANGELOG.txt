@@ -15,3 +15,8 @@ Prevented hit effects from appearing on walls that are inactive or the ceiling
 Fixed the hidden walls still blocking hitscans when they're inactive
 Fixed Stairs not applying the appropriate colored wall effects
 Rocket launcher on remote clients should properly damage other clients now
+Updated round timer to be 5 minutes
+Fixed over heal working up to 200% HP rather than 150% as intended
+Adjusted wall cooldown for heal and teleport to be 5 seconds to allow continuous healing while in the green wall
+Renamed Yellow walls to green to properly reflect the color and minimize confusion
+Introduced a potential fix to weapons not appearing in the player's hand properly on remote clients
