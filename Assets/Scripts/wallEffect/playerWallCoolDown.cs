@@ -13,8 +13,8 @@ public class playerWallCoolDown : MonoBehaviour
 
     void Start()
     {
-        teleportCooldown = 7;
-        healHoverTimeCooldown = 7;
+        teleportCooldown = 5;
+        healHoverTimeCooldown = 5;
     }
 
     public bool handleGreenWallCoolDown()

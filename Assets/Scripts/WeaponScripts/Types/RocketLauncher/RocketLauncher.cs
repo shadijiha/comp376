@@ -81,7 +81,7 @@ public class RocketLauncher : PlayerWeapon
             // We hit Something
 
             Vector3 projectileDir = hit.point - playerShoot.GetComponentInChildren<ParticleOrigin>().gameObject.transform.position;
-            manager.Shoot(playerShoot.name, projectileDir.normalized);
+            manager.Shoot(playerShoot.name, projectileDir.normalized, playerShoot);
         }
 
         playerShoot.cameraRecoil.Shoot(playerShoot.cam);

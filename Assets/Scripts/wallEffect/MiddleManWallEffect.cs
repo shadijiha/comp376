@@ -46,7 +46,7 @@ public class MiddleManWallEffect : MonoBehaviour
                     rdWall.boostPlayerDomage(player);
                 }
                 break;
-            case GameManagerServer.Colour.Yellow:
+            case GameManagerServer.Colour.Green:
                 //print(" Call function healOverTime of player");
                 parrentWall.GetComponent<greenWallEffect>().healPlayerHoverTime(player);
                 break;

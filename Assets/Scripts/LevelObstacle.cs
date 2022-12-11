@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class LevelObstacle : MonoBehaviour
 {
-    private Collider colliderComponent;
-    private Material material;
-    private float originalAlpha = 1.0f;
+    public  bool        visible;
+    private Collider    colliderComponent;
+    private Material    material;
+    private float       originalAlpha       = 1.0f;
 
     [SerializeField] private GameManagerServer.Colour objectColour;
 
@@ -27,27 +28,22 @@ public class LevelObstacle : MonoBehaviour
 
         if (currentColour == objectColour)
         {
-            colliderComponent.enabled = false;
-            
-
+            colliderComponent.enabled   = false;
+            visible                     = false;
             var oldColour = material.color;
             material.SetColor("_Color", new Color(oldColour.r, oldColour.g, oldColour.b, 0.5f));
         }
         else
         {
-            colliderComponent.enabled = true;
-            
+            colliderComponent.enabled   = true;
+            visible                     = true;
             var oldColour = material.color;
             material.SetColor("_Color", new Color(oldColour.r, oldColour.g, oldColour.b, originalAlpha));
         }
-
-         
     }
 
     public GameManagerServer.Colour GetColour()
     {
         return objectColour;
     }
-
-   
 }
