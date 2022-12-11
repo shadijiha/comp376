@@ -14,3 +14,4 @@ Code improvements to stop some script runtime exceptions from occuring
 Prevented hit effects from appearing on walls that are inactive or the ceiling
 Fixed the hidden walls still blocking hitscans when they're inactive
 Fixed Stairs not applying the appropriate colored wall effects
+Rocket launcher on remote clients should properly damage other clients now
