@@ -79,6 +79,7 @@ public class Rocket : NetworkBehaviour
                         int     damage  = Mathf.RoundToInt(Mathf.Lerp(m_splashDamage, m_minSplashDamage, distance / m_MaxRadius));
                         Player  plr     = rigidbody.GetComponent<Player>();
 
+                        // Players have multiple colliders, make sure to only hit the same player once.
                         if (!playersToHit.Contains(plr))
                         {
                             //Debug.Log($"Hitting {plr.name} for {damage}.");

@@ -61,11 +61,7 @@ public class WeaponManager : NetworkBehaviour
         };
         Equip(mSecondary);
 
-        mSuper      = new RocketLauncher
-        {
-            readyToShoot = false
-        };
-        Equip(mSuper);
+        mSuper = null;
     }
 
     public void SwitchWeaponsFromLoadout(PlayerWeapon primary, PlayerWeapon secondary)
