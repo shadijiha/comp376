@@ -1,6 +1,6 @@
 Changelog:
 
-Changes from Donovan:
+Fixes and updates done by Donovan Upsdell:
 
 Fixed Skybox visual glitches
 Fixed Players spawning with rocket launcher when they should not have been
@@ -9,3 +9,8 @@ Normalized the vector the visual projectiles are launched with so that projectil
 Fixed walls special effects being triggered when the walls were not the active gameplay wall
 Fixed Ammo packs sinking into the ground as game progresses
 Adjusted wall heal volume to be quieter
+Fixed weapon swap issue on respawn
+Code improvements to stop some script runtime exceptions from occuring
+Prevented hit effects from appearing on walls that are inactive or the ceiling
+Fixed the hidden walls still blocking hitscans when they're inactive
+Fixed Stairs not applying the appropriate colored wall effects

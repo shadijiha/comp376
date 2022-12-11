@@ -25,6 +25,7 @@ public class Rocket : NetworkBehaviour
     private int             m_maxHits           = 25;
     private Collider[]      m_hits;
     private GameObject[]    m_playersHit;
+    private PlayerShoot     m_shooter;
     
     // Start is called before the first frame update
     void Start()
@@ -65,7 +66,7 @@ public class Rocket : NetworkBehaviour
             Explode();
                 
             int             hits            = Physics.OverlapSphereNonAlloc(transform.position, m_MaxRadius, m_hits, m_targetMask);
-            List<Player>    playersToHit    = new List<Player>();
+            List<Rigidbody>  playersToHit    = new List<Rigidbody>();
             List<int>       playerDmg       = new List<int>();
 
             for (int i = 0; i < hits; i++)
@@ -76,13 +77,17 @@ public class Rocket : NetworkBehaviour
                     if (!Physics.Raycast(transform.position, (m_hits[i].transform.position - transform.position).normalized, distance,  m_blockExplosion))
                     {
                         rigidbody.AddExplosionForce(m_explosionForce, transform.position, m_MaxRadius, m_explosionLift, ForceMode.Impulse);
-                        int     damage  = Mathf.RoundToInt(Mathf.Lerp(m_splashDamage, m_minSplashDamage, distance / m_MaxRadius));
-                        Player  plr     = rigidbody.GetComponent<Player>();
+                        int         damage  = Mathf.RoundToInt(Mathf.Lerp(m_splashDamage, m_minSplashDamage, distance / m_MaxRadius));
+                        Rigidbody   plr     = rigidbody;
 
                         // Players have multiple colliders, make sure to only hit the same player once.
                         if (!playersToHit.Contains(plr))
                         {
-                            //Debug.Log($"Hitting {plr.name} for {damage}.");
+                            if (collision.TryGetComponent<Head>(out Head head))
+                            {
+                                plr = head.par.GetComponent<Rigidbody>();
+                            }
+
                             playersToHit.Add(plr);
                             playerDmg.Add(damage);
                         }
@@ -97,18 +102,18 @@ public class Rocket : NetworkBehaviour
             for (int dmgIndex = 0; dmgIndex < playersToHit.Count; ++dmgIndex)
             {
                 //Debug.Log($"Applying {playerDmg[dmgIndex]} damage to {playersToHit[dmgIndex].name}");
-                playersToHit[dmgIndex].RpcTakeDamage(playerDmg[dmgIndex], m_owner);
+                m_shooter.CmdPlayerShot(playersToHit[dmgIndex].name, m_owner, playerDmg[dmgIndex]);
             }
 
             Destroy(this.gameObject);
         }
     }
 
-    public void Launch(string source)
+    public void Launch(string source, PlayerShoot playerShoot)
     {
         m_owner     = source;
         m_active    = true;
-
+        m_shooter   = playerShoot;
         transform.parent = null;
     }
 

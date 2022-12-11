@@ -109,6 +109,7 @@ public class WeaponManager : NetworkBehaviour
         }
         if (Input.GetButtonDown("Super") && !mCurrent.altFire && mSuper != mCurrent && mSuper != null)
         {
+            Debug.Log($"Super Swap: {mSuper}");
             mNextWeapon                 = mSuper;
             mNextWeapon.switchingWeapon = true;
             mCurrent.reloading          = false;
@@ -327,8 +328,8 @@ public class WeaponManager : NetworkBehaviour
         if (mSuper != null)
         {
             Destroy(mSuper.model);
-            mSuper = null;
         }
+        mSuper = null;
         mSecondary.model.SetActive(false);
         mCurrent                                                    = mPrimary;
         mCurrent.model.SetActive(true);
