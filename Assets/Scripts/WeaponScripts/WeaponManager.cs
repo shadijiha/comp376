@@ -346,16 +346,19 @@ public class WeaponManager : NetworkBehaviour
         }
         else
         {
-            mWallUIEffect.AmpActivate();
-            mPrimary.amplified      = true;
-            mSecondary.amplified    = true;
-
-            if (mSuper != null)
+            if (mWallUIEffect != null)
             {
-                mSuper.amplified    = true;
-            }
+                mWallUIEffect.AmpActivate();
+                mPrimary.amplified      = true;
+                mSecondary.amplified    = true;
 
-            mAmplified = true;
+                if (mSuper != null)
+                {
+                    mSuper.amplified    = true;
+                }
+
+                mAmplified = true;
+            }
         }
     }
 
@@ -367,19 +370,22 @@ public class WeaponManager : NetworkBehaviour
         }
         else
         {
-            mWallUIEffect.HasteActivate();
-            mPrimary.hasted             = true;
-            mPrimary.speedMultiplier    = 1.5f;
-            mSecondary.hasted           = true;
-            mSecondary.speedMultiplier  = 1.5f;
-
-            if (mSuper != null)
+            if (mWallUIEffect != null)
             {
-                mSuper.hasted           = true;
-                mSuper.speedMultiplier  = 1.5f;
-            }
+                mWallUIEffect.HasteActivate();
+                mPrimary.hasted             = true;
+                mPrimary.speedMultiplier    = 1.5f;
+                mSecondary.hasted           = true;
+                mSecondary.speedMultiplier  = 1.5f;
 
-            mHasted = true;
+                if (mSuper != null)
+                {
+                    mSuper.hasted           = true;
+                    mSuper.speedMultiplier  = 1.5f;
+                }
+
+                mHasted = true;
+            }
         }
     }
 
