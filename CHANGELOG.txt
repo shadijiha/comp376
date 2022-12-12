@@ -19,4 +19,4 @@ Updated round timer to be 5 minutes
 Fixed over heal working up to 200% HP rather than 150% as intended
 Adjusted wall cooldown for heal and teleport to be 5 seconds to allow continuous healing while in the green wall
 Renamed Yellow walls to green to properly reflect the color and minimize confusion
-Introduced a potential fix to weapons not appearing in the player's hand properly on remote clients
+Fixed an issue where remote clients triggering wall effects would cause exceptions on the local player's side
